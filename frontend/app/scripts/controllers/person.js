@@ -8,15 +8,16 @@
  * Controller of the teapotApp
  */
 angular.module('teapotApp')
-  .controller('PersonCtrl', function ($scope) {
+  .controller('PersonCtrl', function ($scope, personService) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
+    debugger
     $scope.persons = [
     	'Apoorv',
-    	'Jiabei',
+    	'Jiabei2',
     	'Guy',
     	'Yuval',
     	'Will'
