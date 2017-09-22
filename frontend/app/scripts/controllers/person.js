@@ -14,12 +14,13 @@ angular.module('teapotApp')
       'AngularJS',
       'Karma'
     ];
-    debugger
-    $scope.persons = [
+    //debugger
+    $scope.persons2 = [
     	'Apoorv',
     	'Jiabei2',
     	'Guy',
     	'Yuval',
     	'Will'
     ];
+    $scope.persons = personService.getAllPersons()
   });
