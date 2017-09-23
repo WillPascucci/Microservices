@@ -53,7 +53,10 @@ connection.connect(function(err) {
   });
 
   app.delete('/person/:id', function(req, res) {
-    res.send('Delete on Person - ' + req.params.id);
+    //Need to test this out, postman or something?
+    connection.query("DELETE FROM Person WHERE id=?", req.params.id, function (err, rows) { 
+      res.send('Delete on Person - ' + req.params.id);
+    })
   });
 
   app.listen(8000, function () {
