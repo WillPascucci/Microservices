@@ -1,0 +1,13 @@
+{
+  "name": "Elastic-Beanstalk-Sample-App",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+  	"mysql": "latest",
+  	"sequelize": "latest",
+    "mysql2": "latest"
+  },
+  "scripts": {
+    "start": "node app.js"
+  }
+}
