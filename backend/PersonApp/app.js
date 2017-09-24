@@ -37,7 +37,7 @@ connection.connect(function(err) {
   })
 
   app.get('/person', function (req, res) {
-    connection.query("SELECT * from Person", function (err, rows) {
+    connection.query("SELECT * from Person LIMIT 5", function (err, rows) {
       res.json(rows);
     })
   });
