@@ -1,6 +1,6 @@
-var express = require('express')
-var app = express()
-
+var express = require('express');
+var bodyParser = require('body-parser');
+var app = express();
 var mysql = require('mysql');
 
 var connection = mysql.createConnection({
@@ -10,6 +10,8 @@ var connection = mysql.createConnection({
   port     : 3306,
   database : "microservices"
 });
+
+app.use(bodyParser());
 
 connection.connect(function(err) {
   if (err) {
@@ -33,8 +35,10 @@ connection.connect(function(err) {
 
   app.post('/person', function (req, res) {
     //Need to test this out, postman or something?
-    connection.query("INSERT INTO Person VALUES (?, ?, ?, ?)", req.params.first, req.params.last, req.params.age, req.params.phone, function (err, rows) {
-      res.send('Post call on the Person!');
+    console.log(req.body)
+//INSERT INTO Person (firstname, lastname, age, phone, addressUuid) VALUES ('Barney', 'Barns', '88', '(123) 456-7901', '5bcaa9bd-e315-427d-93cf-2d027cc1b6e2');
+    connection.query("INSERT INTO Person (firstname, lastname, age, phone, addressUuid) VALUES (?, ?, ?, ?, ?)", [req.body.firstname, req.body.lastname, req.body.age, req.body.phone, req.body.addressUuid], function (err, rows) {
+    res.send('Post call on the Person!');
     })
   });
 
