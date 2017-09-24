@@ -87,7 +87,10 @@ connection.connect(function(err) {
   });
 
   app.put('/person/:id', function(req, res) {
+    console.log(req);
+    connection.query("UPDATE Person SET firstname=?, lastname=?, age=?, phone=?, addressUuid=? WHERE id=?", [req.body.firstname, req.body.lastname, req.body.age, req.body.phone, req.body.addressUuid, req.params.id], function (err, rows) {
     res.send('Put on Person - ' + req.params.id);
+    })
   });
 
   app.delete('/person/:id', function(req, res) {
