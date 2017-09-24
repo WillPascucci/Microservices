@@ -2,6 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
 var mysql = require('mysql');
+var request = require('request');
 
 
 
@@ -53,7 +54,12 @@ connection.connect(function(err) {
   app.get('/person/:id', function(req, res) {
     connection.query("SELECT * from Person WHERE id=?", req.params.id, function (err, rows) {
       if (rows[0]) {
-        res.json(rows[0]);
+        request('http://localhost:8000/address/' + rows[0].addressUuid, function (error, response, body) {
+          console.log('error:', error); // Print the error if one occurred
+          console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+          console.log('body:', body); // Print the HTML for the Google homepage.
+          res.json(rows[0]);
+        });
       } else {
         res.send("Invalid id!");
       }
@@ -71,8 +77,8 @@ connection.connect(function(err) {
     })
   });
 
-  app.listen(8000, function () {
-    console.log('Person app listening on port 8000!');
+  app.listen(8080, function () {
+    console.log('Person app listening on port 8080!');
   });
 
 
