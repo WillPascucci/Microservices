@@ -39,7 +39,7 @@ connection.connect(function(err) {
   });
 
   app.get('/address/:id', function(req, res) {
-    connection.query("SELECT * from Address WHERE id=?", req.params.id, function (err, rows) {
+    connection.query("SELECT * from Address WHERE uuid=?", req.params.id, function (err, rows) {
       if (rows[0]) {
         res.json(rows[0]);
       } else {
