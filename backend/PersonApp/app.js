@@ -1,71 +1,88 @@
-var port = process.env.PORT || 3000,
-    http = require('http'),
-    fs = require('fs'),
-    html = fs.readFileSync('index.html');
-
-var log = function(entry) {
-    fs.appendFileSync('/tmp/sample-app.log', new Date().toISOString() + ' - ' + entry + '\n');
-};
-
-var server = http.createServer(function (req, res) {
-    if (req.method === 'POST') {
-        var body = '';
-
-        req.on('data', function(chunk) {
-            body += chunk;
-        });
-
-        req.on('end', function() {
-            if (req.url === '/') {
-                log('Received message: ' + body);
-            } else if (req.url = '/scheduled') {
-                log('Received task ' + req.headers['x-aws-sqsd-taskname'] + ' scheduled at ' + req.headers['x-aws-sqsd-scheduled-at']);
-            }
-
-            res.writeHead(200, 'OK', {'Content-Type': 'text/plain'});
-            res.end();
-        });
-    } else {
-        res.writeHead(200);
-        res.write(html);
-        res.end();
-    }
-});
-
-// Listen on port 3000, IP defaults to 127.0.0.1
-server.listen(port);
-
-// Put a friendly message on the terminal
-console.log('Server running at http://127.0.0.1:' + port + '/');
-
+var express = require('express');
+var bodyParser = require('body-parser');
+var app = express();
 var mysql = require('mysql');
+var request = require('request');
+
+
 
 var connection = mysql.createConnection({
-  host     : process.env.RDS_HOSTNAME,
-  user     : process.env.RDS_USERNAME,
-  password : process.env.RDS_PASSWORD,
-  port     : process.env.RDS_PORT,
+  host     : "aa18rny5pdr87g5.cyi40ipdvtjm.us-east-1.rds.amazonaws.com",
+  user     : "microservices",
+  password : "microservices",
+  port     : 3306,
   database : "microservices"
 });
+
+app.all('*', function(req, res, next) {
+   res.header("Access-Control-Allow-Origin", "*");
+   res.header("Access-Control-Allow-Headers", "X-Requested-With");
+   next();
+ });
+
+app.use(bodyParser());
 
 connection.connect(function(err) {
   if (err) {
     console.error('Database connection failed: ' + err.stack);
+    connection.end();
     return;
   }
 
-  console.log('before');
-  connection.query('SELECT * FROM Person', function(err, results) {
-    if (err) throw err
-    console.log(results[0])
-    console.log(results[0].id)
-    console.log(results[0].firstname)
-    console.log(results[0].lastname)
-    console.log(results[0].age)
-    console.log(results[0].phone)
-    console.log(results[0].addressUuid)
+  console.log('You are connected');
+
+
+  app.get('/', function (req, res) {
+    res.send('Hello World - running on Express!')
   })
 
-  console.log('Connected to database.');
-  connection.end();
+  app.get('/person', function (req, res) {
+    connection.query("SELECT * from Person", function (err, rows) {
+      res.json(rows);
+    })
+  });
+
+  app.post('/person', function (req, res) {
+    //Need to test this out, postman or something?
+    console.log(req.body)
+//INSERT INTO Person (firstname, lastname, age, phone, addressUuid) VALUES ('Barney', 'Barns', '88', '(123) 456-7901', '5bcaa9bd-e315-427d-93cf-2d027cc1b6e2');
+    connection.query("INSERT INTO Person (firstname, lastname, age, phone, addressUuid) VALUES (?, ?, ?, ?, ?)", [req.body.firstname, req.body.lastname, req.body.age, req.body.phone, req.body.addressUuid], function (err, rows) {
+    res.send('Post call on the Person!');
+    })
+  });
+
+  app.get('/person/:id', function(req, res) {
+    connection.query("SELECT * from Person WHERE id=?", req.params.id, function (err, rows) {
+      if (rows[0]) {
+        request('http://localhost:8000/address/' + rows[0].addressUuid, function (error, response, body) {
+          console.log('error:', error);
+          console.log('statusCode:', response && response.statusCode);
+          console.log('body:', body);
+          body = JSON.parse(body);
+          rows[0]["address"] = body['street'] + ", " + body['city'] + ", " + body['state'] + " " + body['zipcode'];
+          delete rows[0]["addressUuid"];
+          res.json(rows[0]);
+        });
+      } else {
+        res.send("Invalid id!");
+      }
+    })
+  });
+
+  app.put('/person/:id', function(req, res) {
+    res.send('Put on Person - ' + req.params.id);
+  });
+
+  app.delete('/person/:id', function(req, res) {
+    //Need to test this out, postman or something?
+    connection.query("DELETE FROM Person WHERE id=?", req.params.id, function (err, rows) { 
+      res.send('Delete on Person - ' + req.params.id);
+    })
+  });
+
+  app.listen(8080, function () {
+    console.log('Person app listening on port 8080!');
+  });
+
+
 });
