@@ -9,18 +9,5 @@
  */
 angular.module('teapotApp')
   .controller('PersonCtrl', function ($scope, personService) {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-    //debugger
-    $scope.persons2 = [
-    	'Apoorv',
-    	'Jiabei2',
-    	'Guy',
-    	'Yuval',
-    	'Will'
-    ];
-    $scope.persons = personService.getAllPersons()
+    personService.getPersons($scope);
   });

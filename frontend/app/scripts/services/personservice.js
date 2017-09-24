@@ -11,12 +11,18 @@ angular.module('teapotApp')
   .service('personService', function ($http) {
     // AngularJS will instantiate a singleton by calling "new" on this function
 
-    this.baseURL = 'http://test-env.wgvvepxg5d.us-east-1.elasticbeanstalk.com'
+    this.baseURL = 'http://person-env.n924wyqpyp.us-east-1.elasticbeanstalk.com:8000'
 
-    this.getAllPersons = function() {
-    	return $http.get(this.baseURL+'/person');
+    this.getPersons = function($scope) {
+        $http.get(this.baseURL + '/person')
+            .then(function(response) {
+                $scope.persons = response.data
+            }, function(response) {
+                console.log(response.data)
+            })
     }
 
+    /*
     this.getPerson = function(personID) {
     	return $http.get(this.baseURL+'/person/'+personID);
     }
@@ -34,4 +40,5 @@ angular.module('teapotApp')
     		pageNum: pagenum
     	});
     }
+    */
   });
