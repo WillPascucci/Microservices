@@ -55,9 +55,12 @@ connection.connect(function(err) {
     connection.query("SELECT * from Person WHERE id=?", req.params.id, function (err, rows) {
       if (rows[0]) {
         request('http://localhost:8000/address/' + rows[0].addressUuid, function (error, response, body) {
-          console.log('error:', error); // Print the error if one occurred
-          console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-          console.log('body:', body); // Print the HTML for the Google homepage.
+          console.log('error:', error);
+          console.log('statusCode:', response && response.statusCode);
+          console.log('body:', body);
+          body = JSON.parse(body);
+          rows[0]["address"] = body['street'] + ", " + body['city'] + ", " + body['state'] + " " + body['zipcode'];
+          delete rows[0]["addressUuid"];
           res.json(rows[0]);
         });
       } else {
