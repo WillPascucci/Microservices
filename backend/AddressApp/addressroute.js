@@ -54,7 +54,7 @@ connection.connect(function(err) {
 
   app.delete('/address/:id', function(req, res) {
     //Need to test this out, postman or something?
-    connection.query("DELETE FROM Address WHERE id=?", req.params.id, function (err, rows) { 
+    connection.query("DELETE FROM Address WHERE uuid=?", req.params.id, function (err, rows) {
       res.send('Delete on Address - ' + req.params.id);
     })
   });
