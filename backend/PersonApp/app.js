@@ -37,8 +37,25 @@ connection.connect(function(err) {
   })
 
   app.get('/person', function (req, res) {
-    connection.query("SELECT * from Person LIMIT 5", function (err, rows) {
-      res.json(rows);
+    connection.query("SELECT * from Person LIMIT 5;", function (err, rows) {
+      request('http://localhost:8000/address', function (error, response, body) {
+        if (response.statusCode === 200) {
+        console.log(body)
+        body = JSON.parse(body);
+        for (row in rows) {
+          for (address in body) {
+            if (body[address].uuid==rows[row].addressUuid) {
+              console.log(address);
+              rows[row]["address"] = body[address].street + ", " + body[address].city + ", " + body[address].state + " " + body[address].zipcode;
+              delete rows[row]["addressUuid"];
+            }
+            console.log("qwrq") 
+          }
+        }
+          console.log(rows)
+          res.json(rows);
+        }
+        });
     })
   });
 
@@ -79,6 +96,22 @@ connection.connect(function(err) {
       res.send('Delete on Person - ' + req.params.id);
     })
   });
+
+//Function to fetch the address of a person using ID
+ app.get('/person/:id/address', function (req, res) {
+   connection.query("SELECT addressUuid from Person where id=?", req.params.id, function (err, rows) {
+     if (rows[0]) {
+         console.log('http://person-env.n924wyqpyp.us-east-1.elasticbeanstalk.com:8000/address/'+rows[0].addressUuid);
+         request('http://localhost:8000/address/'+rows[0].addressUuid, function (error, response, body) {
+         console.log('error:', error); // Print the error if one occurred
+         console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+         console.log('body:', body); // Print the HTML for the Google homepage.
+         res.json(JSON.parse(body));
+     })} else {
+       res.send("Invalid id!");
+     }
+   })
+});
 
   app.listen(8080, function () {
     console.log('Person app listening on port 8080!');
