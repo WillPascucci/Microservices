@@ -15,10 +15,12 @@ var connection = mysql.createConnection({
 });
 
 app.all('*', function(req, res, next) {
-   res.header("Access-Control-Allow-Origin", "*");
-   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-   res.header("Access-Control-Allow-Headers", "X-Requested-With");
-   next();
+	res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Credentials", "true");
+    res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT,DELETE");
+    res.header("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
+	console.log('here');
+	next();
  });
 
 app.use(bodyParser());
@@ -38,6 +40,7 @@ connection.connect(function(err) {
   })
 
   app.get('/person', function (req, res) {
+	console.log('get person called')
     connection.query("SELECT * from Person LIMIT 5;", function (err, rows) {
       request('http://localhost:8000/address', function (error, response, body) {
         if (response.statusCode === 200) {
@@ -140,7 +143,7 @@ connection.connect(function(err) {
    })
 });
 
-  app.listen(8080, function () {
+  app.listen(8000, function () {
     console.log('Person app listening on port 8080!');
   });
 
