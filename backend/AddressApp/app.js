@@ -3,6 +3,7 @@ var app = express()
 
 var mysql = require('mysql');
 var bodyParser = require('body-parser');
+var request = require('request');
 var connection = mysql.createConnection({
   host     : "aagm9e2du3rm1z.cyi40ipdvtjm.us-east-1.rds.amazonaws.com",
   user     : "microservices",
@@ -46,6 +47,28 @@ connection.connect(function(err) {
     //Need to test this out, postman or something?
     connection.query("INSERT INTO Address VALUES (?, ?, ?, ?)", req.params.street, req.params.city, req.params.state, req.params.zipcode, function (err, rows) {
       res.send('Post call on the Address!');
+    })
+  });
+
+  app.get('/address/page/:offset', function (req, res) {
+    connection.query("SELECT ROUND(a.totalPages/5,0) as totalPages, Address.* from (select count(*) as totalPages from Address) as a, Address LIMIT "+(req.params.offset*5)+", 5",  function (err, rows) {
+      request('http://person-env.n924wyqpyp.us-east-1.elasticbeanstalk.com:8000/person', function (error, response, body) {
+        if (response.statusCode === 200) {
+        console.log(body)
+        body = JSON.parse(body);
+        for (row in rows) {
+          for (person in body) {
+            if (body[person].addressUuid == rows[row].uuid) {
+              console.log(person);
+              rows[row]["person"] = body[person].firstname + ", " + body[person].lastname;
+              delete rows[row]["uuid"];
+            }
+          }
+        }
+          console.log(rows)
+          res.json(rows);
+        }
+        });
     })
   });
 
