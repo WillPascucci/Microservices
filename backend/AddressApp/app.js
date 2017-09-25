@@ -1,70 +1,81 @@
-var port = process.env.PORT || 3000,
-    http = require('http'),
-    fs = require('fs'),
-    html = fs.readFileSync('index.html');
-
-var log = function(entry) {
-    fs.appendFileSync('/tmp/sample-app.log', new Date().toISOString() + ' - ' + entry + '\n');
-};
-
-var server = http.createServer(function (req, res) {
-    if (req.method === 'POST') {
-        var body = '';
-
-        req.on('data', function(chunk) {
-            body += chunk;
-        });
-
-        req.on('end', function() {
-            if (req.url === '/') {
-                log('Received message: ' + body);
-            } else if (req.url = '/scheduled') {
-                log('Received task ' + req.headers['x-aws-sqsd-taskname'] + ' scheduled at ' + req.headers['x-aws-sqsd-scheduled-at']);
-            }
-
-            res.writeHead(200, 'OK', {'Content-Type': 'text/plain'});
-            res.end();
-        });
-    } else {
-        res.writeHead(200);
-        res.write(html);
-        res.end();
-    }
-});
-
-// Listen on port 3000, IP defaults to 127.0.0.1
-server.listen(port);
-
-// Put a friendly message on the terminal
-console.log('Server running at http://127.0.0.1:' + port + '/');
+var express = require('express')
+var app = express()
 
 var mysql = require('mysql');
-
+var bodyParser = require('body-parser');
 var connection = mysql.createConnection({
-  host     : process.env.RDS_HOSTNAME,
-  user     : process.env.RDS_USERNAME,
-  password : process.env.RDS_PASSWORD,
-  port     : process.env.RDS_PORT,
+  host     : "aagm9e2du3rm1z.cyi40ipdvtjm.us-east-1.rds.amazonaws.com",
+  user     : "microservices",
+  password : "microservices",
+  port     : 3306,
   database : "microservices"
 });
+
+app.all('*', function(req, res, next) {
+	res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Credentials", "true");
+    res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT,DELETE");
+    res.header("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
+	console.log('here');
+	next();
+ });
+
+app.use(bodyParser());
 
 connection.connect(function(err) {
   if (err) {
     console.error('Database connection failed: ' + err.stack);
+    connection.end();
     return;
   }
 
-  console.log('before');
-  connection.query('SELECT * FROM Address', function(err, results) {
-    if (err) throw err
-    console.log(results[0])
-    console.log(results[0].uuid)
-    console.log(results[0].street)
-    console.log(results[0].city)
-    console.log(results[0].state)
-    console.log(results[0].zipcode)
+  console.log('You are connected to Address App');
+
+
+  app.get('/', function (req, res) {
+    res.send('Hello World - running on Express!')
   })
 
-  console.log('Connected to database.');
-  connection.end();
+  app.get('/address', function (req, res) {
+    connection.query("SELECT * from Address", function (err, rows) {
+      res.json(rows);
+    })
+  });
+
+  app.post('/address', function (req, res) {
+    //Need to test this out, postman or something?
+    connection.query("INSERT INTO Address VALUES (?, ?, ?, ?)", req.params.street, req.params.city, req.params.state, req.params.zipcode, function (err, rows) {
+      res.send('Post call on the Address!');
+    })
+  });
+
+  app.get('/address/:id', function(req, res) {
+    connection.query("SELECT * from Address WHERE uuid=?", req.params.id, function (err, rows) {
+      if (rows[0]) {
+        res.json(rows[0]);
+      } else {
+        res.send("Invalid id!");
+      }
+    })
+  });
+
+ app.put('/address/:id', function(req, res) {
+   console.log(req);
+   connection.query("UPDATE Address SET street=?, city=?, state=?, zipcode=?", [req.body.street, req.body.city, req.body.state, req.body.zipcode], function (err, rows) {
+   res.send('Put on Person - ' + req.params.id);
+   })
+  });
+
+  app.delete('/address/:id', function(req, res) {
+    //Need to test this out, postman or something?
+    connection.query("DELETE FROM Address WHERE uuid=?", req.params.id, function (err, rows) {
+      res.send('Delete on Address - ' + req.params.id);
+    })
+  });
+
+  app.listen(8000, function () {
+    console.log('Address app listening on port 8000!');
+  });
+
+
 });
