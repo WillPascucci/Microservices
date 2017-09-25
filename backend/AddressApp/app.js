@@ -3,6 +3,7 @@ var app = express()
 
 var mysql = require('mysql');
 var bodyParser = require('body-parser');
+var request = require('request');
 var connection = mysql.createConnection({
   host     : "aagm9e2du3rm1z.cyi40ipdvtjm.us-east-1.rds.amazonaws.com",
   user     : "microservices",
@@ -49,6 +50,28 @@ connection.connect(function(err) {
     })
   });
 
+  app.get('/address/page/:offset', function (req, res) {
+    connection.query("SELECT ROUND(a.totalPages/5,0) as totalPages, Address.* from (select count(*) as totalPages from Address) as a, Address LIMIT "+(req.params.offset*5)+", 5",  function (err, rows) {
+      request('http://person-env.n924wyqpyp.us-east-1.elasticbeanstalk.com:8000/person', function (error, response, body) {
+        if (response.statusCode === 200) {
+        console.log(body)
+        body = JSON.parse(body);
+        for (row in rows) {
+          for (person in body) {
+            if (body[person].addressUuid == rows[row].uuid) {
+              console.log(person);
+              rows[row]["person"] = body[person].firstname + ", " + body[person].lastname;
+              delete rows[row]["uuid"];
+            }
+          }
+        }
+          console.log(rows)
+          res.json(rows);
+        }
+        });
+    })
+  });
+
   app.get('/address/:id', function(req, res) {
     connection.query("SELECT * from Address WHERE uuid=?", req.params.id, function (err, rows) {
       if (rows[0]) {
@@ -71,6 +94,17 @@ connection.connect(function(err) {
     connection.query("DELETE FROM Address WHERE uuid=?", req.params.id, function (err, rows) {
       res.send('Delete on Address - ' + req.params.id);
     })
+  });
+
+  //Function to fetch person given address ID
+   app.get('/person/address/:addressID', function (req, res) {
+     connection.query("SELECT * from Person where addressUuid=?",req.params.addressID, function (err, rows) {
+       if(err) console.log(err)
+       console.log('Rows' +res.json(rows))
+       if(!rows){
+         res.send("No Person found at this address!");
+       }
+     })
   });
 
   app.listen(8000, function () {
