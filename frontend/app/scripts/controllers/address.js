@@ -11,7 +11,7 @@ angular.module('teapotApp')
   .controller('AddressCtrl', function ($scope, addressService) {
     addressService.getAddresses($scope);
     $scope.blankAddress = {
-      id: -1
+      uuid: -1
     }
     $scope.currentAddress = JSON.parse(JSON.stringify($scope.blankAddress));
 
@@ -23,8 +23,8 @@ angular.module('teapotApp')
 
     $scope.saveAddress = function() {
       console.log($scope.currentAddress)
-      if($scope.currentAddress.id == -1) {
-        delete $scope.currentAddress.id
+      if($scope.currentAddress.uuid == -1) {
+        delete $scope.currentAddress.uuid
         addressService.createAddress($scope, function() {
           addressService.getAddresses($scope);
           $scope.currentAddress = JSON.parse(JSON.stringify($scope.blankAddress));

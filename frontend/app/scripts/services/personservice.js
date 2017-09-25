@@ -14,13 +14,26 @@ angular.module('teapotApp')
     this.baseURL = 'http://person-env.n924wyqpyp.us-east-1.elasticbeanstalk.com:8000'
 
     this.getPersons = function($scope) {
-        $http.get(this.baseURL + '/person')
+        $http.get(this.baseURL + '/person/page/'+$scope.pageNumber)
             .then(function(response) {
                 $scope.persons = response.data
+                $scope.maxPages = response.data[0].totalPages
                 console.log($scope.persons)
             }, function(response) {
                 console.log(response.data)
             })
+    }
+
+    this.getPersonPage = function($scope, pageRequested, successCallback, failureCallback) {
+        $http.get(this.baseURL + '/person/page/'+pageRequested)
+            .then(function(response) {
+                console.log(response.data)
+                $scope.persons = response.data
+                successCallback()
+            }, function(response) {
+                console.log(response.data)
+                failureCallback()
+            });
     }
 
     this.deletePerson = function($scope, successCallback, failureCallback) {
@@ -33,8 +46,10 @@ angular.module('teapotApp')
     }
 
     this.updatePerson = function($scope, successCallback, failureCallback) {
-        $http.put(this.baseURL+'/person', $scope.currentPerson)
+        console.log($scope.currentPerson)
+        $http.put(this.baseURL+'/person/'+$scope.currentPerson.id, $scope.currentPerson)
             .then(function(response) {
+                console.log(response)
                 successCallback()
             }, function(response) {
                 failureCallback()

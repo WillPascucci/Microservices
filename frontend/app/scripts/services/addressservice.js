@@ -14,7 +14,7 @@ angular.module('teapotApp')
     this.baseURL = 'http://address-env.uitihrdzi7.us-east-1.elasticbeanstalk.com:8000'
 
     this.getAddresses = function($scope) {
-        $http.get(this.baseURL + '/address')
+        $http.get(this.baseURL + '/address/page/0')
             .then(function(response) {
                 $scope.addresses = response.data
                 console.log($scope.addresses)
@@ -24,7 +24,7 @@ angular.module('teapotApp')
     }
 
     this.deleteAddress = function($scope, successCallback, failureCallback) {
-        $http.delete(this.baseURL+'/address/'+$scope.currentAddress.id)
+        $http.delete(this.baseURL+'/address/'+$scope.currentAddress.uuid)
             .then(function(response) {
                 successCallback()
             }, function(response) {
@@ -33,7 +33,7 @@ angular.module('teapotApp')
     }
 
     this.updateAddress = function($scope, successCallback, failureCallback) {
-        $http.put(this.baseURL+'/address', $scope.currentAddress)
+        $http.put(this.baseURL+'/address/'+$scope.currentAddress.uuid, $scope.currentAddress)
             .then(function(response) {
                 successCallback()
             }, function(response) {

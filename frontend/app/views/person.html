@@ -5,6 +5,8 @@
   <ul class="list-group">
   		<li class="list-group-item" ng-click="pickPerson(person)" ng-repeat="person in persons">{{person.firstname}} {{person.lastname}}</li>
 	</ul>
+	<button type="button" class="btn btn-primary" ng-click="prevPage()">Previous</button>
+	<button type="button" class="btn btn-primary" ng-click="nextPage()">Next</button>
 </div>
 <div class="panel panel-default">
   <div class="panel-heading">
