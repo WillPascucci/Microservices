@@ -96,6 +96,17 @@ connection.connect(function(err) {
     })
   });
 
+  //Function to fetch person given address ID
+   app.get('/person/address/:addressID', function (req, res) {
+     connection.query("SELECT * from Person where addressUuid=?",req.params.addressID, function (err, rows) {
+       if(err) console.log(err)
+       console.log('Rows' +res.json(rows))
+       if(!rows){
+         res.send("No Person found at this address!");
+       }
+     })
+  });
+
   app.listen(8000, function () {
     console.log('Address app listening on port 8000!');
   });
