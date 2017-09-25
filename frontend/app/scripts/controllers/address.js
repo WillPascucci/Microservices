@@ -9,11 +9,55 @@
  */
 angular.module('teapotApp')
   .controller('AddressCtrl', function ($scope, addressService) {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-    $scope.one = 1;
-    addressService($scope);
+    addressService.getAddresses($scope);
+    $scope.blankAddress = {
+      id: -1
+    }
+    $scope.currentAddress = JSON.parse(JSON.stringify($scope.blankAddress));
+
+    $scope.pickAddress = function(address) {
+      console.log($scope.currentAddress);
+      $scope.currentAddress = JSON.parse(JSON.stringify(address));
+      console.log($scope.currentAddress);
+    }
+
+    $scope.saveAddress = function() {
+      console.log($scope.currentAddress)
+      if($scope.currentAddress.id == -1) {
+        delete $scope.currentAddress.id
+        addressService.createAddress($scope, function() {
+          addressService.getAddresses($scope);
+          $scope.currentAddress = JSON.parse(JSON.stringify($scope.blankAddress));
+          console.log('Success');
+        }, function() {
+          console.log('Failure');
+        })
+      }
+      else {
+        addressService.updateAddress($scope, function() {
+          addressService.getAddresses($scope);
+          $scope.currentAddress = JSON.parse(JSON.stringify($scope.blankAddress));
+          console.log('Success');
+        }, function() {
+          console.log('Failure');
+        })
+      }
+      //addressService.
+    }
+
+    $scope.clearAddress = function() {
+      //debugger;
+      $scope.currentAddress = JSON.parse(JSON.stringify($scope.blankAddress));
+      //debugger;
+    }
+
+    $scope.deleteAddress = function() {
+      addressService.deleteAddress($scope, function() {
+          addressService.getAddresses($scope);
+          $scope.currentAddress = JSON.parse(JSON.stringify($scope.blankAddress));
+          console.log('Success');
+        }, function() {
+          console.log('Failure');
+        });
+    }
   });

@@ -17,10 +17,39 @@ angular.module('teapotApp')
         $http.get(this.baseURL + '/person')
             .then(function(response) {
                 $scope.persons = response.data
+                console.log($scope.persons)
             }, function(response) {
                 console.log(response.data)
             })
     }
+
+    this.deletePerson = function($scope, successCallback, failureCallback) {
+        $http.delete(this.baseURL+'/person/'+$scope.currentPerson.id)
+            .then(function(response) {
+                successCallback()
+            }, function(response) {
+                failureCallback()
+            });
+    }
+
+    this.updatePerson = function($scope, successCallback, failureCallback) {
+        $http.put(this.baseURL+'/person', $scope.currentPerson)
+            .then(function(response) {
+                successCallback()
+            }, function(response) {
+                failureCallback()
+            });
+    }
+
+    this.createPerson = function($scope, successCallback, failureCallback) {
+        $http.post(this.baseURL + '/person', $scope.currentPerson)
+            .then(function(response) {
+                successCallback()
+            }, function(response) {
+                failureCallback()
+            })
+    }
+
 
     /*
     this.getPerson = function(personID) {
