@@ -64,7 +64,8 @@ connection.connect(function(err) {
   });
 
   app.get('/person/page/:offset', function (req, res) {
-    connection.query("SELECT * from Person LIMIT 2, 5", function (err, rows) {
+    console.log(req.params.offset)
+    connection.query("SELECT * from Person LIMIT "+req.params.offset+", 5",  function (err, rows) {
       request('http://localhost:8000/address', function (error, response, body) {
         if (response.statusCode === 200) {
         console.log(body)
@@ -76,7 +77,6 @@ connection.connect(function(err) {
               rows[row]["address"] = body[address].street + ", " + body[address].city + ", " + body[address].state + " " + body[address].zipcode;
               delete rows[row]["addressUuid"];
             }
-            console.log("\n\nqwrq\n\n") 
           }
         }
           console.log(rows)
