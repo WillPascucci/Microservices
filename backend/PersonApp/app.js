@@ -41,7 +41,7 @@ connection.connect(function(err) {
 
   app.get('/person', function (req, res) {
 	console.log('get person called')
-    connection.query("SELECT * from Person LIMIT 5", function (err, rows) {
+    connection.query("SELECT * from Person", function (err, rows) {
       request('http://Address-env.uitihrdzi7.us-east-1.elasticbeanstalk.com:8000/address', function (error, response, body) {
         if (error) {
           console.log(error);
