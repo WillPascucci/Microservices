@@ -57,6 +57,9 @@ connection.connect(function(err) {
 			  rows[row].addressLink = {
                 href: 'http://Address-env.uitihrdzi7.us-east-1.elasticbeanstalk.com:8000/address/'+ rows[row]["addressUuid"]
               }
+			  rows[row].self = {
+				href: 'http://person-env.n924wyqpyp.us-east-1.elasticbeanstalk.com:8000/person/' + rows[row]['id']
+			  }
               delete rows[row]["addressUuid"];
             }
             console.log("qwrq") 
@@ -88,6 +91,9 @@ connection.connect(function(err) {
 			  rows[row].addressLink = {
 				href: 'http://Address-env.uitihrdzi7.us-east-1.elasticbeanstalk.com:8000/address/'+ rows[row]["addressUuid"]
 			  }
+			  rows[row].self = {
+                href: 'http://person-env.n924wyqpyp.us-east-1.elasticbeanstalk.com:8000/person/' + rows[row]['id']
+              }
 			  delete rows[row]["addressUuid"];
             }
           }
@@ -119,6 +125,9 @@ connection.connect(function(err) {
           rows[0]["address"] = body['street'] + ", " + body['city'] + ", " + body['state'] + " " + body['zipcode'];
 		  rows[0].addressLink = {
                 href: 'http://Address-env.uitihrdzi7.us-east-1.elasticbeanstalk.com:8000/address/'+ rows[0]["addressUuid"]
+          }
+		  rows[row].self = {
+                href: 'http://person-env.n924wyqpyp.us-east-1.elasticbeanstalk.com:8000/person/' + rows[row]['id']
               }
           delete rows[0]["addressUuid"];
           res.json(rows[0]);
