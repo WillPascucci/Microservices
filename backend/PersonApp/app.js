@@ -41,8 +41,11 @@ connection.connect(function(err) {
 
   app.get('/person', function (req, res) {
 	console.log('get person called')
-    connection.query("SELECT * from Person LIMIT 5;", function (err, rows) {
-      request('aagm9e2du3rm1z.cyi40ipdvtjm.us-east-1.rds.amazonaws.com:3306/address', function (error, response, body) {
+    connection.query("SELECT * from Person LIMIT 5", function (err, rows) {
+      request('http://Address-env.uitihrdzi7.us-east-1.elasticbeanstalk.com:8000/address', function (error, response, body) {
+        if (error) {
+          console.log(error);
+        }
         if (response.statusCode === 200) {
         console.log(body)
         body = JSON.parse(body);
@@ -58,14 +61,19 @@ connection.connect(function(err) {
         }
           console.log(rows)
           res.json(rows);
+        } else {
+          console.log(error);
+          console.log(response);
+          console.log(response.statusCode);
+          console.log(body);
         }
         });
     })
   });
 
   app.get('/person/page/:offset', function (req, res) {
-    connection.query("SELECT * from Person LIMIT 2, 5", function (err, rows) {
-      request('http://localhost:8000/address', function (error, response, body) {
+    connection.query("SELECT ROUND(a.totalPages/5,0) as totalPages, Person.* from (select count(*) as totalPages from Person) as a, Person LIMIT "+(req.params.offset*5)+", 5",  function (err, rows) {
+      request('http://Address-env.uitihrdzi7.us-east-1.elasticbeanstalk.com:8000/address', function (error, response, body) {
         if (response.statusCode === 200) {
         console.log(body)
         body = JSON.parse(body);
@@ -76,7 +84,6 @@ connection.connect(function(err) {
               rows[row]["address"] = body[address].street + ", " + body[address].city + ", " + body[address].state + " " + body[address].zipcode;
               delete rows[row]["addressUuid"];
             }
-            console.log("\n\nqwrq\n\n") 
           }
         }
           console.log(rows)
@@ -98,7 +105,7 @@ connection.connect(function(err) {
   app.get('/person/:id', function(req, res) {
     connection.query("SELECT * from Person WHERE id=?", req.params.id, function (err, rows) {
       if (rows[0]) {
-        request('aagm9e2du3rm1z.cyi40ipdvtjm.us-east-1.rds.amazonaws.com:3306/address/' + rows[0].addressUuid, function (error, response, body) {
+        request('http://Address-env.uitihrdzi7.us-east-1.elasticbeanstalk.com:8000/address/' + rows[0].addressUuid, function (error, response, body) {
           console.log('error:', error);
           console.log('statusCode:', response && response.statusCode);
           console.log('body:', body);
@@ -131,8 +138,8 @@ connection.connect(function(err) {
  app.get('/person/:id/address', function (req, res) {
    connection.query("SELECT addressUuid from Person where id=?", req.params.id, function (err, rows) {
      if (rows[0]) {
-         console.log('aagm9e2du3rm1z.cyi40ipdvtjm.us-east-1.rds.amazonaws.com:3306/address/'+rows[0].addressUuid);
-         request('aagm9e2du3rm1z.cyi40ipdvtjm.us-east-1.rds.amazonaws.com:3306/address/'+rows[0].addressUuid, function (error, response, body) {
+         console.log('http://Address-env.uitihrdzi7.us-east-1.elasticbeanstalk.com:8000/address/'+rows[0].addressUuid);
+         request('http://Address-env.uitihrdzi7.us-east-1.elasticbeanstalk.com:8000/address/'+rows[0].addressUuid, function (error, response, body) {
          console.log('error:', error); // Print the error if one occurred
          console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
          console.log('body:', body); // Print the HTML for the Google homepage.
