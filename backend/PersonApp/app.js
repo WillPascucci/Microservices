@@ -41,8 +41,11 @@ connection.connect(function(err) {
 
   app.get('/person', function (req, res) {
 	console.log('get person called')
-    connection.query("SELECT * from Person LIMIT 5;", function (err, rows) {
+    connection.query("SELECT * from Person LIMIT 5", function (err, rows) {
       request('Address-env.uitihrdzi7.us-east-1.elasticbeanstalk.com:8000/address', function (error, response, body) {
+        if (error) {
+          console.log(error);
+        }
         if (response.statusCode === 200) {
         console.log(body)
         body = JSON.parse(body);
@@ -58,6 +61,11 @@ connection.connect(function(err) {
         }
           console.log(rows)
           res.json(rows);
+        } else {
+          console.log(error);
+          console.log(response);
+          console.log(response.statusCode);
+          console.log(body);
         }
         });
     })
