@@ -42,7 +42,7 @@ connection.connect(function(err) {
   app.get('/person', function (req, res) {
 	console.log('get person called')
     connection.query("SELECT * from Person LIMIT 5;", function (err, rows) {
-      request('http://localhost:8000/address', function (error, response, body) {
+      request('aagm9e2du3rm1z.cyi40ipdvtjm.us-east-1.rds.amazonaws.com:3306/address', function (error, response, body) {
         if (response.statusCode === 200) {
         console.log(body)
         body = JSON.parse(body);
@@ -75,7 +75,7 @@ connection.connect(function(err) {
   app.get('/person/:id', function(req, res) {
     connection.query("SELECT * from Person WHERE id=?", req.params.id, function (err, rows) {
       if (rows[0]) {
-        request('http://localhost:8000/address/' + rows[0].addressUuid, function (error, response, body) {
+        request('aagm9e2du3rm1z.cyi40ipdvtjm.us-east-1.rds.amazonaws.com:3306/address/' + rows[0].addressUuid, function (error, response, body) {
           console.log('error:', error);
           console.log('statusCode:', response && response.statusCode);
           console.log('body:', body);
@@ -108,8 +108,8 @@ connection.connect(function(err) {
  app.get('/person/:id/address', function (req, res) {
    connection.query("SELECT addressUuid from Person where id=?", req.params.id, function (err, rows) {
      if (rows[0]) {
-         console.log('http://person-env.n924wyqpyp.us-east-1.elasticbeanstalk.com:8000/address/'+rows[0].addressUuid);
-         request('http://localhost:8000/address/'+rows[0].addressUuid, function (error, response, body) {
+         console.log('aagm9e2du3rm1z.cyi40ipdvtjm.us-east-1.rds.amazonaws.com:3306/address/'+rows[0].addressUuid);
+         request('aagm9e2du3rm1z.cyi40ipdvtjm.us-east-1.rds.amazonaws.com:3306/address/'+rows[0].addressUuid, function (error, response, body) {
          console.log('error:', error); // Print the error if one occurred
          console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
          console.log('body:', body); // Print the HTML for the Google homepage.
@@ -121,7 +121,7 @@ connection.connect(function(err) {
 });
 
   app.listen(8000, function () {
-    console.log('Person app listening on port 8080!');
+    console.log('Person app listening on port 8000!');
   });
 
 
