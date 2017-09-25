@@ -63,6 +63,29 @@ connection.connect(function(err) {
     })
   });
 
+  app.get('/person/page/:offset', function (req, res) {
+    connection.query("SELECT * from Person LIMIT 2, 5", function (err, rows) {
+      request('http://localhost:8000/address', function (error, response, body) {
+        if (response.statusCode === 200) {
+        console.log(body)
+        body = JSON.parse(body);
+        for (row in rows) {
+          for (address in body) {
+            if (body[address].uuid==rows[row].addressUuid) {
+              console.log(address);
+              rows[row]["address"] = body[address].street + ", " + body[address].city + ", " + body[address].state + " " + body[address].zipcode;
+              delete rows[row]["addressUuid"];
+            }
+            console.log("\n\nqwrq\n\n") 
+          }
+        }
+          console.log(rows)
+          res.json(rows);
+        }
+        });
+    })
+  });
+
   app.post('/person', function (req, res) {
     //Need to test this out, postman or something?
     console.log(req.body)
