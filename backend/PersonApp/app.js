@@ -39,47 +39,47 @@ connection.connect(function(err) {
     res.send('Hello World - running on Express!')
   })
 
- app.get('/person', function (req, res) {
-  console.log('get person called')
+  app.get('/person', function (req, res) {
+    console.log('get person called')
     let firstname = "and firstname = '"+req.query.firstname+"'";
     let lastname = "and lastname = '"+req.query.lastname+"'";
     let age = "and age = "+req.query.age;
     let phone = "and phone = '"+req.query.phone;
-   connection.query("SELECT * from Person where 1=1 "+((req.query.firstname === undefined) ? '' : firstname)+ " "+((req.query.lastname === undefined) ? '' : lastname)+ " "+((req.query.age === undefined) ? '' : age)+ " "+((req.query.phone === undefined) ? '' : phone), function (err, rows) {
-      request('http://Address-env.uitihrdzi7.us-east-1.elasticbeanstalk.com:8000/address', function (error, response, body) {
-        if (error) {
-          console.log(error);
-        }
-        if (response.statusCode === 200) {
-        console.log(body)
-        body = JSON.parse(body);
-        for (row in rows) {
-          for (address in body) {
-            if (body[address].uuid==rows[row].addressUuid) {
-              console.log(address);
-              rows[row]["address"] = body[address].street + ", " + body[address].city + ", " + body[address].state + " " + body[address].zipcode;
-        rows[row].addressLink = {
-                href: 'http://Address-env.uitihrdzi7.us-east-1.elasticbeanstalk.com:8000/address/'+ rows[row]["addressUuid"]
-              }
-              delete rows[row]["addressUuid"];
-            }
-            console.log("qwrq")
+    connection.query("SELECT * from Person where 1=1 "+((req.query.firstname === undefined) ? '' : firstname)+ " "+((req.query.lastname === undefined) ? '' : lastname)+ " "+((req.query.age === undefined) ? '' : age)+ " "+((req.query.phone === undefined) ? '' : phone), function (err, rows) {
+        request('http://Address-env.uitihrdzi7.us-east-1.elasticbeanstalk.com:8000/address', function (error, response, body) {
+          if (error) {
+            console.log(error);
           }
-      rows[row].self = {
-        href: 'http://person-env.n924wyqpyp.us-east-1.elasticbeanstalk.com:8000/person/' + rows[row]['id']
-        }
-        }
-          console.log(rows)
-          res.json(rows);
-        } else {
-          console.log(error);
-          console.log(response);
-          console.log(response.statusCode);
-          console.log(body);
-        }
-        });
-    })
-  });
+          if (response.statusCode === 200) {
+          console.log(body)
+          body = JSON.parse(body);
+          for (row in rows) {
+            for (address in body) {
+              if (body[address].uuid==rows[row].addressUuid) {
+                console.log(address);
+                rows[row]["address"] = body[address].street + ", " + body[address].city + ", " + body[address].state + " " + body[address].zipcode;
+          rows[row].addressLink = {
+                  href: 'http://Address-env.uitihrdzi7.us-east-1.elasticbeanstalk.com:8000/address/'+ rows[row]["addressUuid"]
+                }
+                delete rows[row]["addressUuid"];
+              }
+              console.log("qwrq")
+            }
+        rows[row].self = {
+          href: 'http://person-env.n924wyqpyp.us-east-1.elasticbeanstalk.com:8000/person/' + rows[row]['id']
+          }
+          }
+            console.log(rows)
+            res.json(rows);
+          } else {
+            console.log(error);
+            console.log(response);
+            console.log(response.statusCode);
+            console.log(body);
+          }
+          });
+      })
+    });
 
   app.get('/person/page/:offset', function (req, res) {
     connection.query("SELECT ROUND(a.totalPages/5,0) as totalPages, Person.* from (select count(*) as totalPages from Person) as a, Person LIMIT "+(req.params.offset*5)+", 5",  function (err, rows) {
