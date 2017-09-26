@@ -118,6 +118,10 @@ connection.connect(function(err) {
     connection.query("SELECT * from Person WHERE id=?", req.params.id, function (err, rows) {
       if (rows[0]) {
         request('http://Address-env.uitihrdzi7.us-east-1.elasticbeanstalk.com:8000/address/' + rows[0].addressUuid, function (error, response, body) {
+          if (body=="Invalid id!") {
+            res.json(rows[0]);
+            return;
+          }
           console.log('error:', error);
           console.log('statusCode:', response && response.statusCode);
           console.log('body:', body);
