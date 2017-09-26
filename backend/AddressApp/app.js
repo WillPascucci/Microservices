@@ -81,11 +81,18 @@ connection.connect(function(err) {
 
   app.get('/address/:id', function(req, res) {
     connection.query("SELECT * from Address WHERE uuid=?", req.params.id, function (err, rows) {
+      if (err) {
+        console.error('Failed to fetch address: ' + err.stack);
+      }else{
       if (rows[0]) {
+          rows[0].self={
+               href: 'http://Address-env.uitihrdzi7.us-east-1.elasticbeanstalk.com:8000/address/' + rows[0]['uuid']
+             }
         res.json(rows[0]);
       } else {
         res.send("Invalid id!");
       }
+    }
     })
   });
 
@@ -112,6 +119,7 @@ connection.connect(function(err) {
     console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
     console.log('body:', body); // Print the HTML for the Google homepage.
     res.json(JSON.parse(body));
+
   })
   });
 
