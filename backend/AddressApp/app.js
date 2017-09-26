@@ -39,6 +39,13 @@ connection.connect(function(err) {
 
   app.get('/address', function (req, res) {
     connection.query("SELECT * from Address", function (err, rows) {
+      for (row in rows){
+        if(row){
+          rows[row].self={
+               href: 'http://Address-env.uitihrdzi7.us-east-1.elasticbeanstalk.com:8000/address/' + rows[row]['uuid']
+        }
+      }
+    }
       res.json(rows);
     })
   });
