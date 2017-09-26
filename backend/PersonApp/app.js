@@ -41,7 +41,11 @@ connection.connect(function(err) {
 
   app.get('/person', function (req, res) {
 	console.log('get person called')
-    connection.query("SELECT * from Person", function (err, rows) {
+    let firstname = "and firstname = '"+req.query.firstname+"'";
+    let lastname = "and lastname = '"+req.query.lastname+"'";
+    let age = "and age = "+req.query.age;
+    let phone = "and phone = '"+req.query.phone;
+   connection.query("SELECT * from Person where 1=1 "+((req.query.firstname === undefined) ? '' : firstname)+ " "+((req.query.lastname === undefined) ? '' : lastname)+ " "+((req.query.age === undefined) ? '' : age)+ " "+((req.query.phone === undefined) ? '' : phone), function (err, rows) {
       request('http://Address-env.uitihrdzi7.us-east-1.elasticbeanstalk.com:8000/address', function (error, response, body) {
         if (error) {
           console.log(error);
