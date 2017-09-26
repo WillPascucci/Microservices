@@ -19,7 +19,7 @@ Status: Completed
 Status: Completed
 
 – Simple query, e.g. /Person?lastName=Ferguson
-Status: Completed
+Status: Not supported
 
 – Pagination
 Status: Completed
@@ -32,3 +32,7 @@ Status: Completed
 
 – Simple HTML/Angular demo UI.
 Status: Completed
+
+Usage Instructions:
+In the frontend folder, make sure you have Grunt. Do an npm install and a bower install
+Once dependencies are working, type grunt serve
