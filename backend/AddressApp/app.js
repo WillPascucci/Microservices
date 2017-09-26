@@ -4,6 +4,8 @@ var app = express()
 var mysql = require('mysql');
 var bodyParser = require('body-parser');
 var request = require('request');
+var uuidv4 = require('uuid/v4');
+
 var connection = mysql.createConnection({
   host     : "aagm9e2du3rm1z.cyi40ipdvtjm.us-east-1.rds.amazonaws.com",
   user     : "microservices",
@@ -56,7 +58,8 @@ connection.connect(function(err) {
 
   app.post('/address', function (req, res) {
     //Need to test this out, postman or something?
-    connection.query("INSERT INTO Address VALUES (?, ?, ?, ?)", req.params.street, req.params.city, req.params.state, req.params.zipcode, function (err, rows) {
+
+    connection.query("INSERT INTO Address (uuid, street, city, state, zipcode) VALUES (?, ?, ?, ?, ?)", [uuidv4(), req.body.street, req.body.city, req.body.state, req.body.zipcode], function (err, rows) {
       res.send('Post call on the Address!');
     })
   });
