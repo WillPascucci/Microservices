@@ -23,18 +23,18 @@
 - [x] GET, PUT, DELETE on resource/id, e.g. /Person/dff9
     - [x] Person
     - [x] Address 
-- [x] Simple query, e.g. /Person?lastName=Ferguson
+- [ ] Simple query, e.g. /Person?lastName=Ferguson
+    - [ ] Person
+    - [ ] Address 
+- [x] Pagination
     - [x] Person
     - [x] Address 
-- [ ] Pagination
-    - [x] Person
-    - [ ] Address 
 - [x] Relationship paths: /Person/dff9/address and /Addresses/someID/persons
     - [x] Person
     - [x] Address 
-- [ ] HATEOAS links where appropriate.
+- [x] HATEOAS links where appropriate.
     - [x] Person
-    - [ ] Address 
+    - [x] Address 
 - [x] Simple HTML/Angular demo UI.
 
 Usage Instructions:
