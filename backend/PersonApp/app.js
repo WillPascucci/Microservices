@@ -36,12 +36,12 @@ connection.connect(function(err) {
 
 
   app.get('/', function (req, res) {
-    res.send('Hello World - running on Person App!')
+    res.send('Hello World - running on Express!')
   })
 
   app.get('/person', function (req, res) {
 	console.log('get person called')
-    connection.query("SELECT * from Person LIMIT 5", function (err, rows) {
+    connection.query("SELECT * from Person", function (err, rows) {
       request('http://Address-env.uitihrdzi7.us-east-1.elasticbeanstalk.com:8000/address', function (error, response, body) {
         if (error) {
           console.log(error);
@@ -54,10 +54,16 @@ connection.connect(function(err) {
             if (body[address].uuid==rows[row].addressUuid) {
               console.log(address);
               rows[row]["address"] = body[address].street + ", " + body[address].city + ", " + body[address].state + " " + body[address].zipcode;
+			  rows[row].addressLink = {
+                href: 'http://Address-env.uitihrdzi7.us-east-1.elasticbeanstalk.com:8000/address/'+ rows[row]["addressUuid"]
+              }
               delete rows[row]["addressUuid"];
             }
             console.log("qwrq")
           }
+		  rows[row].self = {
+ 				href: 'http://person-env.n924wyqpyp.us-east-1.elasticbeanstalk.com:8000/person/' + rows[row]['id']
+ 			  }
         }
           console.log(rows)
           res.json(rows);
@@ -82,9 +88,15 @@ connection.connect(function(err) {
             if (body[address].uuid==rows[row].addressUuid) {
               console.log(address);
               rows[row]["address"] = body[address].street + ", " + body[address].city + ", " + body[address].state + " " + body[address].zipcode;
-              delete rows[row]["addressUuid"];
+			  rows[row].addressLink = {
+				href: 'http://Address-env.uitihrdzi7.us-east-1.elasticbeanstalk.com:8000/address/'+ rows[row]["addressUuid"]
+			  }
+			  delete rows[row]["addressUuid"];
             }
           }
+		  rows[row].self = {
+ 				href: 'http://person-env.n924wyqpyp.us-east-1.elasticbeanstalk.com:8000/person/' + rows[row]['id']
+ 			  }
         }
           console.log(rows)
           res.json(rows);
@@ -113,10 +125,10 @@ connection.connect(function(err) {
           rows[0]["address"] = body['street'] + ", " + body['city'] + ", " + body['state'] + " " + body['zipcode'];
 		  rows[0].addressLink = {
                 href: 'http://Address-env.uitihrdzi7.us-east-1.elasticbeanstalk.com:8000/address/'+ rows[0]["addressUuid"]
-          }
-		  rows[0].self = {
-                href: 'http://person-env.n924wyqpyp.us-east-1.elasticbeanstalk.com:8000/person/' + rows[0]['id']
               }
+		  rows[0].self = {
+ 				href: 'http://person-env.n924wyqpyp.us-east-1.elasticbeanstalk.com:8000/person/' + rows[0]['id']
+ 			  }
           delete rows[0]["addressUuid"];
           res.json(rows[0]);
         });
@@ -135,7 +147,7 @@ connection.connect(function(err) {
 
   app.delete('/person/:id', function(req, res) {
     //Need to test this out, postman or something?
-    connection.query("DELETE FROM Person WHERE id=?", req.params.id, function (err, rows) {
+    connection.query("DELETE FROM Person WHERE id=?", req.params.id, function (err, rows) { 
       res.send('Delete on Person - ' + req.params.id);
     })
   });
@@ -154,17 +166,6 @@ connection.connect(function(err) {
        res.send("Invalid id!");
      }
    })
-});
-
-app.get('/address/:id/persons', function(req, res) {
-  //Change port back - when checing in to 8000 and the port Person App is listening to
-  console.log('http://person-env.n924wyqpyp.us-east-1.elasticbeanstalk.com:8080/person/address/'+req.params.id);
-  request('http://person-env.n924wyqpyp.us-east-1.elasticbeanstalk.com:8080/person/address/'+req.params.id, function (error, response, body) {
-  console.log('error:', error); // Print the error if one occurred
-  console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-  console.log('body:', body); // Print the HTML for the Google homepage.
-  res.json(JSON.parse(body));
-})
 });
 
   app.listen(8000, function () {
