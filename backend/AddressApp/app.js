@@ -38,7 +38,11 @@ connection.connect(function(err) {
   })
 
   app.get('/address', function (req, res) {
-    connection.query("SELECT * from Address", function (err, rows) {
+    let streetname = "and streetname = '"+req.query.streetname+"'";
+    let city = "and city = '"+req.query.city+"'";
+    let state = "and state = '"+req.query.state+"'";
+    let zipcode = "and zipcode = "+req.query.zipcode;
+    connection.query("SELECT * from Address where 1=1 "+((req.query.streetname === undefined) ? '' : streetname)+ " "+((req.query.city === undefined) ? '' : city)+ " "+((req.query.state === undefined) ? '' : state)+ " "+((req.query.zipcode === undefined) ? '' : zipcode), function (err, rows) {
       for (row in rows){
         if(row){
           rows[row].self={

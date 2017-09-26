@@ -23,9 +23,9 @@
 - [x] GET, PUT, DELETE on resource/id, e.g. /Person/dff9
     - [x] Person
     - [x] Address 
-- [ ] Simple query, e.g. /Person?lastName=Ferguson
-    - [ ] Person
-    - [ ] Address 
+- [x] Simple query, e.g. /Person?lastName=Ferguson
+    - [x] Person
+    - [x] Address 
 - [x] Pagination
     - [x] Person
     - [x] Address 
