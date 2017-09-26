@@ -39,8 +39,8 @@ connection.connect(function(err) {
     res.send('Hello World - running on Express!')
   })
 
-  app.get('/person', function (req, res) {
-	console.log('get person called')
+ app.get('/person', function (req, res) {
+  console.log('get person called')
     let firstname = "and firstname = '"+req.query.firstname+"'";
     let lastname = "and lastname = '"+req.query.lastname+"'";
     let age = "and age = "+req.query.age;
@@ -58,16 +58,16 @@ connection.connect(function(err) {
             if (body[address].uuid==rows[row].addressUuid) {
               console.log(address);
               rows[row]["address"] = body[address].street + ", " + body[address].city + ", " + body[address].state + " " + body[address].zipcode;
-			  rows[row].addressLink = {
+        rows[row].addressLink = {
                 href: 'http://Address-env.uitihrdzi7.us-east-1.elasticbeanstalk.com:8000/address/'+ rows[row]["addressUuid"]
               }
               delete rows[row]["addressUuid"];
             }
             console.log("qwrq")
           }
-		  rows[row].self = {
- 				href: 'http://person-env.n924wyqpyp.us-east-1.elasticbeanstalk.com:8000/person/' + rows[row]['id']
- 			  }
+      rows[row].self = {
+        href: 'http://person-env.n924wyqpyp.us-east-1.elasticbeanstalk.com:8000/person/' + rows[row]['id']
+        }
         }
           console.log(rows)
           res.json(rows);
@@ -122,6 +122,13 @@ connection.connect(function(err) {
     connection.query("SELECT * from Person WHERE id=?", req.params.id, function (err, rows) {
       if (rows[0]) {
         request('http://Address-env.uitihrdzi7.us-east-1.elasticbeanstalk.com:8000/address/' + rows[0].addressUuid, function (error, response, body) {
+          if (body=="Invalid id!") {
+            rows[0].self = {
+              href: 'http://person-env.n924wyqpyp.us-east-1.elasticbeanstalk.com:8000/person/' + rows[0]['id']
+            }
+            res.json(rows[0]);
+            return;
+          }
           console.log('error:', error);
           console.log('statusCode:', response && response.statusCode);
           console.log('body:', body);
