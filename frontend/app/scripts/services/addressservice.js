@@ -23,6 +23,18 @@ angular.module('teapotApp')
             })
     }
 
+    this.getAddressPage = function($scope, pageRequested, successCallback, failureCallback) {
+        $http.get(this.baseURL + '/address/page/'+pageRequested)
+            .then(function(response) {
+                console.log(response.data)
+                $scope.addresses = response.data
+                successCallback()
+            }, function(response) {
+                console.log(response.data)
+                failureCallback()
+            });
+    }
+
     this.deleteAddress = function($scope, successCallback, failureCallback) {
         $http.delete(this.baseURL+'/address/'+$scope.currentAddress.uuid)
             .then(function(response) {
