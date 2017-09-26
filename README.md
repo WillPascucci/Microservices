@@ -1,7 +1,6 @@
-# Project 1 Part 1
-##Team: 418Teapot
+# Project 1 Part 1, Team: 418Teapot
 ---
-###Members: Jiabei Yu (jy2793), Apoorv Purwar (ap3644), Yuval Schaal (ys3055), Will Pascucci (wmp2108), Guy Yardeni (gy2241)
+#Members: Jiabei Yu (jy2793), Apoorv Purwar (ap3644), Yuval Schaal (ys3055), Will Pascucci (wmp2108), Guy Yardeni (gy2241)
 ---
 
 Project Requirements:
