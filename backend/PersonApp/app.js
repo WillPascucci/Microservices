@@ -119,6 +119,9 @@ connection.connect(function(err) {
       if (rows[0]) {
         request('http://Address-env.uitihrdzi7.us-east-1.elasticbeanstalk.com:8000/address/' + rows[0].addressUuid, function (error, response, body) {
           if (body=="Invalid id!") {
+            rows[0].self = {
+              href: 'http://person-env.n924wyqpyp.us-east-1.elasticbeanstalk.com:8000/person/' + rows[0]['id']
+            }
             res.json(rows[0]);
             return;
           }
