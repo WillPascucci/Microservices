@@ -154,7 +154,7 @@ connection.connect(function(err) {
 
   app.delete('/person/:id', function(req, res) {
     //Need to test this out, postman or something?
-    connection.query("DELETE FROM Person WHERE id=?", req.params.id, function (err, rows) { 
+    connection.query("DELETE FROM Person WHERE id=?", req.params.id, function (err, rows) {
       res.send('Delete on Person - ' + req.params.id);
     })
   });
@@ -171,6 +171,20 @@ connection.connect(function(err) {
          res.json(JSON.parse(body));
      })} else {
        res.send("Invalid id!");
+     }
+   })
+});
+
+//Function to fetch person given address ID
+ app.get('/person/address/:addressID', function (req, res) {
+   connection.query("SELECT * from Person where addressUuid=?",req.params.addressID, function (err, rows) {
+     if(err){
+       console.log(err)
+     } else{
+         console.log('Rows' +res.json(rows))
+         if(!rows){
+           res.send("No Person found at this address!");
+         }
      }
    })
 });
