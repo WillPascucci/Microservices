@@ -103,15 +103,16 @@ connection.connect(function(err) {
     })
   });
 
-  //Function to fetch person given address ID
-   app.get('/person/address/:addressID', function (req, res) {
-     connection.query("SELECT * from Person where addressUuid=?",req.params.addressID, function (err, rows) {
-       if(err) console.log(err)
-       console.log('Rows' +res.json(rows))
-       if(!rows){
-         res.send("No Person found at this address!");
-       }
-     })
+
+  app.get('/address/:id/persons', function(req, res) {
+    //Change port back - when checing in to 8000 and the port Person App is listening to
+    console.log('http://person-env.n924wyqpyp.us-east-1.elasticbeanstalk.com:8080/person/address/'+req.params.id);
+    request('http://localhost:8080/person/address/'+req.params.id, function (error, response, body) {
+    console.log('error:', error); // Print the error if one occurred
+    console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+    console.log('body:', body); // Print the HTML for the Google homepage.
+    res.json(JSON.parse(body));
+  })
   });
 
   app.listen(8000, function () {
