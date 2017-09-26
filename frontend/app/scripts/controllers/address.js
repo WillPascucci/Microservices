@@ -25,7 +25,7 @@ angular.module('teapotApp')
 
     $scope.nextPage = function() {
       console.log('next page called')
-      if($scope.pageNumber + 1 < 4/*$scope.maxPages*/) {
+      if($scope.pageNumber + 1 < $scope.maxPages) {
         addressService.getAddressPage($scope, $scope.pageNumber + 1, function() {
           console.log('Next Page Success')
           $scope.pageNumber++;

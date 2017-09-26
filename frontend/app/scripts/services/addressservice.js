@@ -17,6 +17,7 @@ angular.module('teapotApp')
         $http.get(this.baseURL + '/address/page/0')
             .then(function(response) {
                 $scope.addresses = response.data
+                $scope.maxPages = response.data[0].totalPages
                 console.log($scope.addresses)
             }, function(response) {
                 console.log(response.data)
@@ -28,6 +29,7 @@ angular.module('teapotApp')
             .then(function(response) {
                 console.log(response.data)
                 $scope.addresses = response.data
+                $scope.maxPages = response.data[0].totalPages
                 successCallback()
             }, function(response) {
                 console.log(response.data)
