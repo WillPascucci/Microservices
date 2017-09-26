@@ -40,6 +40,7 @@ connection.connect(function(err) {
   })
 
   app.get('/person', function (req, res) {
+<<<<<<< Updated upstream
     console.log('get person called');
     console.log(req.query);
     console.log(Object.keys(req.query).length);
@@ -70,6 +71,26 @@ connection.connect(function(err) {
                   href: 'http://Address-env.uitihrdzi7.us-east-1.elasticbeanstalk.com:8000/address/'+ rows[row]["addressUuid"]
                 }
                 delete rows[row]["addressUuid"];
+=======
+	console.log('get person called')
+  let firstname = "and firstname = "+req.query.firstname;
+  let lastname = "and lastname = "+req.query.lastname;
+    connection.query("SELECT * from Person where 1=1 "+((req.query.firstname === undefined) ? '' : firstname)+ " "+((req.query.lastname === undefined) ? '' : lastname), function (err, rows) {
+      request('http://Address-env.uitihrdzi7.us-east-1.elasticbeanstalk.com:8000/address', function (error, response, body) {
+        if (error) {
+          console.log(error);
+        }
+        if (response.statusCode === 200) {
+        console.log(body)
+        body = JSON.parse(body);
+        for (row in rows) {
+          for (address in body) {
+            if (body[address].uuid==rows[row].addressUuid) {
+              console.log(address);
+              rows[row]["address"] = body[address].street + ", " + body[address].city + ", " + body[address].state + " " + body[address].zipcode;
+			  rows[row].addressLink = {
+                href: 'http://Address-env.uitihrdzi7.us-east-1.elasticbeanstalk.com:8000/address/'+ rows[row]["addressUuid"]
+>>>>>>> Stashed changes
               }
             }
   		  rows[row].self = {
@@ -201,7 +222,7 @@ connection.connect(function(err) {
 
   app.delete('/person/:id', function(req, res) {
     //Need to test this out, postman or something?
-    connection.query("DELETE FROM Person WHERE id=?", req.params.id, function (err, rows) {
+    connection.query("DELETE FROM Person WHERE id=?", req.params.id, function (err, rows) { 
       res.send('Delete on Person - ' + req.params.id);
     })
   });
@@ -218,20 +239,6 @@ connection.connect(function(err) {
          res.json(JSON.parse(body));
      })} else {
        res.send("Invalid id!");
-     }
-   })
-});
-
-//Function to fetch person given address ID
- app.get('/person/address/:addressID', function (req, res) {
-   connection.query("SELECT * from Person where addressUuid=?",req.params.addressID, function (err, rows) {
-     if(err){
-       console.log(err)
-     } else{
-         console.log('Rows' +res.json(rows))
-         if(!rows){
-           res.send("No Person found at this address!");
-         }
      }
    })
 });
