@@ -100,10 +100,10 @@ connection.connect(function(err) {
     })
   });
 
- app.put('/address/:id', function(req, res) {
+ app.put('/address/:uuid', function(req, res) {
    console.log(req);
-   connection.query("UPDATE Address SET street=?, city=?, state=?, zipcode=?", [req.body.street, req.body.city, req.body.state, req.body.zipcode], function (err, rows) {
-   res.send('Put on Person - ' + req.params.id);
+   connection.query("UPDATE Address SET street=?, city=?, state=?, zipcode=? WHERE uuid=?", [req.body.street, req.body.city, req.body.state, req.body.zipcode, req.params.uuid], function (err, rows) {
+   res.send('Put on Address - ' + req.params.uuid);
    })
   });
 
