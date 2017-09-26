@@ -40,8 +40,42 @@ connection.connect(function(err) {
   })
 
   app.get('/person', function (req, res) {
+<<<<<<< Updated upstream
+    console.log('get person called');
+    console.log(req.query);
+    console.log(Object.keys(req.query).length);
+    if (Object.keys(req.query).length === 1) {
+      console.log("IM HERE");
+      console.log(req.query);
+      console.log(Object.keys(req.query));
+      console.log(Object.keys(req.query)[0]);
+      console.log(req.query[Object.keys(req.query)[0]]);
+      console.log('SELECT * from Person WHERE ' + [Object.keys(req.query)[0] + '=' + '"' + req.query[Object.keys(req.query)[0]]] + '"');
+      connection.query('SELECT * from Person WHERE ' + [Object.keys(req.query)[0] + '=' + '"' + req.query[Object.keys(req.query)[0]]] + '"', function (err, rows) {
+        console.log(rows);
+        console.log("between");
+        console.log(err);
+        request('http://Address-env.uitihrdzi7.us-east-1.elasticbeanstalk.com:8000/address', function (error, response, body) {
+          if (error) {
+            console.log(error);
+          }
+          if (response.statusCode === 200) {
+          console.log(body)
+          body = JSON.parse(body);
+          for (row in rows) {
+            for (address in body) {
+              if (body[address].uuid==rows[row].addressUuid) {
+                console.log(address);
+                rows[row]["address"] = body[address].street + ", " + body[address].city + ", " + body[address].state + " " + body[address].zipcode;
+  			  rows[row].addressLink = {
+                  href: 'http://Address-env.uitihrdzi7.us-east-1.elasticbeanstalk.com:8000/address/'+ rows[row]["addressUuid"]
+                }
+                delete rows[row]["addressUuid"];
+=======
 	console.log('get person called')
-    connection.query("SELECT * from Person", function (err, rows) {
+  let firstname = "and firstname = "+req.query.firstname;
+  let lastname = "and lastname = "+req.query.lastname;
+    connection.query("SELECT * from Person where 1=1 "+((req.query.firstname === undefined) ? '' : firstname)+ " "+((req.query.lastname === undefined) ? '' : lastname), function (err, rows) {
       request('http://Address-env.uitihrdzi7.us-east-1.elasticbeanstalk.com:8000/address', function (error, response, body) {
         if (error) {
           console.log(error);
@@ -56,25 +90,59 @@ connection.connect(function(err) {
               rows[row]["address"] = body[address].street + ", " + body[address].city + ", " + body[address].state + " " + body[address].zipcode;
 			  rows[row].addressLink = {
                 href: 'http://Address-env.uitihrdzi7.us-east-1.elasticbeanstalk.com:8000/address/'+ rows[row]["addressUuid"]
+>>>>>>> Stashed changes
               }
-              delete rows[row]["addressUuid"];
             }
-            console.log("qwrq")
+  		  rows[row].self = {
+   				href: 'http://person-env.n924wyqpyp.us-east-1.elasticbeanstalk.com:8000/person/' + rows[row]['id']
+   			  }
           }
-		  rows[row].self = {
- 				href: 'http://person-env.n924wyqpyp.us-east-1.elasticbeanstalk.com:8000/person/' + rows[row]['id']
- 			  }
-        }
-          console.log(rows)
-          res.json(rows);
-        } else {
-          console.log(error);
-          console.log(response);
-          console.log(response.statusCode);
-          console.log(body);
-        }
-        });
-    })
+            console.log(rows)
+            res.json(rows);
+          } else {
+            console.log(error);
+            console.log(response);
+            console.log(response.statusCode);
+            console.log(body);
+          }
+          });
+      })
+    } else {
+      console.log("NO I'M HERE ACTUALLY");
+      connection.query("SELECT * from Person", function (err, rows) {
+        request('http://Address-env.uitihrdzi7.us-east-1.elasticbeanstalk.com:8000/address', function (error, response, body) {
+          if (error) {
+            console.log(error);
+          }
+          if (response.statusCode === 200) {
+          console.log(body)
+          body = JSON.parse(body);
+          for (row in rows) {
+            for (address in body) {
+              if (body[address].uuid==rows[row].addressUuid) {
+                console.log(address);
+                rows[row]["address"] = body[address].street + ", " + body[address].city + ", " + body[address].state + " " + body[address].zipcode;
+          rows[row].addressLink = {
+                  href: 'http://Address-env.uitihrdzi7.us-east-1.elasticbeanstalk.com:8000/address/'+ rows[row]["addressUuid"]
+                }
+                delete rows[row]["addressUuid"];
+              }
+            }
+        rows[row].self = {
+          href: 'http://person-env.n924wyqpyp.us-east-1.elasticbeanstalk.com:8000/person/' + rows[row]['id']
+          }
+          }
+            console.log(rows)
+            res.json(rows);
+          } else {
+            console.log(error);
+            console.log(response);
+            console.log(response.statusCode);
+            console.log(body);
+          }
+          });
+      })
+    }
   });
 
   app.get('/person/page/:offset', function (req, res) {
@@ -154,7 +222,7 @@ connection.connect(function(err) {
 
   app.delete('/person/:id', function(req, res) {
     //Need to test this out, postman or something?
-    connection.query("DELETE FROM Person WHERE id=?", req.params.id, function (err, rows) {
+    connection.query("DELETE FROM Person WHERE id=?", req.params.id, function (err, rows) { 
       res.send('Delete on Person - ' + req.params.id);
     })
   });
@@ -171,20 +239,6 @@ connection.connect(function(err) {
          res.json(JSON.parse(body));
      })} else {
        res.send("Invalid id!");
-     }
-   })
-});
-
-//Function to fetch person given address ID
- app.get('/person/address/:addressID', function (req, res) {
-   connection.query("SELECT * from Person where addressUuid=?",req.params.addressID, function (err, rows) {
-     if(err){
-       console.log(err)
-     } else{
-         console.log('Rows' +res.json(rows))
-         if(!rows){
-           res.send("No Person found at this address!");
-         }
      }
    })
 });
