@@ -38,6 +38,7 @@
 - [x] Simple HTML/Angular demo UI.
 
 Usage Instructions:
-In the frontend folder, make sure you have Grunt. Do an npm install and a bower install
+In the frontend folder, make sure you have Grunt (npm install grunt).
+Do an npm install and a bower install
 Once dependencies are working, type grunt serve
 
