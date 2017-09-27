@@ -14,7 +14,7 @@ angular.module('teapotApp')
     this.baseURL = 'http://address-env.uitihrdzi7.us-east-1.elasticbeanstalk.com:8000'
 
     this.getAddresses = function($scope) {
-        $http.get(this.baseURL + '/address/page/0')
+        $http.get(this.baseURL + '/address/page/'+$scope.pageNumber)
             .then(function(response) {
                 $scope.addresses = response.data
                 $scope.maxPages = response.data[0].totalPages
