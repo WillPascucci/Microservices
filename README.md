@@ -1,4 +1,4 @@
-### Project 1 Part 1
+### Project 2
 
 #### Team: 418Teapot
 
