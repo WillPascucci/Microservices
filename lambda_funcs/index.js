@@ -44,14 +44,20 @@ exports.handler = (event, context, callback) => {
             connection.query("SELECT * from company", function (error, rows) {
                 console.log(error);
                 console.log(rows);
-                callback(null, {
-                    statusCode: error ? '400' : '200',
-                    // body: err ? err.message : JSON.stringify(res),
-                    body: error ? error.message : rows,
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }
-                });
+                if (error) {
+                    console.log("IN ERROR");
+                    callback(error, null);
+                } else {
+                    console.log("IN ELSE");
+                    callback(null, {
+                        statusCode: error ? '400' : '200',
+                        // body: err ? err.message : JSON.stringify(res),
+                        body: error ? error.message : rows[0].id,
+                        headers: {
+                            'Content-Type': 'application/json',
+                        }
+                    });
+                }
             });
             break;
         case 'POST':
