@@ -47,7 +47,7 @@ exports.handler = (event, context, callback) => {
                 callback(null, {
                     statusCode: error ? '400' : '200',
                     // body: err ? err.message : JSON.stringify(res),
-                    body: error ? error.message : JSON.parse(rows),
+                    body: error ? error.message : rows,
                     headers: {
                         'Content-Type': 'application/json',
                     }
