@@ -42,32 +42,32 @@ exports.handler = (event, context, callback) => {
         case 'GET':
             console.log("IN GET");
             connection.query("SELECT * from company", function (error, rows) {
-                console.log("IN SELECT");
+                console.log(error);
+                console.log(rows);
+                callback(null, {
+                    statusCode: error ? '400' : '200',
+                    // body: err ? err.message : JSON.stringify(res),
+                    body: error ? error.message : JSON.parse(rows),
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
             });
-            // console.log(error);
-            // console.log(rows);
-            callback(null, {
-                statusCode: '200',
-                body: 'hiaa',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-            // });
             break;
         case 'POST':
             console.log("IN POST");
-            // connection.query("INSERT INTO company (name, address, type, contactName, phone, fax) VALUES (?, ?, ?, ?, ?, ?)", [event.body.name, event.body.address, event.body.type, event.body.contactName, event.body.phone, event.body.fax], function (error, rows) {
-            //     console.log(error);
-            //     console.log(rows);
-            //     callback(null, {
-            //         statusCode: error ? '400' : '200',
-            //         body: JSON.stringify("Success!"),
-            //         headers: {
-            //             'Content-Type': 'application/json'
-            //         }
-            //     });
-            // });
+            connection.query("INSERT INTO company (name, address, type, contactName, phone, fax) VALUES (?, ?, ?, ?, ?, ?)", [event.body.name, event.body.address, event.body.type, event.body.contactName, event.body.phone, event.body.fax], function (error, rows) {
+                console.log(error);
+                console.log(rows);
+                callback(null, {
+                    statusCode: error ? '400' : '200',
+                    // body: err ? err.message : JSON.stringify(res),
+                    body: JSON.stringify("Success!"),
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+            });
             break;
         default:
             console.log("IN DEFAULT");
