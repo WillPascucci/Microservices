@@ -17,8 +17,16 @@ var connection = mysql.createConnection({
 });
 
 
-
 exports.handler = (event, context, callback) => {
+    connection.connect(function(errorfirst) {
+      if (errorfirst) {
+        console.error('Database connection failed: ' + errorfirst.stack);
+        connection.end();
+        return;
+      }
+    console.log('You are connected');
+
+
     console.log("HI1");
     console.log(event);
     console.log("HI2");
@@ -41,24 +49,50 @@ exports.handler = (event, context, callback) => {
     switch (event.httpMethod) {
         case 'GET':
             console.log("IN GET");
-            connection.query("SELECT * from company", function (error, rows) {
-                console.log(error);
-                console.log(rows);
-                if (error) {
-                    console.log("IN ERROR");
-                    callback(error, null);
-                } else {
-                    console.log("IN ELSE");
-                    callback(null, {
-                        statusCode: error ? '400' : '200',
-                        // body: err ? err.message : JSON.stringify(res),
-                        body: error ? error.message : rows[0].id,
-                        headers: {
-                            'Content-Type': 'application/json',
-                        }
-                    });
-                }
+            var my_rows;
+            let firstpormmm = new Promise(function(resolve, reject) {
+                connection.query("SELECT * from company", function (error, rows) {
+                    console.log(error);
+                    console.log(rows);
+                    my_rows = rows;
+                    if (!error) {
+                        connection.end();
+                        resolve(1);
+                    }
+
+                });
             });
+            firstpormmm.then(function() {
+                console.log(my_rows);
+                callback(null, {
+                    statusCode: '200',
+                    // body: err ? err.message : JSON.stringify(res),
+                    body: JSON.stringify(my_rows),
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                })
+            });
+            // connection.query("SELECT * from company", function (error, rows) {
+            //     console.log(error);
+            //     console.log(rows);
+            //     if (error) {
+            //         console.log("IN ERROR");
+            //         callback(error, null);
+            //     } else {
+            //         console.log("IN ELSE");
+            //         callback(null, {
+            //             statusCode: error ? '400' : '200',
+            //             // body: err ? err.message : JSON.stringify(res),
+            //             body: error ? error.message : rows[0].id,
+            //             headers: {
+            //                 'Content-Type': 'application/json',
+            //             }
+            //         });
+            //         console.log("AT END");
+            //         connection.end();
+            //     }
+            // });
             break;
         case 'POST':
             console.log("IN POST");
@@ -79,4 +113,5 @@ exports.handler = (event, context, callback) => {
             console.log("IN DEFAULT");
             done(new Error(`Unsupported method "${event.httpMethod}"`));
     }
+});
 };
