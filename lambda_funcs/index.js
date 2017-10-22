@@ -50,7 +50,7 @@ exports.handler = (event, context, callback) => {
         case 'GET':
             console.log("IN GET");
             var my_rows;
-            let firstpormmm = new Promise(function(resolve, reject) {
+            let getCompanyPromise = new Promise(function(resolve, reject) {
                 connection.query("SELECT * from company", function (error, rows) {
                     console.log(error);
                     console.log(rows);
@@ -62,7 +62,7 @@ exports.handler = (event, context, callback) => {
 
                 });
             });
-            firstpormmm.then(function() {
+            getCompanyPromise.then(function() {
                 console.log(my_rows);
                 callback(null, {
                     statusCode: '200',
@@ -81,7 +81,7 @@ exports.handler = (event, context, callback) => {
             //         callback(error, null);
             //     } else {
             //         console.log("IN ELSE");
-            //         callback(null, {
+            //         clalback(null, {
             //             statusCode: error ? '400' : '200',
             //             // body: err ? err.message : JSON.stringify(res),
             //             body: error ? error.message : rows[0].id,
@@ -96,22 +96,51 @@ exports.handler = (event, context, callback) => {
             break;
         case 'POST':
             console.log("IN POST");
-            connection.query("INSERT INTO company (name, address, type, contactName, phone, fax) VALUES (?, ?, ?, ?, ?, ?)", [event.body.name, event.body.address, event.body.type, event.body.contactName, event.body.phone, event.body.fax], function (error, rows) {
-                console.log(error);
-                console.log(rows);
-                callback(null, {
-                    statusCode: error ? '400' : '200',
-                    // body: err ? err.message : JSON.stringify(res),
-                    body: JSON.stringify("Success!"),
-                    headers: {
-                        'Content-Type': 'application/json',
+            var my_rows;
+            let postCompanyPromise = new Promise(function(resolve, reject) {
+              console.log("See This ---");
+            //  console.log(event.body["name"]);
+              var compData = JSON.parse(event.body);
+                console.log(compData.name);
+              connection.query("INSERT INTO company (name, address, type, contactName, phone, fax) VALUES (?, ?, ?, ?, ?, ?)", [compData.name, compData.address, compData.type, compData.contactName, compData.phone, compData.fax], function (error, rows) {
+                  console.log(error);
+                  console.log(rows);
+                  my_rows = rows;
+                  if (!error) {
+                      connection.end();
+                      resolve(1);
                     }
                 });
             });
+            postCompanyPromise.then(function() {
+              console.log(my_rows);
+              callback(null, {
+                  statusCode: '200',
+                  // body: err ? err.message : JSON.stringify(res),
+                  body: JSON.stringify(my_rows),
+                  headers: {
+                      'Content-Type': 'application/json',
+                  }
+              })
+            });
+
+            // connection.query("INSERT INTO company (name, address, type, contactName, phone, fax) VALUES (?, ?, ?, ?, ?, ?)", [event.body.name, event.body.address, event.body.type, event.body.contactName, event.body.phone, event.body.fax], function (error, rows) {
+            //     console.log(error);
+            //     console.log(rows);
+            //     callback(null, {
+            //         statusCode: error ? '400' : '200',
+            //         // body: err ? err.message : JSON.stringify(res),
+            //         body: JSON.stringify("Success!"),
+            //         headers: {
+            //             'Content-Type': 'application/json',
+            //         }
+            //     });
+            // });
             break;
         default:
             console.log("IN DEFAULT");
-            done(new Error(`Unsupported method "${event.httpMethod}"`));
+            console.log("HTTP Method-"+event.httpMethod);
+          //  done(new Error(`Unsupported method "${event.httpMethod}"`));
     }
 });
 };
