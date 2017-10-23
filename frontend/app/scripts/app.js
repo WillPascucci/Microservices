@@ -30,6 +30,16 @@ angular
         controller: 'AddressCtrl',
         controllerAs: 'address'
       })
+      .when('/HR', {
+        templateUrl: 'views/hr.html',
+        controller: 'HrCtrl',
+        controllerAs: 'HR'
+      })
+      .when('/CRM', {
+        templateUrl: 'views/crm.html',
+        controller: 'CrmCtrl',
+        controllerAs: 'CRM'
+      })
       .otherwise({
         redirectTo: '/'
       });
