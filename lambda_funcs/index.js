@@ -137,6 +137,8 @@ exports.handler = (event, context, callback) => {
             //     });
             // });
             break;
+        case 'DELETE':
+          console.log("In Delete");
         default:
             console.log("IN DEFAULT");
             console.log("HTTP Method-"+event.httpMethod);
