@@ -12,6 +12,7 @@ angular.module('teapotApp')
     // AngularJS will instantiate a singleton by calling "new" on this function
 
     this.baseURL = 'http://person-env.n924wyqpyp.us-east-1.elasticbeanstalk.com:8000'
+    //this.baseURL = 'https://0j1j9o13l2.execute-api.us-east-1.amazonaws.com/prod'
 
     this.getPersons = function($scope) {
         $http.get(this.baseURL + '/person/page/'+$scope.pageNumber)
@@ -63,6 +64,31 @@ angular.module('teapotApp')
             }, function(response) {
                 failureCallback()
             })
+    }
+
+    this.findPerson = function($scope, successCallback, failureCallback) {
+        var queryString = '?'
+        if($scope.currentPerson.firstname) {
+            queryString += 'firstname=' + $scope.currentPerson.firstname + '&'
+        }
+        if($scope.currentPerson.lastname) {
+            queryString += 'lastname=' + $scope.currentPerson.lastname + '&'
+        }
+        if($scope.currentPerson.age) {
+            queryString += 'age=' + $scope.currentPerson.age + '&'
+        }
+        if($scope.currentPerson.phone) {
+            queryString += 'phone=' + $scope.currentPerson.phone + '&'
+        }
+        console.log(queryString)
+        //console.log(this.baseURL + '/person' + queryString)
+        $http.get(this.baseURL + '/person' + queryString)
+            .then(function(response) {
+                //console.log(response.data)
+                successCallback(response.data)
+            }, function(response) {
+                failureCallback()
+            });
     }
 
 

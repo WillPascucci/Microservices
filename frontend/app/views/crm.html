@@ -1,0 +1,107 @@
+<div class="row">
+  <div class="col-lg-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">CRM</h3>
+      </div>
+      <ul class="list-group">
+      		<li class="list-group-item" ng-click="pickCRM(CRM)" ng-repeat="CRM in CRM">{{CRM.street}}</li>
+    	</ul>
+    	<button type="button" class="btn btn-primary" ng-click="prevPage()">Previous</button>
+    	<button type="button" class="btn btn-primary" ng-click="nextPage()">Next</button>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">CRM</h3>
+      </div>
+      <div class="panel-body">
+        <div class="input-group">
+      		<span class="input-group-addon" id="basic-addon1">Street</span>
+      		<input type="text" class="form-control" placeholder="Street" ng-model="currentCRM.street" aria-describedby="basic-addon1">
+    	</div>
+    	<div class="input-group">
+      		<span class="input-group-addon" id="basic-addon1">City</span>
+      		<input type="text" class="form-control" placeholder="City" ng-model="currentCRM.city" aria-describedby="basic-addon1">
+    	</div>
+    	<div class="input-group">
+      		<span class="input-group-addon" id="basic-addon1">State</span>
+      		<input type="text" class="form-control" placeholder="State" ng-model="currentCRM.state" aria-describedby="basic-addon1">
+    	</div>
+    	<div class="input-group">
+      		<span class="input-group-addon" id="basic-addon1">Zip Code</span>
+      		<input type="text" class="form-control" placeholder="Zip Code" ng-model="currentCRM.zipcode" aria-describedby="basic-addon1">
+    	</div>
+      </div>
+      <button type="button" class="btn btn-danger" ng-click="deleteCRM()">Delete</button>
+      <button type="button" class="btn btn-secondary" ng-click="clearCRM()">Clear</button>
+      <button type="button" class="btn btn-primary" ng-click="saveCRM()">Save</button>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+            <h3 class="panel-title">Check on Customer</h3>
+      </div>
+      <div class="panel-body">
+      	<div class="col-lg-4">
+      		<div class="input-group">
+  				<span class="input-group-addon" id="basic-addon1">First Name</span>
+  				<input type="text" class="form-control" placeholder="First Name" ng-disabled="personFound" ng-model="currentPerson.firstname" aria-describedby="basic-addon1">
+			</div>
+			<div class="input-group">
+  				<span class="input-group-addon" id="basic-addon1">Last Name</span>
+  				<input type="text" class="form-control" placeholder="Last Name" ng-disabled="personFound" ng-model="currentPerson.lastname" aria-describedby="basic-addon1">
+			</div>
+			<div class="input-group">
+  				<span class="input-group-addon" id="basic-addon1">Age</span>
+  				<input type="text" class="form-control" placeholder="Age" ng-disabled="personFound" ng-model="currentPerson.age" aria-describedby="basic-addon1">
+			</div>
+			<div class="input-group">
+  				<span class="input-group-addon" id="basic-addon1">Phone Number</span>
+  				<input type="text" class="form-control" placeholder="Phone Number" ng-disabled="personFound" ng-model="currentPerson.phone" aria-describedby="basic-addon1">
+			</div>
+			<button type="button" class="btn btn-primary" ng-click="findPerson()">Find Person</button>
+			<button type="button" class="btn btn-secondary" ng-click="clearPerson()">Clear Person</button>
+			<span class={{personAlertType}}>{{personAlertMessage}}</span>
+      	</div>
+      	<div class="col-lg-4">
+      		<div class="input-group">
+  				<span class="input-group-addon" id="basic-addon1">Name</span>
+  				<input type="text" class="form-control" placeholder="First Name" ng-disabled="companyFound" ng-model="currentCompany.name" aria-describedby="basic-addon1">
+			</div>
+			<div class="input-group">
+  				<span class="input-group-addon" id="basic-addon1">Type</span>
+  				<input type="text" class="form-control" placeholder="Last Name" ng-disabled="companyFound" ng-model="currentCompany.type" aria-describedby="basic-addon1">
+			</div>
+			<div class="input-group">
+  				<span class="input-group-addon" id="basic-addon1">Contact</span>
+  				<input type="text" class="form-control" placeholder="Phone Number" ng-disabled="companyFound" ng-model="currentCompany.contact" aria-describedby="basic-addon1">
+			</div>
+			<div class="input-group">
+  				<span class="input-group-addon" id="basic-addon1">Fax Number</span>
+  				<input type="text" class="form-control" placeholder="Age" ng-disabled="companyFound" ng-model="currentCompany.fax" aria-describedby="basic-addon1">
+			</div>
+			<div class="input-group">
+  				<span class="input-group-addon" id="basic-addon1">Phone Number</span>
+  				<input type="text" class="form-control" placeholder="Phone Number" ng-disabled="companyFound" ng-model="currentCompany.phone" aria-describedby="basic-addon1">
+			</div>
+			<button type="button" class="btn btn-primary" ng-click="findCompany()">Find Company</button>
+			<button type="button" class="btn btn-secondary" ng-click="clearCompany()">Clear Company</button>
+			<span class={{companyAlertType}}>{{companyAlertMessage}}</span>
+      	</div>
+      	<div class="col-lg-4">
+      		<div class="input-group">
+  				<span class="input-group-addon" id="basic-addon1">Amount Spent</span>
+  				<input type="text" class="form-control" placeholder="First Name" ng-disabled="companyFound" ng-model="currentHR.title" aria-describedby="basic-addon1">
+			</div>
+			<button type="button" class="btn btn-danger" ng-click="deleteHR()">Remove</button>
+			<button type="button" class="btn btn-primary" ng-click="saveHR()">Create</button>
+      	</div>
+      </div>
+    </div>
+  </div>
+</div>

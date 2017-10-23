@@ -12,6 +12,9 @@ angular.module('teapotApp')
     // AngularJS will instantiate a singleton by calling "new" on this function
 
     this.baseURL = 'http://address-env.uitihrdzi7.us-east-1.elasticbeanstalk.com:8000'
+    this.smartyStreetsURL = 'https://us-street.api.smartystreets.com/street-address'
+    this.smartyAuthId = '72315ecb-e04b-4417-200a-bfcb2ac9df63'
+    this.smartyAuthToken = 'J3njx4aHnVdnf6k7l4yR'
 
     this.getAddresses = function($scope) {
         $http.get(this.baseURL + '/address/page/'+$scope.pageNumber)
@@ -61,6 +64,36 @@ angular.module('teapotApp')
                 successCallback()
             }, function(response) {
                 failureCallback()
+            })
+    }
+
+    this.checkAddress = function($scope, successCallback, failureCallback) {
+        //Gray out submit button until Checked and Found
+        var smartyURL = this.smartyStreetsURL
+        var smartyQueryString = '?auth-id=' + this.smartyAuthId + '&auth-token=' + this.smartyAuthToken
+        //console.log($scope.currentAddress)
+        if($scope.currentAddress.zipcode) {
+            smartyQueryString += '&zipcode=' + encodeURI($scope.currentAddress.zipcode)
+        }
+        if($scope.currentAddress.city) {
+            smartyQueryString += '&city=' + encodeURI($scope.currentAddress.city)
+        }
+        if($scope.currentAddress.street) {
+            smartyQueryString += '&street=' + encodeURI($scope.currentAddress.street)
+        }
+        if($scope.currentAddress.state) {
+            smartyQueryString += '&state=' + encodeURI($scope.currentAddress.state)
+        }
+        //console.log(smartyURL+smartyQueryString)
+        
+        $http.get(smartyURL+smartyQueryString)
+            .then(function(response) {
+                console.log(response)
+                successCallback(response.data)
+                //console.log(response)
+            }, function(response) {
+                failureCallback()
+                console.log(response)
             })
     }
   });

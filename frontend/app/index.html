@@ -41,6 +41,8 @@
             <ul class="nav navbar-nav">
               <li><a ng-href="#!/person">Person</a></li>
               <li><a ng-href="#!/address">Address</a></li>
+              <li><a ng-href="#!/HR">HR</a></li>
+              <li><a ng-href="#!/CRM">CRM</a></li>
             </ul>
           </div>
         </div>
@@ -48,7 +50,8 @@
     </div>
 
     <div class="container">
-    <div ng-view=""></div>
+      <div ng-view="" >
+      </div>
     </div>
 
 
@@ -85,6 +88,11 @@
         <script src="scripts/controllers/address.js"></script>
         <script src="scripts/services/personservice.js"></script>
         <script src="scripts/services/addressservice.js"></script>
+        <script src="scripts/controllers/hr.js"></script>
+        <script src="scripts/controllers/crm.js"></script>
+        <script src="scripts/services/hrservice.js"></script>
+        <script src="scripts/services/crmservice.js"></script>
+        <script src="scripts/services/companyservice.js"></script>
         <!-- endbuild -->
 </body>
 </html>

@@ -58,11 +58,13 @@ body {
 .marketing p + h4 {
   margin-top: 28px;
 }
+.container {
+    width: 1400px;
+}
 
 /* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 1000px) {
   .container {
-    max-width: 730px;
   }
 
   /* Remove the padding we set earlier */
