@@ -1,6 +1,2 @@
 backend/AddressApp/node_modules/
 backend/PersonApp/node_modules/
-lambda_funcs/node_modules/
-lambda_funcs/companyFunc/node_modules/
-lambda_funcs/employeeFunc/node_modules/
-lambda_funcs/customerFunc/node_modules/
