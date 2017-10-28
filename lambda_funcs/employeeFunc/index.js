@@ -48,51 +48,87 @@ exports.handler = (event, context, callback) => {
 
     switch (event.httpMethod) {
         case 'GET':
-            console.log("IN GET");
-            var my_rows;
-            let firstpormmm = new Promise(function(resolve, reject) {
-                connection.query("SELECT * from employee", function (error, rows) {
-                    console.log(error);
-                    console.log(rows);
-                    my_rows = rows;
-                    if (!error) {
-                        connection.end();
-                        resolve(1);
-                    }
+            if(event.path == '/employeeFunc2'){
+                console.log("IN GET");
+                var my_rows;
+                let firstpormmm = new Promise(function(resolve, reject) {
+                    connection.query("SELECT * from employee", function (error, rows) {
+                        console.log(error);
+                        console.log(rows);
+                        my_rows = rows;
+                        if (!error) {
+                            connection.end();
+                            resolve(1);
+                        }
 
+                    });
                 });
-            });
-            firstpormmm.then(function() {
-                console.log(my_rows);
-                callback(null, {
-                    statusCode: '200',
-                    // body: err ? err.message : JSON.stringify(res),
-                    body: JSON.stringify(my_rows),
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }
-                })
-            });
-            // connection.query("SELECT * from company", function (error, rows) {
-            //     console.log(error);
-            //     console.log(rows);
-            //     if (error) {
-            //         console.log("IN ERROR");
-            //         callback(error, null);
-            //     } else {
-            //         console.log("IN ELSE");
-            //         callback(null, {
-            //             statusCode: error ? '400' : '200',
-            //             // body: err ? err.message : JSON.stringify(res),
-            //             body: error ? error.message : rows[0].id,
-            //             headers: {
-            //                 'Content-Type': 'application/json',
-            //             }
-            //         });
-            //         console.log("AT END");
-            //         connection.end();
-            //     }
-            // });
+                firstpormmm.then(function() {
+                    console.log(my_rows);
+                    callback(null, {
+                        statusCode: '200',
+                        // body: err ? err.message : JSON.stringify(res),
+                        body: JSON.stringify(my_rows),
+                        headers: {
+                            'Content-Type': 'application/json',
+                        }
+                    })
+                });
+            } else if(event.path.includes('/employeeFunc2/page/')){
+                    console.log("IN PAGE");
+                    console.log(event.path.substr(event.path.lastIndexOf("/") + 1))
+                    var my_rows;
+                    let firstpormmmPage = new Promise(function(resolve, reject) {
+                        connection.query("SELECT ROUND(a.totalPages/5,0) as totalPages, employee.* from (select count(*) as totalPages from employee) as a, employee LIMIT "+(event.path.substr(event.path.lastIndexOf("/") + 1)*5)+", 5",  function (error, rows) {
+                          console.log(error);
+                            console.log(rows);
+                            my_rows = rows;
+                            if (!error) {
+                                connection.end();
+                                resolve(1);
+                            }
+
+                        });
+                    });
+                    firstpormmmPage.then(function() {
+                        console.log(my_rows);
+                        callback(null, {
+                            statusCode: '200',
+                            // body: err ? err.message : JSON.stringify(res),
+                            body: JSON.stringify(my_rows),
+                            headers: {
+                                'Content-Type': 'application/json',
+                            }
+                        })
+                    });
+            } else if(event.path.includes('/employeeFunc2/')){ // this is for /companyFunc/:id
+              console.log("IN getting company ID");
+              console.log(event.path.substr(event.path.lastIndexOf("/") + 1))
+              var my_rows;
+              let firstpormmmPage = new Promise(function(resolve, reject) {
+                  connection.query("SELECT * from employee WHERE employeeId=?", event.path.substr(event.path.lastIndexOf("/") + 1),  function (error, rows) {
+                    console.log(error);
+                      console.log(rows);
+                      my_rows = rows;
+                      if (!error) {
+                          connection.end();
+                          resolve(1);
+                      }
+
+                  });
+              });
+              firstpormmmPage.then(function() {
+                  console.log(my_rows);
+                  callback(null, {
+                      statusCode: '200',
+                      // body: err ? err.message : JSON.stringify(res),
+                      body: JSON.stringify(my_rows),
+                      headers: {
+                          'Content-Type': 'application/json',
+                      }
+                  })
+              });
+            }
             break;
         case 'POST':
             console.log("IN POST");
@@ -109,6 +145,34 @@ exports.handler = (event, context, callback) => {
                 });
             });
             break;
+        case 'PUT': // this is for PUT on companyFunc/:id
+         console.log("IN PUT");
+            var my_rows;
+            let putCompanyPromise = new Promise(function(resolve, reject) {
+
+            var compData = JSON.parse(event.body);
+            console.log(compData.name);
+            connection.query("UPDATE employee SET name=?, address=?, type=?, contactName=?, phone=?, fax=? WHERE employeeId=?", [event.body.name, event.body.address, event.body.type, event.body.contactName, event.body.phone, event.body.fax, event.path.substr(event.path.lastIndexOf("/") + 1)], function (error, rows) {
+                  console.log(error);
+                  console.log(rows);
+                  my_rows = rows;
+                  if (!error) {
+                      connection.end();
+                      resolve(1);
+                    }
+                });
+            });
+            putCompanyPromise.then(function() {
+              console.log(my_rows);
+              callback(null, {
+                  statusCode: '200',
+                  // body: err ? err.message : JSON.stringify(res),
+                  body: JSON.stringify(my_rows),
+                  headers: {
+                      'Content-Type': 'application/json',
+                  }
+              })
+            });
         default:
             console.log("IN DEFAULT");
             done(new Error(`Unsupported method "${event.httpMethod}"`));
