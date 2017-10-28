@@ -7,8 +7,9 @@ console.log('Loading function');
 var mysql = require('mysql');
 var request = require('request');
 
+exports.handler = (event, context, callback) => {
 
-var connection = mysql.createConnection({
+    var connection = mysql.createConnection({
   host     : "assignmentpart2db.cyi40ipdvtjm.us-east-1.rds.amazonaws.com",
   user     : "microservices",
   password : "microservices",
@@ -16,7 +17,6 @@ var connection = mysql.createConnection({
   database : "microservices"
 });
 
-exports.handler = (event, context, callback) => {
     connection.connect(function(errorfirst) {
       if (errorfirst) {
         console.error('Database connection failed: ' + errorfirst.stack);

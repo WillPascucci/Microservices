@@ -8,16 +8,15 @@ var mysql = require('mysql');
 var request = require('request');
 
 
-var connection = mysql.createConnection({
-  host     : "assignmentpart2db.cyi40ipdvtjm.us-east-1.rds.amazonaws.com",
-  user     : "microservices",
-  password : "microservices",
-  port     : 3306,
-  database : "microservices"
-});
-
-
 exports.handler = (event, context, callback) => {
+    var connection = mysql.createConnection({
+    host     : "assignmentpart2db.cyi40ipdvtjm.us-east-1.rds.amazonaws.com",
+    user     : "microservices",
+    password : "microservices",
+    port     : 3306,
+    database : "microservices"
+    });
+
     connection.connect(function(errorfirst) {
       if (errorfirst) {
         console.error('Database connection failed: ' + errorfirst.stack);
@@ -222,7 +221,7 @@ exports.handler = (event, context, callback) => {
         default:
             console.log("IN DEFAULT");
             console.log("HTTP Method-"+event.httpMethod);
-          //  done(new Error(`Unsupported method "${event.httpMethod}"`));
+            done(new Error(`Unsupported method "${event.httpMethod}"`));
     }
 });
 };
