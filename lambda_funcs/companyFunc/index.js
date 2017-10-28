@@ -36,6 +36,23 @@ exports.handler = (event, context, callback) => {
     console.log(context.httpMethod);
     console.log("HI5");
 
+    // Smarty Street back end check - to be integrated when we get the company address from address ID. 
+    var smartyAuthId = '72315ecb-e04b-4417-200a-bfcb2ac9df63';
+    var smartyAuthToken = 'J3njx4aHnVdnf6k7l4yR';
+    var host = 'us-street.api.smartystreets.com';
+
+    var SmartyStreets = require('smartystreets-api');
+    var smartyStreets = SmartyStreets(smartyAuthId, smartyAuthToken, host);
+
+    var address = '440 Park Ave S, New York, NY, United States';
+    console.log("Testing Smarty Streets for - " + address);
+    smartyStreets.address(address, function (err, data, raw) {
+      console.log("In smarty");
+      if (err){
+         console.error(err);
+      }
+      console.log(data);
+    });
 
     const done = (err, res) => callback(null, {
         statusCode: err ? '400' : '200',
