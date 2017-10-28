@@ -6,6 +6,7 @@ console.log('Loading function');
 // var app = express();
 var mysql = require('mysql');
 var request = require('request');
+var snsPublish = require('aws-sns-publish');
 
 exports.handler = (event, context, callback) => {
 
@@ -35,6 +36,8 @@ exports.handler = (event, context, callback) => {
     console.log("HI4");
     console.log(context.httpMethod);
     console.log("HI5");
+    
+    snsPublish('In customerFunc...', {arn: 'arn:aws:sns:us-east-1:099711494433:LambdaTest'});
 
 
     const done = (err, res) => callback(null, {
@@ -138,6 +141,7 @@ exports.handler = (event, context, callback) => {
             break;
         case 'POST':
             console.log("IN POST");
+            snsPublish('In customerFunc.: POST', {arn: 'arn:aws:sns:us-east-1:099711494433:LambdaTest'});
             connection.query("INSERT INTO customer (name, address, type, contactName, phone, fax) VALUES (?, ?, ?, ?, ?, ?)", [event.body.name, event.body.address, event.body.type, event.body.contactName, event.body.phone, event.body.fax], function (error, rows) {
                 console.log(error);
                 console.log(rows);
@@ -153,6 +157,7 @@ exports.handler = (event, context, callback) => {
             break;
         case 'DELETE':
             console.log("IN DELETE");
+            snsPublish('In customerFunc.: DELETE', {arn: 'arn:aws:sns:us-east-1:099711494433:LambdaTest'});
             console.log(event.body.name);
             let firstpormmm2 = new Promise(function(resolve, reject) {
                 connection.query("SELECT * from customer where customerId="+String(event.body.name), function (error, rows) {
@@ -180,6 +185,7 @@ exports.handler = (event, context, callback) => {
             break;
         case 'PUT': // this is for PUT on companyFunc/:id
          console.log("IN PUT");
+            snsPublish('In customerFunc.: PUT', {arn: 'arn:aws:sns:us-east-1:099711494433:LambdaTest'});
             var my_rows;
             let putCompanyPromise = new Promise(function(resolve, reject) {
 

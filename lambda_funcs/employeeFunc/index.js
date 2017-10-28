@@ -6,6 +6,7 @@ console.log('Loading function');
 // var app = express();
 var mysql = require('mysql');
 var request = require('request');
+var snsPublish = require('aws-sns-publish');
 
 exports.handler = (event, context, callback) => {
 
@@ -35,6 +36,8 @@ exports.handler = (event, context, callback) => {
     console.log("HI4");
     console.log(context.httpMethod);
     console.log("HI5");
+    
+    snsPublish('In employeeFunc...', {arn: 'arn:aws:sns:us-east-1:099711494433:LambdaTest'});
 
 
     const done = (err, res) => callback(null, {
@@ -131,6 +134,7 @@ exports.handler = (event, context, callback) => {
             break;
         case 'POST':
             console.log("IN POST");
+            snsPublish('In employeeFunc: POST', {arn: 'arn:aws:sns:us-east-1:099711494433:LambdaTest'});
             connection.query("INSERT INTO company (name, address, type, contactName, phone, fax) VALUES (?, ?, ?, ?, ?, ?)", [event.body.name, event.body.address, event.body.type, event.body.contactName, event.body.phone, event.body.fax], function (error, rows) {
                 console.log(error);
                 console.log(rows);
@@ -146,6 +150,7 @@ exports.handler = (event, context, callback) => {
             break;
         case 'PUT': // this is for PUT on companyFunc/:id
          console.log("IN PUT");
+            snsPublish('In employeeFunc: PUT', {arn: 'arn:aws:sns:us-east-1:099711494433:LambdaTest'});
             var my_rows;
             let putCompanyPromise = new Promise(function(resolve, reject) {
 

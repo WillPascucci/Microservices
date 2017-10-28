@@ -6,7 +6,7 @@ console.log('Loading function');
 // var app = express();
 var mysql = require('mysql');
 var request = require('request');
-
+var snsPublish = require('aws-sns-publish');
 
 exports.handler = (event, context, callback) => {
     var connection = mysql.createConnection({
@@ -36,23 +36,7 @@ exports.handler = (event, context, callback) => {
     console.log(context.httpMethod);
     console.log("HI5");
 
-    // Smarty Street back end check - to be integrated when we get the company address from address ID. 
-    var smartyAuthId = '72315ecb-e04b-4417-200a-bfcb2ac9df63';
-    var smartyAuthToken = 'J3njx4aHnVdnf6k7l4yR';
-    var host = 'us-street.api.smartystreets.com';
-
-    var SmartyStreets = require('smartystreets-api');
-    var smartyStreets = SmartyStreets(smartyAuthId, smartyAuthToken, host);
-
-    var address = '440 Park Ave S, New York, NY, United States';
-    console.log("Testing Smarty Streets for - " + address);
-    smartyStreets.address(address, function (err, data, raw) {
-      console.log("In smarty");
-      if (err){
-         console.error(err);
-      }
-      console.log(data);
-    });
+    snsPublish('In companyFunc...', {arn: 'arn:aws:sns:us-east-1:099711494433:LambdaTest'});
 
     const done = (err, res) => callback(null, {
         statusCode: err ? '400' : '200',
@@ -149,6 +133,7 @@ exports.handler = (event, context, callback) => {
             break;
         case 'POST':
             console.log("IN POST");
+            snsPublish('IN companyFunc: POST', {arn: 'arn:aws:sns:us-east-1:099711494433:LambdaTest'});
             var my_rows;
             let postCompanyPromise = new Promise(function(resolve, reject) {
 
@@ -180,6 +165,7 @@ exports.handler = (event, context, callback) => {
 
         case 'DELETE':
           console.log("In Delete");
+          snsPublish('IN companyFunc: DELETE', {arn: 'arn:aws:sns:us-east-1:099711494433:LambdaTest'});
           var my_rows;
           let delelteCompanyPromise = new Promise(function(resolve, reject) {
 
@@ -209,6 +195,7 @@ exports.handler = (event, context, callback) => {
           break;
         case 'PUT': // this is for PUT on companyFunc/:id
          console.log("IN PUT");
+         snsPublish('IN companyFunc: PUT', {arn: 'arn:aws:sns:us-east-1:099711494433:LambdaTest'});
             var my_rows;
             let putCompanyPromise = new Promise(function(resolve, reject) {
 
