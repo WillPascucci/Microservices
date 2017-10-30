@@ -10,79 +10,113 @@ var snsPublish = require('aws-sns-publish');
 
 exports.handler = (event, context, callback) => {
 
-    var connection = mysql.createConnection({
-  host     : "assignmentpart2db.cyi40ipdvtjm.us-east-1.rds.amazonaws.com",
-  user     : "microservices",
-  password : "microservices",
-  port     : 3306,
-  database : "microservices"
-});
+  var connection = mysql.createConnection({
+    host     : "assignmentpart2db.cyi40ipdvtjm.us-east-1.rds.amazonaws.com",
+    user     : "microservices",
+    password : "microservices",
+    port     : 3306,
+    database : "microservices"
+  });
 
-    connection.connect(function(errorfirst) {
-      if (errorfirst) {
-        console.error('Database connection failed: ' + errorfirst.stack);
-        connection.end();
-        return;
-      }
+  connection.connect(function(errorfirst) {
+    if (errorfirst) {
+      console.error('Database connection failed: ' + errorfirst.stack);
+      connection.end();
+      return;
+    }
     console.log('You are connected');
 
-
-    console.log("HI1");
-    console.log(event);
-    console.log("HI2");
-    console.log(context);
-    console.log("HI3");
-    console.log(event.httpMethod);
-    console.log("HI4");
-    console.log(context.httpMethod);
-    console.log("HI5");
-    
     snsPublish('In customerFunc...', {arn: 'arn:aws:sns:us-east-1:099711494433:LambdaTest'});
 
-
     const done = (err, res) => callback(null, {
-        statusCode: err ? '400' : '200',
-        body: err ? err.message : JSON.stringify(res),
-        headers: {
-            'Content-Type': 'application/json',
-        },
+      statusCode: err ? '400' : '200',
+      body: err ? err.message : JSON.stringify(res),
+      headers: {
+        'Content-Type': 'application/json',
+      },
     });
 
-    //event.httpMethod = 'GET'
-    console.log(event.body);
-    console.log(context);
-    console.log("EVENT PATH");
-    console.log(event.path);
+    function getAllMethod(my_rows) {
+          request('https://0j1j9o13l2.execute-api.us-east-1.amazonaws.com/prod/companyFunc', function (err, response, body) {
+          request('http://person-env.n924wyqpyp.us-east-1.elasticbeanstalk.com:8000/person', function (err2, response2, body2) {
+            console.log("IN START OF GET REQUEST GETMETHOD")
+            if (err) {
+              console.log(err);
+              connection.end();
+            }
+            if (response.statusCode === 200 && response2.statusCode === 200) {
+              body = JSON.parse(body);
+              body2 = JSON.parse(body2);
+              var row;
+              for (row in my_rows) {
+                var company;
+                var person;
+                for (company in body) {
+                  if (body[company].id==my_rows[row].companyId) {
+                    my_rows[row]["company"] = body[company].name;
+                    my_rows[row].companyLink = {
+                      href: 'https://0j1j9o13l2.execute-api.us-east-1.amazonaws.com/prod/companyFunc/' + my_rows[row]["companyId"]
+                    }
+                    delete my_rows[row]["companyId"];
+                    break;
+                  }
+                }
+                for (person in body2) {
+                  if (body2[person].id==my_rows[row].personId) {
+                    my_rows[row]["person"] = body2[person].firstname + " " + body2[person].lastname;
+                    my_rows[row].personLink = {
+                      href: 'http://person-env.n924wyqpyp.us-east-1.elasticbeanstalk.com:8000/person' + my_rows[row]["personId"]
+                    }
+                    delete my_rows[row]["personId"];
+                    break;
+                  }
+                }
+                my_rows[row].self = {
+                  href: 'https://0j1j9o13l2.execute-api.us-east-1.amazonaws.com/prod/customerFunc2/' + my_rows[row]['id']
+                }
+              }
+              callback(null, {
+                statusCode: '200',
+                body: JSON.stringify(my_rows),
+                headers: {
+                  'Content-Type': 'application/json',
+                }
+              })
+            } else {
+              console.log(err);
+              console.log(response);
+              console.log(response.statusCode);
+              console.log(body);
+              console.log(err2);
+              console.log(response2);
+              console.log(response2.statusCode);
+              console.log(body2);
+            }
+          });
+          });
+    }
 
     switch (event.httpMethod) {
-        case 'GET':
-            if(event.path == '/customerFunc2'){
-                    console.log("IN GET");
-                    var my_rows;
-                    let firstpormmm = new Promise(function(resolve, reject) {
-                        connection.query("SELECT * from customer", function (error, rows) {
-                            console.log(error);
-                            console.log(rows);
-                            my_rows = rows;
-                            if (!error) {
-                                connection.end();
-                                resolve(1);
-                            }
+      case 'GET':
+      if(event.path == '/customerFunc2'){
+        console.log("IN GET");
+        var my_rows;
+        // let secondpormm = new Promise(function(resolve, reject) {
+        // });
 
-                        });
-                    });
-                    firstpormmm.then(function() {
-                        console.log(my_rows);
-                        callback(null, {
-                            statusCode: '200',
-                            // body: err ? err.message : JSON.stringify(res),
-                            body: JSON.stringify(my_rows),
-                            headers: {
-                                'Content-Type': 'application/json',
-                            }
-                        })
-                    });
-                    break;
+        let firstpormmm = new Promise(function(resolve, reject) {
+          connection.query("SELECT * from customer", function (error, rows) {
+            my_rows = rows;
+            if (!error) {
+              connection.end();
+              resolve(1);
+            }
+          });
+        });
+        firstpormmm.then(function() {
+          return getAllMethod(my_rows);
+        });
+        break;
             } else if(event.path.includes('/customerFunc2/page/')){
                     console.log("IN PAGE");
                     console.log(event.path.substr(event.path.lastIndexOf("/") + 1))
