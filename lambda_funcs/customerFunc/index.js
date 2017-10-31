@@ -72,7 +72,7 @@ exports.handler = (event, context, callback) => {
                   }
                 }
                 my_rows[row].self = {
-                  href: 'https://0j1j9o13l2.execute-api.us-east-1.amazonaws.com/prod/customerFunc2/' + my_rows[row]['id']
+                  href: 'https://0j1j9o13l2.execute-api.us-east-1.amazonaws.com/prod/customerFunc2/' + my_rows[row]['customerId']
                 }
               }
               callback(null, {
@@ -153,15 +153,7 @@ exports.handler = (event, context, callback) => {
                   });
               });
               firstpormmmPage.then(function() {
-                  console.log(my_rows);
-                  callback(null, {
-                      statusCode: '200',
-                      // body: err ? err.message : JSON.stringify(res),
-                      body: JSON.stringify(my_rows),
-                      headers: {
-                          'Content-Type': 'application/json',
-                      }
-                  })
+                return getAllMethod(my_rows);
               });
             }
             break;
