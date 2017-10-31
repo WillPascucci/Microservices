@@ -134,15 +134,7 @@ exports.handler = (event, context, callback) => {
                         });
                     });
                     firstpormmmPage.then(function() {
-                        console.log(my_rows);
-                        callback(null, {
-                            statusCode: '200',
-                            // body: err ? err.message : JSON.stringify(res),
-                            body: JSON.stringify(my_rows),
-                            headers: {
-                                'Content-Type': 'application/json',
-                            }
-                        })
+                      return getAllMethod(my_rows);
                     });
             } else if(event.path.includes('/customerFunc2/')){ // this is for /companyFunc/:id
               console.log("IN getting customer ID");
