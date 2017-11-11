@@ -7,6 +7,7 @@ console.log('Loading function');
 var mysql = require('mysql');
 var request = require('request');
 var snsPublish = require('aws-sns-publish');
+var etag = require('etag');
 
 exports.handler = (event, context, callback) => {
 
@@ -80,6 +81,7 @@ exports.handler = (event, context, callback) => {
                 body: JSON.stringify(my_rows),
                 headers: {
                   'Content-Type': 'application/json',
+                  'etag': etag(my_rows)
                 }
               })
             } else {
@@ -169,6 +171,7 @@ exports.handler = (event, context, callback) => {
                     body: JSON.stringify("Success!"),
                     headers: {
                         'Content-Type': 'application/json',
+                        'etag': etag(my_rows)
                     }
                 });
             });
@@ -197,6 +200,7 @@ exports.handler = (event, context, callback) => {
                     body: JSON.stringify(my_rows),
                     headers: {
                         'Content-Type': 'application/json',
+                        'etag': etag(my_rows)
                     }
                 })
             });
@@ -227,6 +231,7 @@ exports.handler = (event, context, callback) => {
                   body: JSON.stringify(my_rows),
                   headers: {
                       'Content-Type': 'application/json',
+                      'etag': etag(my_rows)
                   }
               })
             });

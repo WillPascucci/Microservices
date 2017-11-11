@@ -7,7 +7,7 @@ console.log('Loading function');
 var mysql = require('mysql');
 var request = require('request');
 var snsPublish = require('aws-sns-publish');
-var etag = require('etag')
+var etag = require('etag');
 
 exports.handler = (event, context, callback) => {
     var connection = mysql.createConnection({
@@ -243,7 +243,7 @@ exports.handler = (event, context, callback) => {
                   body: JSON.stringify(my_rows),
                   headers: {
                       'Content-Type': 'application/json',
-                      'etag': etag(my_rows) 
+                      'etag': etag(my_rows)
                   }
               })
             });

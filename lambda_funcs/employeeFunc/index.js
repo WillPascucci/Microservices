@@ -7,6 +7,7 @@ console.log('Loading function');
 var mysql = require('mysql');
 var request = require('request');
 var snsPublish = require('aws-sns-publish');
+var etag = require('etag');
 
 exports.handler = (event, context, callback) => {
 
@@ -25,7 +26,7 @@ exports.handler = (event, context, callback) => {
         return;
       }
     console.log('You are connected');
-    
+
     snsPublish('In employeeFunc...', {arn: 'arn:aws:sns:us-east-1:099711494433:LambdaTest'});
 
     const done = (err, res) => callback(null, {
@@ -80,6 +81,7 @@ exports.handler = (event, context, callback) => {
                 body: JSON.stringify(my_rows),
                 headers: {
                   'Content-Type': 'application/json',
+                  'etag': etag(my_rows)
                 }
               })
             } else {
@@ -168,6 +170,7 @@ exports.handler = (event, context, callback) => {
                     body: JSON.stringify("Success!"),
                     headers: {
                         'Content-Type': 'application/json',
+                        'etag': etag(rows)
                     }
                 });
             });
@@ -198,6 +201,7 @@ exports.handler = (event, context, callback) => {
                   body: JSON.stringify(my_rows),
                   headers: {
                       'Content-Type': 'application/json',
+                      'etag': etag(my_rows)
                   }
               })
             });
