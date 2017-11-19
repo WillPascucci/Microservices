@@ -79,7 +79,7 @@ exports.handler = (event, context, callback) => {
                 body: JSON.stringify(my_rows),
                 headers: {
                   'Content-Type': 'application/json',
-                  'etag': etag(my_rows)
+                  'etag': etag(JSON.stringify(my_rows))
                 }
               })
             } else {
@@ -169,7 +169,7 @@ exports.handler = (event, context, callback) => {
                     body: JSON.stringify("Success!"),
                     headers: {
                         'Content-Type': 'application/json',
-                        'etag': etag(my_rows)
+                        'etag': etag(JSON.stringify(my_rows))
                     }
                 });
             });
@@ -198,7 +198,7 @@ exports.handler = (event, context, callback) => {
                     body: JSON.stringify(my_rows),
                     headers: {
                         'Content-Type': 'application/json',
-                        'etag': etag(my_rows)
+                        'etag': etag(JSON.stringify(my_rows))
                     }
                 })
             });
@@ -229,7 +229,7 @@ exports.handler = (event, context, callback) => {
                   body: JSON.stringify(my_rows),
                   headers: {
                       'Content-Type': 'application/json',
-                      'etag': etag(my_rows)
+                      'etag': etag(JSON.stringify(my_rows))
                   }
               })
             });
