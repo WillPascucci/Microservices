@@ -58,7 +58,6 @@ exports.handler = (event, context, callback) => {
                     my_rows[row].companyLink = {
                       href: 'https://0j1j9o13l2.execute-api.us-east-1.amazonaws.com/prod/companyFunc/' + my_rows[row]["companyId"]
                     }
-                    delete my_rows[row]["companyId"];
                     break;
                   }
                 }
@@ -68,7 +67,6 @@ exports.handler = (event, context, callback) => {
                     my_rows[row].personLink = {
                       href: 'http://person-env.n924wyqpyp.us-east-1.elasticbeanstalk.com:8000/person/' + my_rows[row]["personId"]
                     }
-                    delete my_rows[row]["personId"];
                     break;
                   }
                 }
