@@ -66,7 +66,7 @@ exports.handler = (event, context, callback) => {
                   if (body2[person].id==my_rows[row].personId) {
                     my_rows[row]["person"] = body2[person].firstname + " " + body2[person].lastname;
                     my_rows[row].personLink = {
-                      href: 'http://person-env.n924wyqpyp.us-east-1.elasticbeanstalk.com:8000/person' + my_rows[row]["personId"]
+                      href: 'http://person-env.n924wyqpyp.us-east-1.elasticbeanstalk.com:8000/person/' + my_rows[row]["personId"]
                     }
                     delete my_rows[row]["personId"];
                     break;
