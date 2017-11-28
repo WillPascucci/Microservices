@@ -27,7 +27,7 @@ angular.module('teapotApp')
   	$scope.companyAlertType = ''
   	$scope.companyAlertMessage = ''
 
-	$scope.pageNumber = 0;
+    $scope.pageNumber = 0;
     $scope.maxPages = 0;
     HRService.getHRs($scope);
     $scope.blankHR = {
@@ -71,8 +71,17 @@ angular.module('teapotApp')
     }
 
     $scope.pickHR = function(HR) {
+      console.log('in pick HR')
       console.log($scope.currentHR);
       $scope.currentHR = JSON.parse(JSON.stringify(HR));
+      $scope.currentPerson.id = $scope.currentHR.id
+      $scope.currentCompany.id = $scope.currentHR.id
+      console.log('in pick HR - 2')
+      console.log($scope.currentHR);
+      console.log($scope.currentPerson);
+      console.log($scope.currentCompany);
+      $scope.findPerson()
+      $scope.findCompany()
       console.log($scope.currentHR);
     }
 

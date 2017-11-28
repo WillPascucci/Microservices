@@ -5,7 +5,7 @@
         <h3 class="panel-title">HR</h3>
       </div>
       <ul class="list-group">
-      		<li class="list-group-item" ng-click="pickHR(HR)" ng-repeat="HR in HR">{{HR.street}}</li>
+      		<li class="list-group-item" ng-click="pickHR(HR)" ng-repeat="HR in HRs">{{HR.person}}, {{HR.title}}, {{HR.company}}</li>
     	</ul>
     	<button type="button" class="btn btn-primary" ng-click="prevPage()">Previous</button>
     	<button type="button" class="btn btn-primary" ng-click="nextPage()">Next</button>

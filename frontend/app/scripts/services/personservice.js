@@ -25,6 +25,15 @@ angular.module('teapotApp')
             })
     }
 
+    this.getPersonLink = function($scope, link) {
+        $http.get(link)
+            .then(function(response) {
+                $scope.currentPerson = response.data[0]
+            }, function(response) {
+                console.log(response)
+            })
+    }
+
     this.getPersonPage = function($scope, pageRequested, successCallback, failureCallback) {
         $http.get(this.baseURL + '/person/page/'+pageRequested)
             .then(function(response) {
@@ -79,6 +88,9 @@ angular.module('teapotApp')
         }
         if($scope.currentPerson.phone) {
             queryString += 'phone=' + $scope.currentPerson.phone + '&'
+        }
+        if($scope.currentPerson.id) {
+            queryString += 'id=' + $scope.currentPerson.id + '&'
         }
         console.log(queryString)
         //console.log(this.baseURL + '/person' + queryString)
