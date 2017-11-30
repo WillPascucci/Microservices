@@ -9,40 +9,40 @@
  */
 angular.module('teapotApp')
   .controller('AddressCtrl', function ($scope, addressService) {
-    $scope.alertTypes = ['alert alert-success', 'alert alert-info', 'alert alert-warning', 'alert alert-danger']
-    $scope.checkAddressMessage = 'Please check your address before saving'
-    $scope.addressFoundMessage = 'Address Exists!'
-    $scope.addressNotFoundMessage = 'Address does not exist :('
+    $scope.alertTypes = ['alert alert-success', 'alert alert-info', 'alert alert-warning', 'alert alert-danger'];
+    $scope.checkAddressMessage = 'Please check your address before saving';
+    $scope.addressFoundMessage = 'Address Exists!';
+    $scope.addressNotFoundMessage = 'Address does not exist :(';
 
   	$scope.pageNumber = 0;
     $scope.maxPages = 0;
     addressService.getAddresses($scope);
     $scope.blankAddress = {
       uuid: -1
-    }
+    };
     $scope.currentAddress = JSON.parse(JSON.stringify($scope.blankAddress));
     
     $scope.addressChecked = false;
     $scope.addressFound = false;
-    $scope.alertType = ''
-    $scope.alertMessage = ''
+    $scope.alertType = '';
+    $scope.alertMessage = '';
 
     $scope.addressTextChanged = function() {
       $scope.addressChecked = false;
       $scope.addressFound = false;
-      $scope.updateAlert()
+      $scope.updateAlert();
     }
 
     $scope.updateAlert = function() {
       if($scope.addressChecked && $scope.addressFound) {
-        $scope.alertType = $scope.alertTypes[0]
-        $scope.alertMessage = $scope.addressFoundMessage
+        $scope.alertType = $scope.alertTypes[0];
+        $scope.alertMessage = $scope.addressFoundMessage;
       } else if($scope.addressChecked && !$scope.addressFound) {
-        $scope.alertType = $scope.alertTypes[3]
-        $scope.alertMessage = $scope.addressNotFoundMessage
+        $scope.alertType = $scope.alertTypes[3];
+        $scope.alertMessage = $scope.addressNotFoundMessage;
       } else {
-        $scope.alertType = $scope.alertTypes[2]
-        $scope.alertMessage = $scope.checkAddressMessage
+        $scope.alertType = $scope.alertTypes[2];
+        $scope.alertMessage = $scope.checkAddressMessage;
       }
     }
 
@@ -53,13 +53,13 @@ angular.module('teapotApp')
     }
 
     $scope.nextPage = function() {
-      console.log('next page called')
+      console.log('next page called');
       if($scope.pageNumber + 1 < $scope.maxPages) {
         addressService.getAddressPage($scope, $scope.pageNumber + 1, function() {
-          console.log('Next Page Success')
+          console.log('Next Page Success');
           $scope.pageNumber++;
         }, function() {
-          console.log('Next Page Failure')
+          console.log('Next Page Failure');
         })
       }
     }
@@ -67,10 +67,10 @@ angular.module('teapotApp')
     $scope.prevPage = function() {
       if($scope.pageNumber - 1 >= 0) {
         addressService.getAddressPage($scope, $scope.pageNumber - 1, function() {
-          console.log('Prev Page Success')
+          console.log('Prev Page Success');
           $scope.pageNumber--;
         }, function() {
-          console.log('Prev Page Failure')
+          console.log('Prev Page Failure');
         })
       }
     }
@@ -106,8 +106,8 @@ angular.module('teapotApp')
       $scope.currentAddress = JSON.parse(JSON.stringify($scope.blankAddress));
       $scope.addressChecked = false;
       $scope.addressFound = false;
-      $scope.alertType = ''
-      $scope.alertMessage = ''
+      $scope.alertType = '';
+      $scope.alertMessage = '';
       //debugger;
     }
 
@@ -126,9 +126,9 @@ angular.module('teapotApp')
         //console.log(data[0].components)
         //console.log('called')
         if(data.length >= 1) {
-            $scope.currentAddress.street = data[0].components.primary_number + ' '
+            $scope.currentAddress.street = data[0].components.primary_number + ' ';
             if('street_predirection' in data[0].components) {
-              $scope.currentAddress.street += data[0].components.street_predirection + ' '
+              $scope.currentAddress.street += data[0].components.street_predirection + ' ';
             }
             $scope.currentAddress.street += data[0].components.street_name + ' ' + data[0].components.street_suffix;
             $scope.currentAddress.city = data[0].components.city_name;
@@ -137,13 +137,13 @@ angular.module('teapotApp')
 
             $scope.addressChecked = true;
             $scope.addressFound = true;
-            $scope.updateAlert()
-            console.log('found')
-            console.log($scope.addressFound)
+            $scope.updateAlert();
+            console.log('found');
+            console.log($scope.addressFound);
         } else {
             $scope.addressChecked = true;
             $scope.addressFound = false;
-            $scope.updateAlert()
+            $scope.updateAlert();
         }
       }, function() {
         console.log('Failure')

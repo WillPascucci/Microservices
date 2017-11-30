@@ -16,7 +16,9 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'mgcrea.ngStrap'
+    'mgcrea.ngStrap',
+    //'angular-uuid'
+    //'angular-oauth2'
   ])
   .config(function ($routeProvider) {
     $routeProvider

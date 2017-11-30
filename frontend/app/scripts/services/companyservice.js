@@ -10,6 +10,7 @@
 angular.module('teapotApp')
   .service('companyService', function ($http) {
   	this.baseURL = 'https://0j1j9o13l2.execute-api.us-east-1.amazonaws.com/prod'
+    
     this.getCompanys = function($scope) {
         $http.get(this.baseURL + '/companyFunc/page/'+$scope.companyPageNumber)
             .then(function(response) {
@@ -64,33 +65,47 @@ angular.module('teapotApp')
     }
 
     this.findCompany = function($scope, successCallback, failureCallback) {
-        var queryString = '?'
-        if($scope.currentCompany.name) {
-            queryString += 'name=' + $scope.currentCompany.name + '&'
+        if($scope.currentCompany.companyId && $scope.currentCompany.companyId != -1){
+            var urlString = this.baseURL + '/companyFunc/' + $scope.currentCompany.companyId;
+            console.log(urlString);
+            $http.get(urlString)
+                .then(function(response) {
+                    //Note the difference in response.data being in an array which is different than behaviore 
+                    //from person service
+                    successCallback(response.data)
+                }, function(response) {
+                    failureCallback()
+                })
         }
-        if($scope.currentCompany.type) {
-            queryString += 'type=' + $scope.currentCompany.type + '&'
+        else {
+            var queryString = '?'
+            if($scope.currentCompany.name) {
+                queryString += 'name=' + $scope.currentCompany.name + '&'
+            }
+            if($scope.currentCompany.type) {
+                queryString += 'type=' + $scope.currentCompany.type + '&'
+            }
+            if($scope.currentCompany.fax) {
+                queryString += 'fax=' + $scope.currentCompany.fax + '&'
+            }
+            if($scope.currentCompany.contact) {
+                queryString += 'contact=' + $scope.currentCompany.contact + '&'
+            }
+            if($scope.currentCompany.phone) {
+                queryString += 'phone=' + $scope.currentCompany.phone + '&'
+            }
+            if($scope.currentCompany.id) {
+                queryString += 'id=' + $scope.currentCompany.id + '&'
+            }
+            console.log(queryString)
+            //console.log(this.baseURL + '/person' + queryString)
+            $http.get(this.baseURL + '/companyFunc' + queryString)
+                .then(function(response) {
+                    //console.log(response.data)
+                    successCallback(response.data)
+                }, function(response) {
+                    failureCallback()
+                });
         }
-        if($scope.currentCompany.fax) {
-            queryString += 'fax=' + $scope.currentCompany.fax + '&'
-        }
-		if($scope.currentCompany.contact) {
-            queryString += 'contact=' + $scope.currentCompany.contact + '&'
-        }
-        if($scope.currentCompany.phone) {
-            queryString += 'phone=' + $scope.currentCompany.phone + '&'
-        }
-        if($scope.currentCompany.id) {
-            queryString += 'id=' + $scope.currentCompany.id + '&'
-        }
-        console.log(queryString)
-        //console.log(this.baseURL + '/person' + queryString)
-        $http.get(this.baseURL + '/companyFunc' + queryString)
-            .then(function(response) {
-                //console.log(response.data)
-                successCallback(response.data)
-            }, function(response) {
-                failureCallback()
-            });
     }
   });

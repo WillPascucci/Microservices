@@ -9,24 +9,24 @@
  */
 angular.module('teapotApp')
   .service('CRMService', function ($http) {
-    this.baseURL = 'http://CRM-env.uitihrdzi7.us-east-1.elasticbeanstalk.com:8000'
+    this.baseURL = 'https://0j1j9o13l2.execute-api.us-east-1.amazonaws.com/prod'
 
     this.getCRMs = function($scope) {
-        $http.get(this.baseURL + '/CRM/page/'+$scope.pageNumber)
+        $http.get(this.baseURL + '/customerFunc2/page/'+$scope.pageNumber)
             .then(function(response) {
-                $scope.CRMes = response.data
+                $scope.CRMs = response.data
                 $scope.maxPages = response.data[0].totalPages
-                console.log($scope.CRMes)
+                console.log($scope.CRMs)
             }, function(response) {
                 console.log(response.data)
             })
     }
 
     this.getCRMPage = function($scope, pageRequested, successCallback, failureCallback) {
-        $http.get(this.baseURL + '/CRM/page/'+pageRequested)
+        $http.get(this.baseURL + '/customerFunc2/page/'+pageRequested)
             .then(function(response) {
                 console.log(response.data)
-                $scope.CRMes = response.data
+                $scope.CRMs = response.data
                 $scope.maxPages = response.data[0].totalPages
                 successCallback()
             }, function(response) {
@@ -36,7 +36,7 @@ angular.module('teapotApp')
     }
 
     this.deleteCRM = function($scope, successCallback, failureCallback) {
-        $http.delete(this.baseURL+'/CRM/'+$scope.currentCRM.uuid)
+        $http.delete(this.baseURL+'/customerFunc2/'+$scope.currentCRM.uuid)
             .then(function(response) {
                 successCallback()
             }, function(response) {
@@ -45,7 +45,7 @@ angular.module('teapotApp')
     }
 
     this.updateCRM = function($scope, successCallback, failureCallback) {
-        $http.put(this.baseURL+'/CRM/'+$scope.currentCRM.uuid, $scope.currentCRM)
+        $http.put(this.baseURL+'/customerFunc2/'+$scope.currentCRM.uuid, $scope.currentCRM)
             .then(function(response) {
                 successCallback()
             }, function(response) {

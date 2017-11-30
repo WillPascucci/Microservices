@@ -27,7 +27,7 @@ angular.module('teapotApp')
   	$scope.companyAlertType = ''
   	$scope.companyAlertMessage = ''
 
-	$scope.pageNumber = 0;
+	  $scope.pageNumber = 0;
     $scope.maxPages = 0;
     CRMService.getCRMs($scope);
     $scope.blankCRM = {
@@ -36,21 +36,16 @@ angular.module('teapotApp')
     $scope.currentCRM = JSON.parse(JSON.stringify($scope.blankCRM));
 
     $scope.blankPerson = {
-    	id: -1
+    	personId: -1
     }
 
     $scope.blankCompany = {
-    	id: -1
+    	companyId: -1
     }
 
     $scope.currentPerson = JSON.parse(JSON.stringify($scope.blankPerson))
 
     $scope.currentCompany = JSON.parse(JSON.stringify($scope.blankCompany))
-    $scope.pickCRM = function(CRM) {
-      console.log($scope.currentCRM);
-      $scope.currentCRM = JSON.parse(JSON.stringify(CRM));
-      console.log($scope.currentCRM);
-    }
 
     $scope.nextPage = function() {
       console.log('next page called')
@@ -73,6 +68,16 @@ angular.module('teapotApp')
           console.log('Prev Page Failure')
         })
       }
+    }
+
+    $scope.pickCRM = function(CRM) {
+      //console.log($scope.currentCRM);
+      $scope.currentCRM = JSON.parse(JSON.stringify(CRM));
+      $scope.currentPerson.personId = $scope.currentCRM.personId
+      $scope.currentCompany.companyId = $scope.currentCRM.companyId
+      //console.log($scope.currentCRM);
+      $scope.findPerson()
+      $scope.findCompany()
     }
 
     $scope.saveCRM = function() {
@@ -174,7 +179,9 @@ angular.module('teapotApp')
     }
 
     $scope.findPerson = function() {
-	    if(!$scope.currentPerson.firstname && !$scope.currentPerson.lastname && !$scope.currentPerson.age && !$scope.currentPerson.phone) {
+	    if(!$scope.currentPerson.firstname && !$scope.currentPerson.lastname && !$scope.currentPerson.age &&
+         !$scope.currentPerson.phone && !$scope.currentPerson.personId) {
+
 	    	$scope.personAlertType = $scope.alertTypes[1]
     		$scope.personAlertMessage = 'Empty Person'
 	    } else {
@@ -207,7 +214,8 @@ angular.module('teapotApp')
     }
 
     $scope.findCompany = function() {
-	    if(!$scope.currentCompany.firstname && !$scope.currentCompany.lastname && !$scope.currentCompany.age && !$scope.currentCompany.phone) {
+	    if(!$scope.currentCompany.firstname && !$scope.currentCompany.lastname && !$scope.currentCompany.age &&
+         !$scope.currentCompany.phone && !$scope.currentCompany.companyId) {
 	    	$scope.companyAlertType = $scope.alertTypes[1]
     		$scope.companyAlertMessage = 'Empty Company'
 	    } else {
