@@ -67,7 +67,7 @@ angular.module('teapotApp')
     this.findCompany = function($scope, successCallback, failureCallback) {
         if($scope.currentCompany.companyId && $scope.currentCompany.companyId != -1){
             var urlString = this.baseURL + '/companyFunc/' + $scope.currentCompany.companyId;
-            console.log(urlString);
+            //console.log(urlString);
             $http.get(urlString)
                 .then(function(response) {
                     //Note the difference in response.data being in an array which is different than behaviore 

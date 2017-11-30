@@ -31,7 +31,7 @@ angular.module('teapotApp')
     $scope.maxPages = 0;
     CRMService.getCRMs($scope);
     $scope.blankCRM = {
-      id: -1
+      customerId: -1
     }
     $scope.currentCRM = JSON.parse(JSON.stringify($scope.blankCRM));
 
@@ -82,8 +82,8 @@ angular.module('teapotApp')
 
     $scope.saveCRM = function() {
       console.log($scope.currentCRM)
-      if($scope.currentCRM.uuid == -1) {
-        delete $scope.currentCRM.uuid
+      if($scope.currentCRM.customerId == -1) {
+        delete $scope.currentCRM.customerId
         CRMService.createCRM($scope, function() {
           CRMService.getCRMs($scope);
           $scope.currentCRM = JSON.parse(JSON.stringify($scope.blankCRM));

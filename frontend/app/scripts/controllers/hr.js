@@ -8,7 +8,7 @@
  * Controller of the teapotApp
  */
 angular.module('teapotApp')
-  .controller('HrCtrl', function ($scope, HRService, personService, companyService, teauuid) {
+  .controller('HrCtrl', function ($scope, HRService, personService, companyService) {
   	$scope.alertTypes = ['alert alert-success', 'alert alert-info', 'alert alert-warning', 'alert alert-danger']
 
   	$scope.personFoundMessage = 'Person Found!'
@@ -31,7 +31,7 @@ angular.module('teapotApp')
     $scope.maxPages = 0;
     HRService.getHRs($scope);
     $scope.blankHR = {
-      id: -1
+      employeeId: -1
     }
     $scope.currentHR = JSON.parse(JSON.stringify($scope.blankHR));
 
@@ -48,13 +48,13 @@ angular.module('teapotApp')
     $scope.currentCompany = JSON.parse(JSON.stringify($scope.blankCompany))
 
     $scope.nextPage = function() {
-      console.log('next page called')
+      //console.log('next page called')
       if($scope.pageNumber + 1 < $scope.maxPages) {
         HRService.getHRPage($scope, $scope.pageNumber + 1, function() {
-          console.log('Next Page Success')
+          //console.log('Next Page Success')
           $scope.pageNumber++;
         }, function() {
-          console.log('Next Page Failure')
+          //console.log('Next Page Failure')
         })
       }
     }
@@ -62,48 +62,48 @@ angular.module('teapotApp')
     $scope.prevPage = function() {
       if($scope.pageNumber - 1 >= 0) {
         HRService.getHRPage($scope, $scope.pageNumber - 1, function() {
-          console.log('Prev Page Success')
+          //console.log('Prev Page Success')
           $scope.pageNumber--;
         }, function() {
-          console.log('Prev Page Failure')
+          //console.log('Prev Page Failure')
         })
       }
     }
 
     $scope.pickHR = function(HR) {
-      //console.log('in pick HR')
-      //console.log($scope.currentHR);
+      ////console.log('in pick HR')
+      ////console.log($scope.currentHR);
       $scope.currentHR = JSON.parse(JSON.stringify(HR));
       $scope.currentPerson.personId = $scope.currentHR.personId
       $scope.currentCompany.companyId = $scope.currentHR.companyId
-      //console.log('in pick HR - 2')
-      //console.log($scope.currentHR);
-      //console.log($scope.currentPerson.id);
-      //console.log($scope.currentCompany.id);
+      ////console.log('in pick HR - 2')
+      ////console.log($scope.currentHR);
+      ////console.log($scope.currentPerson.personId);
+      ////console.log($scope.currentCompany.companyId);
       $scope.findPerson()
       $scope.findCompany()
-      //console.log($scope.currentHR);
+      ////console.log($scope.currentHR);
     }
 
     $scope.saveHR = function() {
-      console.log($scope.currentHR)
-      if($scope.currentHR.id == -1) {
-        delete $scope.currentHR.id
+      //console.log($scope.currentHR)
+      if($scope.currentHR.employeeId == -1) {
+        delete $scope.currentHR.employeeId
         HRService.createHR($scope, function() {
           HRService.getHRs($scope);
           $scope.currentHR =  JSON.parse(JSON.stringify($scope.blankHR));
-          console.log('Success Create');
+          //console.log('Success Create');
         }, function() {
-          console.log('Failure');
+          //console.log('Failure');
         })
       }
       else {
         HRService.updateHR($scope, function() {
           HRService.getHRs($scope);
           $scope.currentHR = JSON.parse(JSON.stringify($scope.blankHR));
-          console.log('Success Update');
+          //console.log('Success Update');
         }, function() {
-          console.log('Failure');
+          //console.log('Failure');
         })
       }
       //HRService.
@@ -117,7 +117,7 @@ angular.module('teapotApp')
 
     $scope.clearPerson = function() {
     	$scope.currentPerson = JSON.parse(JSON.stringify($scope.blankPerson));
-    	console.log($scope.blankPerson);
+    	//console.log($scope.blankPerson);
     	$scope.personChecked = false;
     	$scope.personFound = false;
     	$scope.personAlertType = '';
@@ -127,7 +127,7 @@ angular.module('teapotApp')
 
   	$scope.clearCompany = function() {
     	$scope.currentCompany = JSON.parse(JSON.stringify($scope.blankCompany));
-    	console.log($scope.blankCompany);
+    	//console.log($scope.blankCompany);
     	$scope.companyChecked = false;
     	$scope.companyFound = false;
     	$scope.companyAlertType = '';
@@ -139,9 +139,9 @@ angular.module('teapotApp')
       HRService.deleteHR($scope, function() {
           HRService.getHRs($scope);
           $scope.currentHR = JSON.parse(JSON.stringify($scope.blankHR));
-          console.log('Success');
+          //console.log('Success');
         }, function() {
-          console.log('Failure');
+          //console.log('Failure');
         });
     }
 
@@ -184,8 +184,8 @@ angular.module('teapotApp')
     }
 
     $scope.findPerson = function() {
-      console.log('in find person')
-      console.log($scope.currentPerson.personId)
+      //console.log('in find person')
+      //console.log($scope.currentPerson.personId)
 	    if(!$scope.currentPerson.firstname && !$scope.currentPerson.lastname && !$scope.currentPerson.age && 
             !$scope.currentPerson.phone && !$scope.currentPerson.personId) {
 
@@ -193,11 +193,11 @@ angular.module('teapotApp')
     		$scope.personAlertMessage = 'Empty Person'
 	    } else {
 	    	personService.findPerson($scope, function(data) {
-          //console.log(data)
-          //console.log(data)
+          ////console.log(data)
+          ////console.log(data)
 	    		if(data.length > 0) {
-	    			//console.log(data)
-	    			//console.log(data.length)
+	    			////console.log(data)
+	    			////console.log(data.length)
 			    	if(data.length == 1) {
 			    		$scope.currentPerson = data[0]
 		    			$scope.personChecked = true;
@@ -209,7 +209,7 @@ angular.module('teapotApp')
 			    	}
 			    }
 			    else {
-			    	console.log('Something went wrong in find person data handling')
+			    	//console.log('Something went wrong in find person data handling')
 			    	$scope.personChecked = true;
     				$scope.personFound = false;
     				$scope.updatePersonAlert()
@@ -217,7 +217,7 @@ angular.module('teapotApp')
 	    	}, function() {
 	    		$scope.personChecked = true;
 	    		$scope.personFound = false;
-	    		console.log('Failure')
+	    		//console.log('Failure')
 	    	});
 	    }
     }
@@ -230,8 +230,8 @@ angular.module('teapotApp')
 	    } else {
 	    	companyService.findCompany($scope, function(data) {
 	    		if(data.length > 0) {
-	    			console.log(data)
-	    			console.log(data.length)
+	    			//console.log(data)
+	    			//console.log(data.length)
 			    	if(data.length == 1) {
 			    		$scope.currentCompany = data[0]
 		    			$scope.companyChecked = true;
@@ -243,7 +243,7 @@ angular.module('teapotApp')
 			    	}
 			    }
 			    else {
-			    	console.log('?')
+			    	//console.log('?')
 			    	$scope.companyChecked = true;
     				$scope.companyFound = false;
     				$scope.updateCompanyAlert()
@@ -251,7 +251,7 @@ angular.module('teapotApp')
 	    	}, function() {
 	    		$scope.companyChecked = true;
 	    		$scope.companyFound = false;
-	    		console.log('Failure')
+	    		//console.log('Failure')
 	    	});
 	    }
     }

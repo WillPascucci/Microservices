@@ -36,7 +36,7 @@ angular.module('teapotApp')
     }
 
     this.deleteCRM = function($scope, successCallback, failureCallback) {
-        $http.delete(this.baseURL+'/customerFunc2/'+$scope.currentCRM.uuid)
+        $http.delete(this.baseURL+'/customerFunc2/'+$scope.currentCRM.customerId)
             .then(function(response) {
                 successCallback()
             }, function(response) {
@@ -45,7 +45,7 @@ angular.module('teapotApp')
     }
 
     this.updateCRM = function($scope, successCallback, failureCallback) {
-        $http.put(this.baseURL+'/customerFunc2/'+$scope.currentCRM.uuid, $scope.currentCRM)
+        $http.put(this.baseURL+'/customerFunc2/'+$scope.currentCRM.customerId, $scope.currentCRM)
             .then(function(response) {
                 successCallback()
             }, function(response) {

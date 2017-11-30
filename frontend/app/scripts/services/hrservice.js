@@ -8,7 +8,7 @@
  * Service in the teapotApp.
  */
 angular.module('teapotApp')
-  .service('HRService', function ($http) {
+  .service('HRService', function ($http, teauuid) {
 	//this.baseURL = 'http://HR-env.n924wyqpyp.us-east-1.elasticbeanstalk.com:8000'
     this.baseURL = 'https://0j1j9o13l2.execute-api.us-east-1.amazonaws.com/prod'
 
@@ -17,7 +17,7 @@ angular.module('teapotApp')
             .then(function(response) {
                 $scope.HRs = response.data
                 $scope.maxPages = response.data[0].totalPages
-                console.log($scope.HRs)
+                //console.log($scope.HRs)
             }, function(response) {
                 console.log(response.data)
             })
@@ -26,7 +26,7 @@ angular.module('teapotApp')
     this.getHRPage = function($scope, pageRequested, successCallback, failureCallback) {
         $http.get(this.baseURL + '/employeeFunc2/page/'+pageRequested)
             .then(function(response) {
-                console.log(response.data)
+                //console.log(response.data)
                 $scope.HRs = response.data
                 successCallback()
             }, function(response) {
@@ -36,7 +36,7 @@ angular.module('teapotApp')
     }
 
     this.deleteHR = function($scope, successCallback, failureCallback) {
-        $http.delete(this.baseURL+'/employeeFunc2/'+$scope.currentHR.id)
+        $http.delete(this.baseURL+'/employeeFunc2/'+$scope.currentHR.employeeId)
             .then(function(response) {
                 successCallback()
             }, function(response) {
@@ -45,8 +45,11 @@ angular.module('teapotApp')
     }
 
     this.updateHR = function($scope, successCallback, failureCallback) {
+        console.log('in UpdateHR')
         console.log($scope.currentHR)
-        $http.put(this.baseURL+'/employeeFunc2/'+$scope.currentHR.id, $scope.currentHR)
+        console.log('idem key')
+        console.log(teauuid.makeUuid())
+        $http.put(this.baseURL+'/employeeFunc2/'+$scope.currentHR.employeeId, $scope.currentHR)
             .then(function(response) {
                 console.log(response)
                 successCallback()
