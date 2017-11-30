@@ -7,6 +7,7 @@ console.log('Loading function');
 var mysql = require('mysql');
 var request = require('request');
 var snsPublish = require('aws-sns-publish');
+var etag = require('etag');
 
 exports.handler = (event, context, callback) => {
     var connection = mysql.createConnection({
@@ -35,6 +36,7 @@ exports.handler = (event, context, callback) => {
     console.log("HI4");
     console.log(context.httpMethod);
     console.log("HI5");
+
 
     snsPublish('In companyFunc...', {arn: 'arn:aws:sns:us-east-1:099711494433:LambdaTest'});
 
@@ -71,6 +73,7 @@ exports.handler = (event, context, callback) => {
                     body: JSON.stringify(my_rows),
                     headers: {
                         'Content-Type': 'application/json',
+                        'etag': etag(my_rows)
                     }
                 })
             });
@@ -98,6 +101,7 @@ exports.handler = (event, context, callback) => {
                     body: JSON.stringify(my_rows),
                     headers: {
                         'Content-Type': 'application/json',
+                        'etag': etag(my_rows)               // Even though this is GET but eTag will be different for paginated calls - Front End to handle this?
                     }
                 })
             });
@@ -125,6 +129,7 @@ exports.handler = (event, context, callback) => {
                       body: JSON.stringify(my_rows),
                       headers: {
                           'Content-Type': 'application/json',
+                          'etag': etag(my_rows)
                       }
                   })
               });
@@ -157,6 +162,7 @@ exports.handler = (event, context, callback) => {
                   body: JSON.stringify(my_rows),
                   headers: {
                       'Content-Type': 'application/json',
+                      'etag': etag(my_rows)
                   }
               })
             });
@@ -189,6 +195,7 @@ exports.handler = (event, context, callback) => {
                 body: JSON.stringify(my_rows),
                 headers: {
                     'Content-Type': 'application/json',
+                    'etag': etag(my_rows)
                 }
             })
           });
@@ -219,6 +226,7 @@ exports.handler = (event, context, callback) => {
                   body: JSON.stringify(my_rows),
                   headers: {
                       'Content-Type': 'application/json',
+                      'etag': etag(my_rows)
                   }
               })
             });

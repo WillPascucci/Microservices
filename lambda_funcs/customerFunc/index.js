@@ -7,6 +7,7 @@ console.log('Loading function');
 var mysql = require('mysql');
 var request = require('request');
 var snsPublish = require('aws-sns-publish');
+var etag = require('etag');
 
 exports.handler = (event, context, callback) => {
 
@@ -57,7 +58,6 @@ exports.handler = (event, context, callback) => {
                     my_rows[row].companyLink = {
                       href: 'https://0j1j9o13l2.execute-api.us-east-1.amazonaws.com/prod/companyFunc/' + my_rows[row]["companyId"]
                     }
-                    delete my_rows[row]["companyId"];
                     break;
                   }
                 }
@@ -65,9 +65,8 @@ exports.handler = (event, context, callback) => {
                   if (body2[person].id==my_rows[row].personId) {
                     my_rows[row]["person"] = body2[person].firstname + " " + body2[person].lastname;
                     my_rows[row].personLink = {
-                      href: 'http://person-env.n924wyqpyp.us-east-1.elasticbeanstalk.com:8000/person' + my_rows[row]["personId"]
+                      href: 'http://person-env.n924wyqpyp.us-east-1.elasticbeanstalk.com:8000/person/' + my_rows[row]["personId"]
                     }
-                    delete my_rows[row]["personId"];
                     break;
                   }
                 }
@@ -80,6 +79,7 @@ exports.handler = (event, context, callback) => {
                 body: JSON.stringify(my_rows),
                 headers: {
                   'Content-Type': 'application/json',
+                  'etag': etag(JSON.stringify(my_rows))
                 }
               })
             } else {
@@ -169,6 +169,7 @@ exports.handler = (event, context, callback) => {
                     body: JSON.stringify("Success!"),
                     headers: {
                         'Content-Type': 'application/json',
+                        'etag': etag(JSON.stringify(my_rows))
                     }
                 });
             });
@@ -197,6 +198,7 @@ exports.handler = (event, context, callback) => {
                     body: JSON.stringify(my_rows),
                     headers: {
                         'Content-Type': 'application/json',
+                        'etag': etag(JSON.stringify(my_rows))
                     }
                 })
             });
@@ -227,6 +229,7 @@ exports.handler = (event, context, callback) => {
                   body: JSON.stringify(my_rows),
                   headers: {
                       'Content-Type': 'application/json',
+                      'etag': etag(JSON.stringify(my_rows))
                   }
               })
             });
