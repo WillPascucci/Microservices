@@ -25,6 +25,15 @@ angular.module('teapotApp')
             })
     }
 
+    this.getPersonLink = function($scope, link) {
+        $http.get(link)
+            .then(function(response) {
+                $scope.currentPerson = response.data[0]
+            }, function(response) {
+                console.log(response)
+            })
+    }
+
     this.getPersonPage = function($scope, pageRequested, successCallback, failureCallback) {
         $http.get(this.baseURL + '/person/page/'+pageRequested)
             .then(function(response) {
@@ -67,28 +76,42 @@ angular.module('teapotApp')
     }
 
     this.findPerson = function($scope, successCallback, failureCallback) {
-        var queryString = '?'
-        if($scope.currentPerson.firstname) {
-            queryString += 'firstname=' + $scope.currentPerson.firstname + '&'
+        if($scope.currentPerson.personId && $scope.currentPerson.personId != -1) {
+            var urlString = this.baseURL + '/person/' + $scope.currentPerson.personId;
+            //console.log(urlString);
+            $http.get(urlString)
+                .then(function(response) {
+                    //The data is put in an array to match the data return type of an array
+                    //From the else case below using a query
+                    successCallback([response.data])
+                }, function(response) {
+                    failureCallback()
+                })
         }
-        if($scope.currentPerson.lastname) {
-            queryString += 'lastname=' + $scope.currentPerson.lastname + '&'
+        else {
+            var queryString = '?'
+            if($scope.currentPerson.firstname) {
+                queryString += 'firstname=' + $scope.currentPerson.firstname + '&'
+            }
+            if($scope.currentPerson.lastname) {
+                queryString += 'lastname=' + $scope.currentPerson.lastname + '&'
+            }
+            if($scope.currentPerson.age) {
+                queryString += 'age=' + $scope.currentPerson.age + '&'
+            }
+            if($scope.currentPerson.phone) {
+                queryString += 'phone=' + $scope.currentPerson.phone + '&'
+            }
+            console.log(queryString)
+            //console.log(this.baseURL + '/person' + queryString)
+            $http.get(this.baseURL + '/person' + queryString)
+                .then(function(response) {
+                    //console.log(response.data)
+                    successCallback(response.data)
+                }, function(response) {
+                    failureCallback()
+                });
         }
-        if($scope.currentPerson.age) {
-            queryString += 'age=' + $scope.currentPerson.age + '&'
-        }
-        if($scope.currentPerson.phone) {
-            queryString += 'phone=' + $scope.currentPerson.phone + '&'
-        }
-        console.log(queryString)
-        //console.log(this.baseURL + '/person' + queryString)
-        $http.get(this.baseURL + '/person' + queryString)
-            .then(function(response) {
-                //console.log(response.data)
-                successCallback(response.data)
-            }, function(response) {
-                failureCallback()
-            });
     }
 
 

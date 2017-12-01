@@ -8,7 +8,7 @@
  * Controller of the teapotApp
  */
 angular.module('teapotApp')
-  .controller('HrCtrl', function ($scope, HRService, personService, companyService) {
+  .controller('HrCtrl', function ($scope, HRService, personService, companyService, teauuid) {
   	$scope.alertTypes = ['alert alert-success', 'alert alert-info', 'alert alert-warning', 'alert alert-danger']
 
   	$scope.personFoundMessage = 'Person Found!'
@@ -27,7 +27,7 @@ angular.module('teapotApp')
   	$scope.companyAlertType = ''
   	$scope.companyAlertMessage = ''
 
-	$scope.pageNumber = 0;
+    $scope.pageNumber = 0;
     $scope.maxPages = 0;
     HRService.getHRs($scope);
     $scope.blankHR = {
@@ -36,11 +36,11 @@ angular.module('teapotApp')
     $scope.currentHR = JSON.parse(JSON.stringify($scope.blankHR));
 
     $scope.blankPerson = {
-    	id: -1
+    	personId: -1
     }
 
     $scope.blankCompany = {
-    	id: -1
+    	companyId: -1
     }
 
     $scope.currentPerson = JSON.parse(JSON.stringify($scope.blankPerson))
@@ -71,9 +71,18 @@ angular.module('teapotApp')
     }
 
     $scope.pickHR = function(HR) {
-      console.log($scope.currentHR);
+      //console.log('in pick HR')
+      //console.log($scope.currentHR);
       $scope.currentHR = JSON.parse(JSON.stringify(HR));
-      console.log($scope.currentHR);
+      $scope.currentPerson.personId = $scope.currentHR.personId
+      $scope.currentCompany.companyId = $scope.currentHR.companyId
+      //console.log('in pick HR - 2')
+      //console.log($scope.currentHR);
+      //console.log($scope.currentPerson.id);
+      //console.log($scope.currentCompany.id);
+      $scope.findPerson()
+      $scope.findCompany()
+      //console.log($scope.currentHR);
     }
 
     $scope.saveHR = function() {
@@ -175,14 +184,20 @@ angular.module('teapotApp')
     }
 
     $scope.findPerson = function() {
-	    if(!$scope.currentPerson.firstname && !$scope.currentPerson.lastname && !$scope.currentPerson.age && !$scope.currentPerson.phone) {
+      console.log('in find person')
+      console.log($scope.currentPerson.personId)
+	    if(!$scope.currentPerson.firstname && !$scope.currentPerson.lastname && !$scope.currentPerson.age && 
+            !$scope.currentPerson.phone && !$scope.currentPerson.personId) {
+
 	    	$scope.personAlertType = $scope.alertTypes[1]
     		$scope.personAlertMessage = 'Empty Person'
 	    } else {
 	    	personService.findPerson($scope, function(data) {
+          //console.log(data)
+          //console.log(data)
 	    		if(data.length > 0) {
-	    			console.log(data)
-	    			console.log(data.length)
+	    			//console.log(data)
+	    			//console.log(data.length)
 			    	if(data.length == 1) {
 			    		$scope.currentPerson = data[0]
 		    			$scope.personChecked = true;
@@ -194,7 +209,7 @@ angular.module('teapotApp')
 			    	}
 			    }
 			    else {
-			    	console.log('?')
+			    	console.log('Something went wrong in find person data handling')
 			    	$scope.personChecked = true;
     				$scope.personFound = false;
     				$scope.updatePersonAlert()
@@ -208,7 +223,8 @@ angular.module('teapotApp')
     }
 
     $scope.findCompany = function() {
-	    if(!$scope.currentCompany.firstname && !$scope.currentCompany.lastname && !$scope.currentCompany.age && !$scope.currentCompany.phone) {
+	    if(!$scope.currentCompany.firstname && !$scope.currentCompany.lastname && !$scope.currentCompany.age && 
+          !$scope.currentCompany.phone && !$scope.currentCompany.companyId) {
 	    	$scope.companyAlertType = $scope.alertTypes[1]
     		$scope.companyAlertMessage = 'Empty Company'
 	    } else {

@@ -5,7 +5,7 @@
         <h3 class="panel-title">CRM</h3>
       </div>
       <ul class="list-group">
-      		<li class="list-group-item" ng-click="pickCRM(CRM)" ng-repeat="CRM in CRM">{{CRM.street}}</li>
+      		<li class="list-group-item" ng-click="pickCRM(CRM)" ng-repeat="CRM in CRMs">{{CRM.person}}, {{CRM.company}}</li>
     	</ul>
     	<button type="button" class="btn btn-primary" ng-click="prevPage()">Previous</button>
     	<button type="button" class="btn btn-primary" ng-click="nextPage()">Next</button>
@@ -96,10 +96,10 @@
       	<div class="col-lg-4">
       		<div class="input-group">
   				<span class="input-group-addon" id="basic-addon1">Amount Spent</span>
-  				<input type="text" class="form-control" placeholder="First Name" ng-disabled="companyFound" ng-model="currentHR.title" aria-describedby="basic-addon1">
+  				<input type="text" class="form-control" placeholder="First Name" ng-disabled="!(companyFound && companyChecked && personFound && personChecked)" ng-model="currentHR.title" aria-describedby="basic-addon1">
 			</div>
-			<button type="button" class="btn btn-danger" ng-click="deleteHR()">Remove</button>
-			<button type="button" class="btn btn-primary" ng-click="saveHR()">Create</button>
+			<button type="button" class="btn btn-danger" ng-disabled="!(companyFound && companyChecked && personFound && personChecked)" ng-click="deleteHR()">Remove</button>
+			<button type="button" class="btn btn-primary" ng-disabled="!(companyFound && companyChecked && personFound && personChecked)" ng-click="saveHR()">Create</button>
       	</div>
       </div>
     </div>
