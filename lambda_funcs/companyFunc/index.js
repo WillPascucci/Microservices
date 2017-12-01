@@ -148,7 +148,7 @@ exports.handler = (event, context, callback) => {
                     body: JSON.stringify(my_rows),
                     headers: {
                         'Content-Type': 'application/json',
-                        'etag': etag(my_rows)               // Even though this is GET but eTag will be different for paginated calls - Front End to handle this?
+                        'etag': etag(JSON.stringify(my_rows))             // Even though this is GET but eTag will be different for paginated calls - Front End to handle this?
                     }
                 })
             });
@@ -176,7 +176,7 @@ exports.handler = (event, context, callback) => {
                       body: JSON.stringify(my_rows),
                       headers: {
                           'Content-Type': 'application/json',
-                          'etag': etag(my_rows)
+                          'etag': etag(JSON.stringify(my_rows))
                       }
                   })
               });
@@ -209,7 +209,7 @@ exports.handler = (event, context, callback) => {
                   body: JSON.stringify(my_rows),
                   headers: {
                       'Content-Type': 'application/json',
-                      'etag': etag(my_rows)
+                      'etag': etag(JSON.stringify(my_rows))
                   }
               })
             });
@@ -242,7 +242,7 @@ exports.handler = (event, context, callback) => {
                 body: JSON.stringify(my_rows),
                 headers: {
                     'Content-Type': 'application/json',
-                    'etag': etag(my_rows)
+                    'etag': etag(JSON.stringify(my_rows))
                 }
             })
           });
@@ -273,7 +273,7 @@ exports.handler = (event, context, callback) => {
                   body: JSON.stringify(my_rows),
                   headers: {
                       'Content-Type': 'application/json',
-                      'etag': etag(my_rows)
+                      'etag': etag(JSON.stringify(my_rows))
                   }
               })
             });
