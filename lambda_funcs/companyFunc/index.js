@@ -75,7 +75,7 @@ exports.handler = (event, context, callback) => {
                     body: JSON.stringify(my_rows),
                     headers: {
                         'Content-Type': 'application/json',
-                        //'etag': etag(my_rows)
+                        'etag': etag(JSON.stringify(my_rows))
                     }
                 })
             });
@@ -90,7 +90,7 @@ exports.handler = (event, context, callback) => {
                   temp = queries[i].split('=');
                   params[temp[0]] = temp[1];
               }
-              */              
+              */
               var my_rows;
               console.log("before then")
               let getCompanyPromiseqry = new Promise(function(resolve, reject) {
@@ -120,7 +120,7 @@ exports.handler = (event, context, callback) => {
                       body: JSON.stringify(my_rows),
                       headers: {
                           'Content-Type': 'application/json',
-                          //'etag': etag(my_rows)
+                          'etag': etag(JSON.stringify(my_rows))
                       }
                 })
             });
