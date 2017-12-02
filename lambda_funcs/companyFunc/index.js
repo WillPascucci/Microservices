@@ -50,7 +50,7 @@ exports.handler = (event, context, callback) => {
 
     switch (event.httpMethod) {
         case 'GET':
-          if(event.path == '/companyFunc'){
+          if(event.path == '/companyFunc' && event.queryStringParameters == null){
             console.log("IN GET");
             var my_rows;
             let getCompanyPromise = new Promise(function(resolve, reject) {
@@ -62,9 +62,11 @@ exports.handler = (event, context, callback) => {
                         connection.end();
                         resolve(1);
                     }
+                    console.log("after setting promise")
 
                 });
             });
+            console.log("before then")
             getCompanyPromise.then(function() {
                 console.log(my_rows);
                 callback(null, {
@@ -73,8 +75,53 @@ exports.handler = (event, context, callback) => {
                     body: JSON.stringify(my_rows),
                     headers: {
                         'Content-Type': 'application/json',
-                        'etag': etag(my_rows)
+                        'etag': etag(JSON.stringify(my_rows))
                     }
+                })
+            });
+          } else if(event.path == '/companyFunc' && event.queryStringParameters != null){
+              console.log("IN GET Query");
+              // get query parameters
+              /*var params = {}, queries, temp, i, l;
+              // Split into key/value pairs
+              queries = event.path.split("&");
+              // Convert the array of strings into an object
+              for ( i = 0, l = queries.length; i < l; i++ ) {
+                  temp = queries[i].split('=');
+                  params[temp[0]] = temp[1];
+              }
+              */
+              var my_rows;
+              console.log("before then")
+              let getCompanyPromiseqry = new Promise(function(resolve, reject) {
+                  var built_query = "SELECT * from company where 1=1";
+                  console.log("here: "+built_query)
+                  for(var key in event.queryStringParameters){
+                    console.log("inside loop: "+built_query +"...."+key)
+                    built_query += " and " + key +'="'+event.queryStringParameters[key]+'"';
+                  }
+                console.log("query: "+built_query);
+                connection.query(built_query, function (error, rows) {
+                      console.log(error);
+                      console.log(rows);
+                      my_rows = rows;
+                      if (!error) {
+                          connection.end();
+                          resolve(1);
+                      }
+                      console.log("after setting promise")
+                  });
+              });
+              getCompanyPromiseqry.then(function() {
+                  console.log(my_rows);
+                  callback(null, {
+                      statusCode: '200',
+                      // body: err ? err.message : JSON.stringify(res),
+                      body: JSON.stringify(my_rows),
+                      headers: {
+                          'Content-Type': 'application/json',
+                          'etag': etag(JSON.stringify(my_rows))
+                      }
                 })
             });
           } else if(event.path.includes('/companyFunc/page/')){
@@ -101,7 +148,7 @@ exports.handler = (event, context, callback) => {
                     body: JSON.stringify(my_rows),
                     headers: {
                         'Content-Type': 'application/json',
-                        'etag': etag(my_rows)               // Even though this is GET but eTag will be different for paginated calls - Front End to handle this?
+                        'etag': etag(JSON.stringify(my_rows))             // Even though this is GET but eTag will be different for paginated calls - Front End to handle this?
                     }
                 })
             });
@@ -129,7 +176,7 @@ exports.handler = (event, context, callback) => {
                       body: JSON.stringify(my_rows),
                       headers: {
                           'Content-Type': 'application/json',
-                          'etag': etag(my_rows)
+                          'etag': etag(JSON.stringify(my_rows))
                       }
                   })
               });
@@ -162,7 +209,7 @@ exports.handler = (event, context, callback) => {
                   body: JSON.stringify(my_rows),
                   headers: {
                       'Content-Type': 'application/json',
-                      'etag': etag(my_rows)
+                      'etag': etag(JSON.stringify(my_rows))
                   }
               })
             });
@@ -195,7 +242,7 @@ exports.handler = (event, context, callback) => {
                 body: JSON.stringify(my_rows),
                 headers: {
                     'Content-Type': 'application/json',
-                    'etag': etag(my_rows)
+                    'etag': etag(JSON.stringify(my_rows))
                 }
             })
           });
@@ -226,7 +273,7 @@ exports.handler = (event, context, callback) => {
                   body: JSON.stringify(my_rows),
                   headers: {
                       'Content-Type': 'application/json',
-                      'etag': etag(my_rows)
+                      'etag': etag(JSON.stringify(my_rows))
                   }
               })
             });
