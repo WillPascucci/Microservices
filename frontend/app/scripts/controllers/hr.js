@@ -71,17 +71,22 @@ angular.module('teapotApp')
     }
 
     $scope.pickHR = function(HR) {
-      ////console.log('in pick HR')
+      console.log('in pick HR')
       ////console.log($scope.currentHR);
       $scope.currentHR = JSON.parse(JSON.stringify(HR));
       $scope.currentPerson.personId = $scope.currentHR.personId
       $scope.currentCompany.companyId = $scope.currentHR.companyId
-      ////console.log('in pick HR - 2')
-      ////console.log($scope.currentHR);
-      ////console.log($scope.currentPerson.personId);
-      ////console.log($scope.currentCompany.companyId);
-      $scope.findPerson()
-      $scope.findCompany()
+      console.log('in pick HR - 2')
+      console.log($scope.currentHR);
+      console.log($scope.currentPerson.personId);
+      console.log($scope.currentCompany.companyId);
+      HRService.getHR($scope);
+      $scope.findPerson();
+      $scope.findCompany();
+      console.log('in pick HR - 3')
+      console.log($scope.currentHR);
+      console.log($scope.currentPerson.personId);
+      console.log($scope.currentCompany.companyId);
       ////console.log($scope.currentHR);
     }
 
@@ -200,6 +205,9 @@ angular.module('teapotApp')
 	    			////console.log(data.length)
 			    	if(data.length == 1) {
 			    		$scope.currentPerson = data[0]
+              if(!data[0].personId) {
+                $scope.currentPerson.personId = $scope.currentPerson.id
+              }
 		    			$scope.personChecked = true;
 		    			$scope.personFound = true;
 		    			$scope.updatePersonAlert()
@@ -230,16 +238,19 @@ angular.module('teapotApp')
 	    } else {
 	    	companyService.findCompany($scope, function(data) {
 	    		if(data.length > 0) {
-	    			//console.log(data)
+	    			console.log(data)
 	    			//console.log(data.length)
 			    	if(data.length == 1) {
 			    		$scope.currentCompany = data[0]
+              if(!data[0].companyId) {
+                $scope.currentCompany.companyId = $scope.currentCompany.id
+              }
 		    			$scope.companyChecked = true;
 		    			$scope.companyFound = true;
 		    			$scope.updateCompanyAlert()
 			    	} else {
 			    		$scope.companyAlertType = $scope.alertTypes[2]
-			    		$scope.companyAlertMessage = 'Too many people found'
+			    		$scope.companyAlertMessage = 'Too many companies found'
 			    	}
 			    }
 			    else {

@@ -26,6 +26,8 @@ angular.module('teapotApp')
         console.log('Company page called')
         $http.get(this.baseURL + '/companyFunc/page/'+pageRequested)
             .then(function(response) {
+                console.log('company')
+                console.log(response)
                 console.log(response.data)
                 $scope.companys = response.data
                 successCallback()
@@ -65,7 +67,7 @@ angular.module('teapotApp')
     }
 
     this.findCompany = function($scope, successCallback, failureCallback) {
-        if($scope.currentCompany.companyId && $scope.currentCompany.companyId != -1){
+        if($scope.currentCompany.companyId && $scope.currentCompany.companyId != -1) {
             var urlString = this.baseURL + '/companyFunc/' + $scope.currentCompany.companyId;
             //console.log(urlString);
             $http.get(urlString)
@@ -95,12 +97,13 @@ angular.module('teapotApp')
                 queryString += 'phone=' + $scope.currentCompany.phone + '&'
             }
             if($scope.currentCompany.id) {
-                queryString += 'id=' + $scope.currentCompany.id + '&'
+                queryString += 'companyId=' + $scope.currentCompany.id + '&'
             }
             console.log(queryString)
             //console.log(this.baseURL + '/person' + queryString)
             $http.get(this.baseURL + '/companyFunc' + queryString)
                 .then(function(response) {
+                    console.log(response)
                     //console.log(response.data)
                     successCallback(response.data)
                 }, function(response) {

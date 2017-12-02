@@ -8,7 +8,7 @@
  * Service in the teapotApp.
  */
 angular.module('teapotApp')
-  .service('CRMService', function ($http) {
+  .service('CRMService', function ($http, teauuid) {
     this.baseURL = 'https://0j1j9o13l2.execute-api.us-east-1.amazonaws.com/prod'
 
     this.getCRMs = function($scope) {
@@ -36,7 +36,8 @@ angular.module('teapotApp')
     }
 
     this.deleteCRM = function($scope, successCallback, failureCallback) {
-        $http.delete(this.baseURL+'/customerFunc2/'+$scope.currentCRM.customerId)
+        var idemKeyStr = teauuid.makeUuid()
+        $http.delete(this.baseURL+'/customerFunc2/'+$scope.currentCRM.customerId, {headers:{'idem-key':idemKeyStr}})
             .then(function(response) {
                 successCallback()
             }, function(response) {
@@ -45,7 +46,8 @@ angular.module('teapotApp')
     }
 
     this.updateCRM = function($scope, successCallback, failureCallback) {
-        $http.put(this.baseURL+'/customerFunc2/'+$scope.currentCRM.customerId, $scope.currentCRM)
+        var idemKeyStr = teauuid.makeUuid()
+        $http.put(this.baseURL+'/customerFunc2/'+$scope.currentCRM.customerId, $scope.currentCRM, {headers:{'idem-key':idemKeyStr}})
             .then(function(response) {
                 successCallback()
             }, function(response) {
@@ -54,7 +56,8 @@ angular.module('teapotApp')
     }
 
     this.createCRM = function($scope, successCallback, failureCallback) {
-        $http.post(this.baseURL + '/CRM', $scope.currentCRM)
+        var idemKeyStr = teauuid.makeUuid()
+        $http.post(this.baseURL + '/CRM', $scope.currentCRM, {headers:{'idem-key':idemKeyStr}})
             .then(function(response) {
                 successCallback()
             }, function(response) {
