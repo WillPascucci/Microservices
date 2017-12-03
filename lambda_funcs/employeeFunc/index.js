@@ -158,8 +158,11 @@ exports.handler = (event, context, callback) => {
             break;
         case 'POST':
             console.log("IN POST");
+            var my_rows;
+            var bod = JSON.parse(event.body);
             snsPublish('In employeeFunc: POST', {arn: 'arn:aws:sns:us-east-1:099711494433:LambdaTest'});
-            connection.query("INSERT INTO company (name, address, type, contactName, phone, fax) VALUES (?, ?, ?, ?, ?, ?)", [event.body.name, event.body.address, event.body.type, event.body.contactName, event.body.phone, event.body.fax], function (error, rows) {
+            connection.query("INSERT INTO employee (personId, companyId, salary, title) VALUES (?, ?, ?, ?)", [bod.personId, bod.companyId, bod.salary, bod.title], function (error, rows) {
+                my_rows = rows;
                 console.log(error);
                 console.log(rows);
                 callback(null, {
@@ -178,10 +181,8 @@ exports.handler = (event, context, callback) => {
             snsPublish('In employeeFunc: PUT', {arn: 'arn:aws:sns:us-east-1:099711494433:LambdaTest'});
             var my_rows;
             let putCompanyPromise = new Promise(function(resolve, reject) {
-
-            var compData = JSON.parse(event.body);
-            console.log(compData.name);
-            connection.query("UPDATE employee SET name=?, address=?, type=?, contactName=?, phone=?, fax=? WHERE employeeId=?", [event.body.name, event.body.address, event.body.type, event.body.contactName, event.body.phone, event.body.fax, event.path.substr(event.path.lastIndexOf("/") + 1)], function (error, rows) {
+            var bod = JSON.parse(event.body);
+            connection.query("UPDATE employee SET personId=?, companyId=?, salary=?, title=? WHERE employeeId=?", [bod.personId, bod.companyId, bod.salary, bod.title, event.path.substr(event.path.lastIndexOf("/") + 1)], function (error, rows) {
                   console.log(error);
                   console.log(rows);
                   my_rows = rows;
