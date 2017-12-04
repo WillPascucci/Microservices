@@ -129,7 +129,7 @@ exports.handler = (event, context, callback) => {
             console.log(event.path.substr(event.path.lastIndexOf("/") + 1))
             var my_rows;
             let firstpormmmPage = new Promise(function(resolve, reject) {
-                connection.query("SELECT ROUND(a.totalPages/5,0) as totalPages, company.* from (select count(*) as totalPages from company) as a, company LIMIT "+(event.path.substr(event.path.lastIndexOf("/") + 1)*5)+", 5",  function (error, rows) {
+                connection.query("SELECT FLOOR(a.totalPages/5) as totalPages, company.* from (select count(*) as totalPages from company) as a, company LIMIT "+(event.path.substr(event.path.lastIndexOf("/") + 1)*5)+", 5",  function (error, rows) {
                   console.log(error);
                     console.log(rows);
                     my_rows = rows;
