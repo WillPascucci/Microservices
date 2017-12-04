@@ -180,7 +180,6 @@ exports.handler = (event, context, callback) => {
             console.log("IN DELETE");
             snsPublish('In employeeFunc.: DELETE', {arn: 'arn:aws:sns:us-east-1:099711494433:LambdaTest'});
             var my_rows;
-            console.log(event.body.name);
             let firstpormmm2 = new Promise(function(resolve, reject) {
                 connection.query("DELETE from employee where employeeId="+String(event.path.substr(event.path.lastIndexOf("/") + 1)), function (error, rows) {
                     console.log(error);
