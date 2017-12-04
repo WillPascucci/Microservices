@@ -161,19 +161,28 @@ exports.handler = (event, context, callback) => {
             var my_rows;
             var bod = JSON.parse(event.body);
             snsPublish('In employeeFunc: POST', {arn: 'arn:aws:sns:us-east-1:099711494433:LambdaTest'});
-            connection.query("INSERT INTO employee (personId, companyId, salary, title) VALUES (?, ?, ?, ?)", [bod.personId, bod.companyId, bod.salary, bod.title], function (error, rows) {
-                my_rows = rows;
+            let postEmployeePromise = new Promise(function(resolve, reject) {
+              connection.query("INSERT INTO employee (personId, companyId, salary, title) VALUES (?, ?, ?, ?)", [bod.personId, bod.companyId, bod.salary, bod.title], function (error, rows) {
                 console.log(error);
                 console.log(rows);
-                callback(null, {
-                    statusCode: error ? '400' : '200',
-                    // body: err ? err.message : JSON.stringify(res),
-                    body: JSON.stringify("Success!"),
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'etag': etag(JSON.stringify(my_rows))
-                    }
-                });
+                my_rows = rows;
+                if (!error) {
+                    connection.end();
+                    resolve(1);
+                }
+              });
+            });
+            postEmployeePromise.then(function() {
+              console.log(my_rows);
+              callback(null, {
+                  statusCode: '200',
+                  // body: err ? err.message : JSON.stringify(res),
+                  body: JSON.stringify(my_rows),
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'etag': etag(JSON.stringify(my_rows))
+                  }
+              })
             });
             break;
         case 'DELETE':
