@@ -233,6 +233,7 @@ exports.handler = (event, context, callback) => {
                   }
               })
             });
+            break;
         default:
             console.log("IN DEFAULT");
             done(new Error(`Unsupported method "${event.httpMethod}"`));
