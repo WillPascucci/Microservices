@@ -176,6 +176,35 @@ exports.handler = (event, context, callback) => {
                 });
             });
             break;
+        case 'DELETE':
+            console.log("IN DELETE");
+            snsPublish('In employeeFunc.: DELETE', {arn: 'arn:aws:sns:us-east-1:099711494433:LambdaTest'});
+            var my_rows;
+            let firstpormmm2 = new Promise(function(resolve, reject) {
+                connection.query("DELETE from employee where employeeId="+String(event.path.substr(event.path.lastIndexOf("/") + 1)), function (error, rows) {
+                    console.log(error);
+                    console.log(rows);
+                    my_rows = rows;
+                    if (!error) {
+                        connection.end();
+                        resolve(1);
+                    }
+
+                });
+            });
+            firstpormmm2.then(function() {
+                console.log(my_rows);
+                callback(null, {
+                    statusCode: '200',
+                    // body: err ? err.message : JSON.stringify(res),
+                    body: JSON.stringify(my_rows),
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'etag': etag(JSON.stringify(my_rows))
+                    }
+                })
+            });
+            break;
         case 'PUT': // this is for PUT on companyFunc/:id
          console.log("IN PUT");
             snsPublish('In employeeFunc: PUT', {arn: 'arn:aws:sns:us-east-1:099711494433:LambdaTest'});
