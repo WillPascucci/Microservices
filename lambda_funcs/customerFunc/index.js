@@ -159,19 +159,31 @@ exports.handler = (event, context, callback) => {
             break;
         case 'POST':
             console.log("IN POST");
-            snsPublish('In customerFunc.: POST', {arn: 'arn:aws:sns:us-east-1:099711494433:LambdaTest'});
-            connection.query("INSERT INTO customer (name, address, type, contactName, phone, fax) VALUES (?, ?, ?, ?, ?, ?)", [event.body.name, event.body.address, event.body.type, event.body.contactName, event.body.phone, event.body.fax], function (error, rows) {
+            var my_rows;
+            var bod = JSON.parse(event.body);
+            snsPublish('In customerFunc: POST', {arn: 'arn:aws:sns:us-east-1:099711494433:LambdaTest'});
+            let postCustomerPromise = new Promise(function(resolve, reject) {
+              connection.query("INSERT INTO customer (companyId, personId, dollarsSpent) VALUES (?, ?, ?)", [bod.companyId, bod.personId, bod.dollarsSpent], function (error, rows) {
                 console.log(error);
                 console.log(rows);
-                callback(null, {
-                    statusCode: error ? '400' : '200',
-                    // body: err ? err.message : JSON.stringify(res),
-                    body: JSON.stringify("Success!"),
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'etag': etag(JSON.stringify(my_rows))
-                    }
-                });
+                my_rows = rows;
+                if (!error) {
+                    connection.end();
+                    resolve(1);
+                }
+              });
+            });
+            postCustomerPromise.then(function() {
+              console.log(my_rows);
+              callback(null, {
+                  statusCode: '200',
+                  // body: err ? err.message : JSON.stringify(res),
+                  body: JSON.stringify(my_rows),
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'etag': etag(JSON.stringify(my_rows))
+                  }
+              })
             });
             break;
         case 'DELETE':
@@ -205,13 +217,11 @@ exports.handler = (event, context, callback) => {
             break;
         case 'PUT': // this is for PUT on companyFunc/:id
          console.log("IN PUT");
-            snsPublish('In customerFunc.: PUT', {arn: 'arn:aws:sns:us-east-1:099711494433:LambdaTest'});
+            snsPublish('In customerFunc: PUT', {arn: 'arn:aws:sns:us-east-1:099711494433:LambdaTest'});
             var my_rows;
-            let putCompanyPromise = new Promise(function(resolve, reject) {
-
-            var compData = JSON.parse(event.body);
-                console.log(compData.name);
-              connection.query("UPDATE customer SET name=?, address=?, type=?, contactName=?, phone=?, fax=? WHERE customerId=?", [event.body.name, event.body.address, event.body.type, event.body.contactName, event.body.phone, event.body.fax, event.path.substr(event.path.lastIndexOf("/") + 1)], function (error, rows) {
+            let putCustomerPromise = new Promise(function(resolve, reject) {
+            var bod = JSON.parse(event.body);
+            connection.query("UPDATE employee SET companyId=?, personId=?, dollarsSpent=? WHERE customerId=?", [bod.companyId, bod.personId, bod.dollarsSpent, event.path.substr(event.path.lastIndexOf("/") + 1)], function (error, rows) {
                   console.log(error);
                   console.log(rows);
                   my_rows = rows;
@@ -221,7 +231,7 @@ exports.handler = (event, context, callback) => {
                     }
                 });
             });
-            putCompanyPromise.then(function() {
+            putCustomerPromise.then(function() {
               console.log(my_rows);
               callback(null, {
                   statusCode: '200',

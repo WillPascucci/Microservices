@@ -218,7 +218,7 @@ exports.handler = (event, context, callback) => {
          console.log("IN PUT");
             snsPublish('In employeeFunc: PUT', {arn: 'arn:aws:sns:us-east-1:099711494433:LambdaTest'});
             var my_rows;
-            let putCompanyPromise = new Promise(function(resolve, reject) {
+            let putEmployeePromise = new Promise(function(resolve, reject) {
             var bod = JSON.parse(event.body);
             connection.query("UPDATE employee SET personId=?, companyId=?, salary=?, title=? WHERE employeeId=?", [bod.personId, bod.companyId, bod.salary, bod.title, event.path.substr(event.path.lastIndexOf("/") + 1)], function (error, rows) {
                   console.log(error);
@@ -230,7 +230,7 @@ exports.handler = (event, context, callback) => {
                     }
                 });
             });
-            putCompanyPromise.then(function() {
+            putEmployeePromise.then(function() {
               console.log(my_rows);
               callback(null, {
                   statusCode: '200',
