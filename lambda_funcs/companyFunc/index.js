@@ -171,7 +171,7 @@ exports.handler = (event, context, callback) => {
               firstpormmmPage.then(function() {
                   console.log(my_rows);
                   callback(null, {
-                      statusCode: '200',
+                    statusCode: event.headers == null ? '200' : event.headers.etag == null  ? '200' : etag(JSON.stringify(my_rows)) == JSON.stringify(event.headers.etag) ? '304' : '200',
                       // body: err ? err.message : JSON.stringify(res),
                       body: JSON.stringify(my_rows),
                       headers: {
@@ -209,7 +209,7 @@ exports.handler = (event, context, callback) => {
                   body: JSON.stringify(my_rows),
                   headers: {
                       'Content-Type': 'application/json',
-                      'etag': etag(JSON.stringify(my_rows))
+                  //    'etag': etag(JSON.stringify(my_rows))
                   }
               })
             });
@@ -242,7 +242,7 @@ exports.handler = (event, context, callback) => {
                 body: JSON.stringify(my_rows),
                 headers: {
                     'Content-Type': 'application/json',
-                    'etag': etag(JSON.stringify(my_rows))
+                  //  'etag': etag(JSON.stringify(my_rows))
                 }
             })
           });
@@ -268,7 +268,7 @@ exports.handler = (event, context, callback) => {
             putCompanyPromise.then(function() {
               console.log(my_rows);
               callback(null, {
-                  statusCode: '200',
+                statusCode: event.headers == null ? '200' : event.headers.etag == null  ? '200' : etag(JSON.stringify(my_rows)) == JSON.stringify(event.headers.etag) ? '304' : '200',
                   // body: err ? err.message : JSON.stringify(res),
                   body: JSON.stringify(my_rows),
                   headers: {
