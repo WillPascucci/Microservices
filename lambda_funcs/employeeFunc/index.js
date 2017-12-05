@@ -9,7 +9,26 @@ var request = require('request');
 var snsPublish = require('aws-sns-publish');
 var etag = require('etag');
 
+console.log("IN START");
+var idempDict = {};
+
 exports.handler = (event, context, callback) => {
+  console.log("IDEMP Dict is:");
+  console.log(idempDict);
+  console.log("after idemp log");
+  if (event.httpMethod!='GET' && event.headers['idem-key'] in idempDict) {
+        console.log("DOES it get here??");
+        callback(null, {
+          statusCode: 200,
+          body: JSON.stringify(idempDict[event.headers['idem-key']]),
+          headers: {
+            'Content-Type': 'application/json',
+          }
+        });
+
+  } else {
+
+  console.log(idempDict);
 
   var connection = mysql.createConnection({
   host     : "assignmentpart2db.cyi40ipdvtjm.us-east-1.rds.amazonaws.com",
@@ -166,6 +185,7 @@ exports.handler = (event, context, callback) => {
                 console.log(error);
                 console.log(rows);
                 my_rows = rows;
+                idempDict[event.headers['idem-key']] = JSON.stringify(my_rows);
                 if (!error) {
                     connection.end();
                     resolve(1);
@@ -174,6 +194,7 @@ exports.handler = (event, context, callback) => {
             });
             postEmployeePromise.then(function() {
               console.log(my_rows);
+              console.log(idempDict);
               callback(null, {
                   statusCode: '200',
                   // body: err ? err.message : JSON.stringify(res),
@@ -187,6 +208,9 @@ exports.handler = (event, context, callback) => {
             break;
         case 'DELETE':
             console.log("IN DELETE");
+            console.log("getting key from header:");
+            console.log(event.headers['idem-key']);
+            console.log()
             snsPublish('In employeeFunc.: DELETE', {arn: 'arn:aws:sns:us-east-1:099711494433:LambdaTest'});
             var my_rows;
             let firstpormmm2 = new Promise(function(resolve, reject) {
@@ -194,6 +218,7 @@ exports.handler = (event, context, callback) => {
                     console.log(error);
                     console.log(rows);
                     my_rows = rows;
+                    idempDict[event.headers['idem-key']] = JSON.stringify(my_rows);
                     if (!error) {
                         connection.end();
                         resolve(1);
@@ -203,6 +228,7 @@ exports.handler = (event, context, callback) => {
             });
             firstpormmm2.then(function() {
                 console.log(my_rows);
+                console.log(idempDict);
                 callback(null, {
                     statusCode: '200',
                     // body: err ? err.message : JSON.stringify(res),
@@ -224,6 +250,7 @@ exports.handler = (event, context, callback) => {
                   console.log(error);
                   console.log(rows);
                   my_rows = rows;
+                  idempDict[event.headers['idem-key']] = JSON.stringify(my_rows);
                   if (!error) {
                       connection.end();
                       resolve(1);
@@ -232,6 +259,7 @@ exports.handler = (event, context, callback) => {
             });
             putEmployeePromise.then(function() {
               console.log(my_rows);
+              console.log(idempDict);
               callback(null, {
                 statusCode: event.headers == null ? '200' : event.headers.etag == null  ? '200' : etag(JSON.stringify(my_rows)) == JSON.stringify(event.headers.etag) ? '304' : '200',
                   // body: err ? err.message : JSON.stringify(res),
@@ -248,4 +276,5 @@ exports.handler = (event, context, callback) => {
             done(new Error(`Unsupported method "${event.httpMethod}"`));
     }
 });
+}
 };
