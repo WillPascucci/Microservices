@@ -146,7 +146,7 @@ exports.handler = (event, context, callback) => {
                           for (r in rows) {
                             rows[r]["selfPage"] = "https://0j1j9o13l2.execute-api.us-east-1.amazonaws.com/prod/employeeFunc2/page/" + event.path.substr(event.path.lastIndexOf("/")+1);
                             rows[r]["prevPage"] = "https://0j1j9o13l2.execute-api.us-east-1.amazonaws.com/prod/employeeFunc2/page/" + (event.path.substr(event.path.lastIndexOf("/")+1)-1<=0 ? 0 : event.path.substr(event.path.lastIndexOf("/")+1)-1);
-                            rows[r]["nextPage"] = "https://0j1j9o13l2.execute-api.us-east-1.amazonaws.com/prod/employeeFunc2/page/" + (event.path.substr(event.path.lastIndexOf("/")+1)+1>=0+rows[r].totalPages ? rows[r].totalPages : event.path.substr(event.path.lastIndexOf("/")+1)-0+1);
+                            rows[r]["nextPage"] = "https://0j1j9o13l2.execute-api.us-east-1.amazonaws.com/prod/employeeFunc2/page/" + (Number(event.path.substr(event.path.lastIndexOf("/")+1))+1>=0+Number(rows[r].totalPages) ? rows[r].totalPages : event.path.substr(event.path.lastIndexOf("/")+1)-0+1);
                           }
                             console.log(rows);
                             my_rows = rows;
