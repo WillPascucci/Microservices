@@ -1,0 +1,10 @@
+{
+  "name": "Lambda App",
+  "version": "0.0.1",
+  "private": true,
+  "main": "index.js",
+  "dependencies": {
+    "oauth": "^0.9.15",
+    "https": "^1.0.0"
+  }
+}

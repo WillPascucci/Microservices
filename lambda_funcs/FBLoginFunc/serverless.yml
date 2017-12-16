@@ -1,0 +1,21 @@
+service: lambda-facebook-oauth
+
+provider:
+  name: aws
+  runtime: nodejs4.3
+  memorySize: 1536
+  timeout: 10
+  versionFunctions: false
+    
+functions:
+  auth:
+    handler: index.auth
+    events: 
+      - http:
+          path: auth/facebook
+          method: get
+    environment:
+      appKey: 155167865239166
+      appSecret: 23a39a38eb60cf0b90d8c28d77e7274b
+      redirectUrl: https://0j1j9o13l2.execute-api.us-east-1.amazonaws.com/prod/fbLoginFunc
+      appUrl: <YOUR-APP-URL-THAT-YOU-WANT-TO-REDIRECT-TO-AFTER-SUCCESSFUL-AUTHN>
