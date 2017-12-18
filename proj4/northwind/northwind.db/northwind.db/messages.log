@@ -1,0 +1,1097 @@
+2014-12-17 18:05:13.353+0000 INFO  [org.neo4j]: You are using an unsupported version of the Java runtime. Please use Oracle(R) Java(TM) Runtime Environment 7 or OpenJDK(TM) 7.
+2014-12-17 18:05:13.575+0000 INFO  [org.neo4j]: No locking implementation specified, defaulting to 'community'
+2014-12-17 18:05:13.764+0000 INFO  [org.neo4j]: --- INITIALIZED diagnostics START ---
+2014-12-17 18:05:13.765+0000 INFO  [org.neo4j]: Neo4j Kernel properties:
+    neostore.propertystore.db.strings.mapped_memory=1098M
+    ephemeral=false
+    neostore.nodestore.db.mapped_memory=358M
+    store_dir=northwind.db
+    read_only=false
+    neostore.propertystore.db.arrays.mapped_memory=1244M
+    neostore.propertystore.db.mapped_memory=1291M
+    neostore.relationshipstore.db.mapped_memory=1583M
+2014-12-17 18:05:13.767+0000 INFO  [org.neo4j]: Diagnostics providers:
+    org.neo4j.kernel.configuration.Config
+    org.neo4j.kernel.info.DiagnosticsManager
+    SYSTEM_MEMORY
+    JAVA_MEMORY
+    OPERATING_SYSTEM
+    JAVA_VIRTUAL_MACHINE
+    CLASSPATH
+    LIBRARY_PATH
+    SYSTEM_PROPERTIES
+    NETWORK
+2014-12-17 18:05:13.768+0000 INFO  [org.neo4j]: System memory information:
+    Total Physical memory: 16,00 GB
+    Free Physical memory: 529,36 MB
+    Committed virtual memory: 7,82 GB
+    Total swap space: 6,00 GB
+    Free swap space: 1,20 GB
+2014-12-17 18:05:13.775+0000 INFO  [org.neo4j]: JVM memory information:
+    Free  memory: 3,81 GB
+    Total memory: 3,88 GB
+    Max   memory: 3,88 GB
+    Garbage Collector: PS Scavenge: [PS Eden Space, PS Survivor Space]
+    Garbage Collector: PS MarkSweep: [PS Eden Space, PS Survivor Space, PS Old Gen]
+    Memory Pool: Code Cache (Non-heap memory): committed=2,44 MB, used=2,21 MB, max=240,00 MB, threshold=0,00 B
+    Memory Pool: Metaspace (Non-heap memory): committed=6,63 MB, used=6,30 MB, max=-1,00 B, threshold=0,00 B
+    Memory Pool: Compressed Class Space (Non-heap memory): committed=896,00 kB, used=836,07 kB, max=1,00 GB, threshold=0,00 B
+    Memory Pool: PS Eden Space (Heap memory): committed=768,00 MB, used=61,44 MB, max=768,00 MB, threshold=?
+    Memory Pool: PS Survivor Space (Heap memory): committed=128,00 MB, used=0,00 B, max=128,00 MB, threshold=?
+    Memory Pool: PS Old Gen (Heap memory): committed=3,00 GB, used=0,00 B, max=3,00 GB, threshold=0,00 B
+2014-12-17 18:05:13.786+0000 INFO  [org.neo4j]: Operating system information:
+    Operating System: Mac OS X; version: 10.10.1; arch: x86_64; cpus: 4
+    Max number of file descriptors: 10240
+    Number of open file descriptors: 32
+    Process id: 65721@wuqour.local
+    Byte order: LITTLE_ENDIAN
+    Local timezone: Europe/Berlin
+2014-12-17 18:05:13.810+0000 INFO  [org.neo4j]: JVM information:
+    VM Name: Java HotSpot(TM) 64-Bit Server VM
+    VM Vendor: Oracle Corporation
+    VM Version: 25.0-b70
+    JIT compiler: HotSpot 64-Bit Tiered Compilers
+    VM Arguments: [-Xmx4G, -Xms4G, -Xmn1G, -Dapp.name=neo4j-shell, -Dapp.pid=65721, -Dapp.repo=/Users/mh/Downloads/neo4j-community-2.1.5/lib, -Dbasedir=/Users/mh/Downloads/neo4j-community-2.1.5, -Dfile.encoding=UTF-8]
+2014-12-17 18:05:13.811+0000 INFO  [org.neo4j]: Java classpath:
+     [classpath + loader.0] file:/Users/mh/Downloads/neo4j-community-2.1.5/lib/neo4j-cypher-commons-2.1.5.jar
+     [classpath + loader.0] file:/Users/mh/Downloads/neo4j-community-2.1.5/lib/neo4j-lucene-index-2.1.5.jar
+     [bootstrap] /Library/Java/JavaVirtualMachines/jdk1.8.0.jdk/Contents/Home/jre/classes
+     [classpath + loader.0] file:/Users/mh/Downloads/neo4j-community-2.1.5/lib/neo4j-graph-matching-2.1.5.jar
+     [bootstrap] /Library/Java/JavaVirtualMachines/jdk1.8.0.jdk/Contents/Home/jre/lib/charsets.jar
+     [classpath + loader.0] file:/Users/mh/Downloads/neo4j-community-2.1.5/lib/neo4j-shell-2.1.5.jar
+     [classpath + loader.0] file:/Users/mh/Downloads/neo4j-community-2.1.5/lib/parboiled-core-1.1.6.jar
+     [classpath + loader.0] file:/Users/mh/Downloads/neo4j-community-2.1.5/lib/opencsv-2.0.jar
+     [bootstrap] /Library/Java/JavaVirtualMachines/jdk1.8.0.jdk/Contents/Home/jre/lib/rt.jar
+     [bootstrap] /Library/Java/JavaVirtualMachines/jdk1.8.0.jdk/Contents/Home/jre/lib/jsse.jar
+     [loader.1] file:/Library/Java/JavaVirtualMachines/jdk1.8.0.jdk/Contents/Home/jre/lib/ext/sunec.jar
+     [bootstrap] /Library/Java/JavaVirtualMachines/jdk1.8.0.jdk/Contents/Home/jre/lib/jce.jar
+     [loader.1] file:/Library/Java/JavaVirtualMachines/jdk1.8.0.jdk/Contents/Home/jre/lib/ext/localedata.jar
+     [loader.1] file:/Library/Java/JavaVirtualMachines/jdk1.8.0.jdk/Contents/Home/jre/lib/ext/zipfs.jar
+     [bootstrap] /Library/Java/JavaVirtualMachines/jdk1.8.0.jdk/Contents/Home/jre/lib/resources.jar
+     [classpath + loader.0] file:/Users/mh/Downloads/neo4j-community-2.1.5/lib/neo4j-primitive-collections-2.1.5.jar
+     [classpath + loader.0] file:/Users/mh/Downloads/neo4j-community-2.1.5/lib/geronimo-jta_1.1_spec-1.1.1.jar
+     [classpath + loader.0] file:/Users/mh/Downloads/neo4j-community-2.1.5/lib/neo4j-cypher-compiler-1.9-2.0.3.jar
+     [bootstrap] /Library/Java/JavaVirtualMachines/jdk1.8.0.jdk/Contents/Home/jre/lib/jfr.jar
+     [classpath + loader.0] file:/Users/mh/Downloads/neo4j-community-2.1.5/lib/neo4j-cypher-2.1.5.jar
+     [loader.1] file:/Library/Java/JavaVirtualMachines/jdk1.8.0.jdk/Contents/Home/jre/lib/ext/cldrdata.jar
+     [loader.1] file:/Library/Java/JavaVirtualMachines/jdk1.8.0.jdk/Contents/Home/jre/lib/ext/sunpkcs11.jar
+     [classpath + loader.0] file:/Users/mh/Downloads/neo4j-community-2.1.5/lib/server-api-2.1.5.jar
+     [loader.1] file:/Library/Java/JavaVirtualMachines/jdk1.8.0.jdk/Contents/Home/jre/lib/ext/sunjce_provider.jar
+     [classpath + loader.0] file:/Users/mh/Downloads/neo4j-community-2.1.5/lib/neo4j-udc-2.1.5.jar
+     [classpath + loader.0] file:/Users/mh/Downloads/neo4j-community-2.1.5/lib/neo4j-jmx-2.1.5.jar
+     [classpath + loader.0] file:/Users/mh/Downloads/neo4j-community-2.1.5/lib/neo4j-cypher-compiler-2.0-2.0.3.jar
+     [bootstrap] /Library/Java/JavaVirtualMachines/jdk1.8.0.jdk/Contents/Home/jre/lib/sunrsasign.jar
+     [classpath + loader.0] file:/Users/mh/Downloads/neo4j-community-2.1.5/lib/neo4j-cypher-compiler-2.1-2.1.5.jar
+     [classpath + loader.0] file:/Users/mh/Downloads/neo4j-community-2.1.5/lib/concurrentlinkedhashmap-lru-1.3.1.jar
+     [classpath + loader.0] file:/Users/mh/Downloads/neo4j-community-2.1.5/lib/org.apache.servicemix.bundles.jline-0.9.94_1.jar
+     [classpath + loader.0] file:/Users/mh/Downloads/neo4j-community-2.1.5/lib/parboiled-scala_2.10-1.1.6.jar
+     [loader.1] file:/Library/Java/JavaVirtualMachines/jdk1.8.0.jdk/Contents/Home/jre/lib/ext/dnsns.jar
+     [classpath + loader.0] file:/Users/mh/Downloads/neo4j-community-2.1.5/lib/scala-library-2.10.4.jar
+     [classpath + loader.0] file:/Users/mh/Downloads/neo4j-community-2.1.5/lib/lucene-core-3.6.2.jar
+     [loader.1] file:/Library/Java/JavaVirtualMachines/jdk1.8.0.jdk/Contents/Home/jre/lib/ext/jfxrt.jar
+     [classpath + loader.0] file:/Users/mh/Downloads/neo4j-community-2.1.5/lib/neo4j-graph-algo-2.1.5.jar
+     [classpath + loader.0] file:/Users/mh/Downloads/neo4j-community-2.1.5/lib/neo4j-kernel-2.1.5.jar
+     [classpath + loader.0] file:/Users/mh/Downloads/neo4j-community-2.1.5/lib/groovy-all-2.3.7.jar
+     [classpath + loader.0] file:/Users/mh/java/neo/developer-resources/working-with-data/guide-importing-data-and-etl/northwind/
+     [loader.1] file:/Library/Java/JavaVirtualMachines/jdk1.8.0.jdk/Contents/Home/jre/lib/ext/nashorn.jar
+     [loader.1] file:/System/Library/Java/Extensions/MRJToolkit.jar
+2014-12-17 18:05:13.823+0000 INFO  [org.neo4j]: Library path:
+    /Users/mh/Library/Java/Extensions
+    /Library/Java/Extensions
+    /Network/Library/Java/Extensions
+    /System/Library/Java/Extensions
+    /usr/lib/java
+    /Users/mh/java/neo/developer-resources/working-with-data/guide-importing-data-and-etl/northwind
+2014-12-17 18:05:13.828+0000 INFO  [org.neo4j]: System.properties:
+    sun.boot.library.path = /Library/Java/JavaVirtualMachines/jdk1.8.0.jdk/Contents/Home/jre/lib
+    gopherProxySet = false
+    path.separator = :
+    file.encoding.pkg = sun.io
+    user.country = DE
+    sun.java.launcher = SUN_STANDARD
+    sun.os.patch.level = unknown
+    user.dir = /Users/mh/java/neo/developer-resources/working-with-data/guide-importing-data-and-etl/northwind
+    basedir = /Users/mh/Downloads/neo4j-community-2.1.5
+    app.name = neo4j-shell
+    sun.jnu.encoding = UTF-8
+    app.repo = /Users/mh/Downloads/neo4j-community-2.1.5/lib
+    sun.management.compiler = HotSpot 64-Bit Tiered Compilers
+    user.home = /Users/mh
+    user.timezone = Europe/Berlin
+    file.encoding = UTF-8
+    user.name = mh
+    sun.java.command = org.neo4j.shell.StartClient -path northwind.db -file import_csv.cypher -v
+    sun.arch.data.model = 64
+    user.language = de
+    awt.toolkit = sun.lwawt.macosx.LWCToolkit
+    file.separator = /
+    sun.io.unicode.encoding = UnicodeBig
+    sun.cpu.endian = little
+    app.pid = 65721
+    sun.cpu.isalist = 
+2014-12-17 18:05:13.831+0000 INFO  [org.neo4j]: Network information:
+    Interface utun0:
+        address: fd6c:1d93:fc9:9f19:4c53:117e:a902:8325
+        address: fe80:0:0:0:4c53:117e:a902:8325%utun0
+    Interface lo0:
+        address: fe80:0:0:0:0:0:0:1%lo0
+        address: 0:0:0:0:0:0:0:1
+        address: 127.0.0.1
+2014-12-17 18:05:13.836+0000 INFO  [org.neo4j]: --- INITIALIZED diagnostics END ---
+2014-12-17 18:05:14.026+0000 INFO  [org.neo4j]: Creating new db @ northwind.db/neostore
+2014-12-17 18:05:14.074+0000 INFO  [org.neo4j]: [northwind.db/neostore.relationshiptypestore.db.names] brickCount=0 brickSize=0b mappedMem=0b (storeSize=38b)
+2014-12-17 18:05:14.076+0000 INFO  [org.neo4j]: [northwind.db/neostore.relationshiptypestore.db] brickCount=0 brickSize=0b mappedMem=0b (storeSize=0b)
+2014-12-17 18:05:14.076+0000 INFO  [org.neo4j]: northwind.db/neostore.relationshiptypestore.db.names hit=0 miss=0 switches=0 ooe=0
+2014-12-17 18:05:14.078+0000 INFO  [org.neo4j]: northwind.db/neostore.relationshiptypestore.db hit=0 miss=0 switches=0 ooe=0
+2014-12-17 18:05:14.081+0000 INFO  [org.neo4j]: [northwind.db/neostore.labeltokenstore.db.names] brickCount=0 brickSize=0b mappedMem=0b (storeSize=38b)
+2014-12-17 18:05:14.082+0000 INFO  [org.neo4j]: [northwind.db/neostore.labeltokenstore.db] brickCount=0 brickSize=0b mappedMem=0b (storeSize=0b)
+2014-12-17 18:05:14.082+0000 INFO  [org.neo4j]: northwind.db/neostore.labeltokenstore.db.names hit=0 miss=0 switches=0 ooe=0
+2014-12-17 18:05:14.083+0000 INFO  [org.neo4j]: northwind.db/neostore.labeltokenstore.db hit=0 miss=0 switches=0 ooe=0
+2014-12-17 18:05:14.090+0000 INFO  [org.neo4j]: [northwind.db/neostore.relationshiptypestore.db.names] brickCount=0 brickSize=0b mappedMem=0b (storeSize=38b)
+2014-12-17 18:05:14.090+0000 INFO  [org.neo4j]: [northwind.db/neostore.relationshiptypestore.db] brickCount=0 brickSize=0b mappedMem=0b (storeSize=0b)
+2014-12-17 18:05:14.090+0000 INFO  [org.neo4j]: [northwind.db/neostore.labeltokenstore.db.names] brickCount=0 brickSize=0b mappedMem=0b (storeSize=38b)
+2014-12-17 18:05:14.090+0000 INFO  [org.neo4j]: [northwind.db/neostore.labeltokenstore.db] brickCount=0 brickSize=0b mappedMem=0b (storeSize=0b)
+2014-12-17 18:05:14.091+0000 INFO  [org.neo4j]: [northwind.db/neostore.propertystore.db.strings] brickCount=0 brickSize=1151232b mappedMem=1151336448b (storeSize=128b)
+2014-12-17 18:05:14.091+0000 INFO  [org.neo4j]: [northwind.db/neostore.propertystore.db.index.keys] brickCount=0 brickSize=0b mappedMem=0b (storeSize=38b)
+2014-12-17 18:05:14.091+0000 INFO  [org.neo4j]: [northwind.db/neostore.propertystore.db.index] brickCount=0 brickSize=0b mappedMem=0b (storeSize=0b)
+2014-12-17 18:05:14.092+0000 INFO  [org.neo4j]: [northwind.db/neostore.propertystore.db.arrays] brickCount=0 brickSize=1304320b mappedMem=1304428544b (storeSize=128b)
+2014-12-17 18:05:14.094+0000 INFO  [org.neo4j]: [northwind.db/neostore.propertystore.db] brickCount=0 brickSize=13537093b mappedMem=1353711616b (storeSize=0b)
+2014-12-17 18:05:14.097+0000 INFO  [org.neo4j]: [northwind.db/neostore.relationshipstore.db] brickCount=0 brickSize=16598936b mappedMem=1659895808b (storeSize=0b)
+2014-12-17 18:05:14.097+0000 INFO  [org.neo4j]: [northwind.db/neostore.nodestore.db.labels] brickCount=0 brickSize=0b mappedMem=0b (storeSize=68b)
+2014-12-17 18:05:14.105+0000 INFO  [org.neo4j]: [northwind.db/neostore.nodestore.db] brickCount=0 brickSize=3753900b mappedMem=375390208b (storeSize=0b)
+2014-12-17 18:05:14.106+0000 INFO  [org.neo4j]: [northwind.db/neostore.schemastore.db] brickCount=0 brickSize=0b mappedMem=0b (storeSize=64b)
+2014-12-17 18:05:14.108+0000 INFO  [org.neo4j]: [northwind.db/neostore.relationshipgroupstore.db] brickCount=0 brickSize=0b mappedMem=0b (storeSize=25b)
+2014-12-17 18:05:14.109+0000 INFO  [org.neo4j]: [northwind.db/neostore] brickCount=0 brickSize=0b mappedMem=0b (storeSize=0b)
+2014-12-17 18:05:14.121+0000 INFO  [org.neo4j]: northwind.db/neostore.relationshiptypestore.db.names hit=0 miss=0 switches=0 ooe=0
+2014-12-17 18:05:14.123+0000 INFO  [org.neo4j]: northwind.db/neostore.relationshiptypestore.db hit=0 miss=0 switches=0 ooe=0
+2014-12-17 18:05:14.123+0000 INFO  [org.neo4j]: northwind.db/neostore.labeltokenstore.db.names hit=0 miss=0 switches=0 ooe=0
+2014-12-17 18:05:14.124+0000 INFO  [org.neo4j]: northwind.db/neostore.labeltokenstore.db hit=0 miss=0 switches=0 ooe=0
+2014-12-17 18:05:14.125+0000 INFO  [org.neo4j]: northwind.db/neostore.propertystore.db.strings hit=0 miss=0 switches=0 ooe=0
+2014-12-17 18:05:14.126+0000 INFO  [org.neo4j]: northwind.db/neostore.propertystore.db.index.keys hit=0 miss=0 switches=0 ooe=0
+2014-12-17 18:05:14.128+0000 INFO  [org.neo4j]: northwind.db/neostore.propertystore.db.index hit=0 miss=0 switches=0 ooe=0
+2014-12-17 18:05:14.130+0000 INFO  [org.neo4j]: northwind.db/neostore.propertystore.db.arrays hit=0 miss=0 switches=0 ooe=0
+2014-12-17 18:05:14.130+0000 INFO  [org.neo4j]: northwind.db/neostore.propertystore.db hit=0 miss=0 switches=0 ooe=0
+2014-12-17 18:05:14.132+0000 INFO  [org.neo4j]: northwind.db/neostore.relationshipstore.db hit=0 miss=0 switches=0 ooe=0
+2014-12-17 18:05:14.133+0000 INFO  [org.neo4j]: northwind.db/neostore.nodestore.db.labels hit=0 miss=0 switches=0 ooe=0
+2014-12-17 18:05:14.134+0000 INFO  [org.neo4j]: northwind.db/neostore.nodestore.db hit=0 miss=0 switches=0 ooe=0
+2014-12-17 18:05:14.135+0000 INFO  [org.neo4j]: northwind.db/neostore.schemastore.db hit=0 miss=0 switches=0 ooe=0
+2014-12-17 18:05:14.136+0000 INFO  [org.neo4j]: northwind.db/neostore.relationshipgroupstore.db hit=0 miss=0 switches=0 ooe=0
+2014-12-17 18:05:14.136+0000 INFO  [org.neo4j]: northwind.db/neostore hit=0 miss=10 switches=0 ooe=0
+2014-12-17 18:05:14.146+0000 INFO  [org.neo4j]: [northwind.db/neostore.relationshiptypestore.db.names] brickCount=0 brickSize=0b mappedMem=0b (storeSize=38b)
+2014-12-17 18:05:14.147+0000 INFO  [org.neo4j]: [northwind.db/neostore.relationshiptypestore.db] brickCount=0 brickSize=0b mappedMem=0b (storeSize=0b)
+2014-12-17 18:05:14.147+0000 INFO  [org.neo4j]: [northwind.db/neostore.labeltokenstore.db.names] brickCount=0 brickSize=0b mappedMem=0b (storeSize=38b)
+2014-12-17 18:05:14.147+0000 INFO  [org.neo4j]: [northwind.db/neostore.labeltokenstore.db] brickCount=0 brickSize=0b mappedMem=0b (storeSize=0b)
+2014-12-17 18:05:14.148+0000 INFO  [org.neo4j]: [northwind.db/neostore.propertystore.db.strings] brickCount=0 brickSize=1151232b mappedMem=1151336448b (storeSize=128b)
+2014-12-17 18:05:14.148+0000 INFO  [org.neo4j]: [northwind.db/neostore.propertystore.db.index.keys] brickCount=0 brickSize=0b mappedMem=0b (storeSize=38b)
+2014-12-17 18:05:14.149+0000 INFO  [org.neo4j]: [northwind.db/neostore.propertystore.db.index] brickCount=0 brickSize=0b mappedMem=0b (storeSize=0b)
+2014-12-17 18:05:14.149+0000 INFO  [org.neo4j]: [northwind.db/neostore.propertystore.db.arrays] brickCount=0 brickSize=1304320b mappedMem=1304428544b (storeSize=128b)
+2014-12-17 18:05:14.150+0000 INFO  [org.neo4j]: [northwind.db/neostore.propertystore.db] brickCount=0 brickSize=13537093b mappedMem=1353711616b (storeSize=0b)
+2014-12-17 18:05:14.151+0000 INFO  [org.neo4j]: [northwind.db/neostore.relationshipstore.db] brickCount=0 brickSize=16598936b mappedMem=1659895808b (storeSize=0b)
+2014-12-17 18:05:14.151+0000 INFO  [org.neo4j]: [northwind.db/neostore.nodestore.db.labels] brickCount=0 brickSize=0b mappedMem=0b (storeSize=68b)
+2014-12-17 18:05:14.151+0000 INFO  [org.neo4j]: [northwind.db/neostore.nodestore.db] brickCount=0 brickSize=3753900b mappedMem=375390208b (storeSize=0b)
+2014-12-17 18:05:14.151+0000 INFO  [org.neo4j]: [northwind.db/neostore.schemastore.db] brickCount=0 brickSize=0b mappedMem=0b (storeSize=64b)
+2014-12-17 18:05:14.152+0000 INFO  [org.neo4j]: [northwind.db/neostore.relationshipgroupstore.db] brickCount=0 brickSize=0b mappedMem=0b (storeSize=25b)
+2014-12-17 18:05:14.155+0000 INFO  [org.neo4j]: [northwind.db/neostore] brickCount=0 brickSize=0b mappedMem=0b (storeSize=81b)
+2014-12-17 18:05:14.266+0000 INFO  [org.neo4j]: No lucene scan store index found, this might just be first use. Preparing to rebuild.
+2014-12-17 18:05:14.315+0000 INFO  [org.neo4j]: No lucene scan store index found, this might just be first use. Preparing to rebuild.
+2014-12-17 18:05:14.425+0000 INFO  [org.neo4j]: Opened logical log [northwind.db/nioneo_logical.log.1] version=0, lastTxId=1 (clean)
+2014-12-17 18:05:14.428+0000 INFO  [org.neo4j]: Rebuilding lucene scan store, this may take a while
+2014-12-17 18:05:14.430+0000 INFO  [org.neo4j]: Lucene scan store rebuilt (roughly -1 nodes)
+2014-12-17 18:05:14.434+0000 INFO  [org.neo4j]: TM new log: tm_tx_log.1
+2014-12-17 18:05:14.440+0000 INFO  [org.neo4j]: Kernel health set to OK
+2014-12-17 18:05:14.584+0000 INFO  [org.neo4j]: Opened logical log [northwind.db/index/lucene.log.1] version=0, lastTxId=1 (clean)
+2014-12-17 18:05:14.594+0000 INFO  [org.neo4j]: --- STARTED diagnostics for KernelDiagnostics:Versions START ---
+2014-12-17 18:05:14.595+0000 INFO  [org.neo4j]: Graph Database: org.neo4j.kernel.EmbeddedGraphDatabase StoreId{creationTime=1418839514037, randomId=-272873202702287831, storeVersion=14406081294923270, upgradeTime=1418839514037, upgradeId=-272873202702287831}
+2014-12-17 18:05:14.595+0000 INFO  [org.neo4j]: Kernel version: Neo4j - Graph Database Kernel (neo4j-kernel), version: 2.1.5
+2014-12-17 18:05:14.596+0000 INFO  [org.neo4j]: Neo4j component versions:
+2014-12-17 18:05:14.641+0000 INFO  [org.neo4j]:   Neo4j - Cypher Compiler 1.9 (neo4j-cypher-compiler-1.9), version: 2.0.3; revision: 2.0.3:2.0-maint:72/307c563c11b75fdc71cfa6df05daf9b08d6c37dc
+2014-12-17 18:05:14.641+0000 INFO  [org.neo4j]:   Neo4j - Cypher Commons (neo4j-cypher-commons), version: 2.1.5; revision: 2.1.5:2.1-maint:529/45c3cc04946c2b0e243e48c8252e40cb85931744
+2014-12-17 18:05:14.642+0000 INFO  [org.neo4j]:   neo4j-udc, version: 2.1.5; revision: 2.1.5:2.1-maint:529/45c3cc04946c2b0e243e48c8252e40cb85931744
+2014-12-17 18:05:14.642+0000 INFO  [org.neo4j]:   Neo4j Server API (server-api), version: 2.1.5; revision: 2.1.5:2.1-maint:529/45c3cc04946c2b0e243e48c8252e40cb85931744
+2014-12-17 18:05:14.642+0000 INFO  [org.neo4j]:   Neo4j - Lucene Index (neo4j-lucene-index), version: 2.1.5; revision: 2.1.5:2.1-maint:529/45c3cc04946c2b0e243e48c8252e40cb85931744
+2014-12-17 18:05:14.642+0000 INFO  [org.neo4j]:   Neo4j - Cypher Compiler 2.0 (neo4j-cypher-compiler-2.0), version: 2.0.3; revision: 2.0.3:2.0-maint:72/307c563c11b75fdc71cfa6df05daf9b08d6c37dc
+2014-12-17 18:05:14.642+0000 INFO  [org.neo4j]:   Neo4j - Graph Matching (neo4j-graph-matching), version: 2.1.5; revision: 2.1.5:2.1-maint:529/45c3cc04946c2b0e243e48c8252e40cb85931744
+2014-12-17 18:05:14.642+0000 INFO  [org.neo4j]:   Neo4j - Graph Database Kernel (neo4j-kernel), version: 2.1.5; revision: 2.1.5:2.1-maint:529/45c3cc04946c2b0e243e48c8252e40cb85931744
+2014-12-17 18:05:14.642+0000 INFO  [org.neo4j]:   Neo4j - JMX support (neo4j-jmx), version: 2.1.5; revision: 2.1.5:2.1-maint:529/45c3cc04946c2b0e243e48c8252e40cb85931744
+2014-12-17 18:05:14.642+0000 INFO  [org.neo4j]:   Neo4j - Cypher (neo4j-cypher), version: 2.1.5; revision: 2.1.5:2.1-maint:529/45c3cc04946c2b0e243e48c8252e40cb85931744
+2014-12-17 18:05:14.642+0000 INFO  [org.neo4j]:   Neo4j - Generic shell (neo4j-shell), version: 2.1.5; revision: 2.1.5:2.1-maint:529/45c3cc04946c2b0e243e48c8252e40cb85931744
+2014-12-17 18:05:14.642+0000 INFO  [org.neo4j]:   Neo4j - Graph Algorithms (neo4j-graph-algo), version: 2.1.5; revision: 2.1.5:2.1-maint:529/45c3cc04946c2b0e243e48c8252e40cb85931744
+2014-12-17 18:05:14.642+0000 INFO  [org.neo4j]: --- STARTED diagnostics for KernelDiagnostics:Versions END ---
+2014-12-17 18:05:14.644+0000 INFO  [org.neo4j]: --- STARTED diagnostics for NEO_STORE_VERSIONS START ---
+2014-12-17 18:05:14.644+0000 INFO  [org.neo4j]: Store versions:
+    Store versions:
+      NeoStore v0.A.3
+      SchemaStore v0.A.3
+      NodeStore v0.A.3
+      RelationshipStore v0.A.3
+      RelationshipTypeStore v0.A.3
+      LabelTokenStore v0.A.3
+      PropertyStore v0.A.3
+      PropertyIndexStore v0.A.3
+      StringPropertyStore v0.A.3
+      ArrayPropertyStore v0.A.3
+      RelationshipGroupStore v0.A.3
+2014-12-17 18:05:14.644+0000 INFO  [org.neo4j]: --- STARTED diagnostics for NEO_STORE_VERSIONS END ---
+2014-12-17 18:05:14.644+0000 INFO  [org.neo4j]: --- STARTED diagnostics for NEO_STORE_ID_USAGE START ---
+2014-12-17 18:05:14.644+0000 INFO  [org.neo4j]: Id usage:
+    Id usage:
+      SchemaStore: used=1 high=0
+      NodeStore: used=0 high=-1
+      RelationshipStore: used=0 high=-1
+      RelationshipTypeStore: used=0 high=-1
+      LabelTokenStore: used=0 high=-1
+      PropertyStore: used=0 high=-1
+      PropertyIndexStore: used=0 high=-1
+      StringPropertyStore: used=1 high=0
+      ArrayPropertyStore: used=1 high=0
+      RelationshipGroupStore: used=1 high=0
+2014-12-17 18:05:14.645+0000 INFO  [org.neo4j]: --- STARTED diagnostics for NEO_STORE_ID_USAGE END ---
+2014-12-17 18:05:14.645+0000 INFO  [org.neo4j]: --- STARTED diagnostics for PERSISTENCE_WINDOW_POOL_STATS START ---
+2014-12-17 18:05:14.646+0000 INFO  [org.neo4j]: --- STARTED diagnostics for PERSISTENCE_WINDOW_POOL_STATS END ---
+2014-12-17 18:05:14.646+0000 INFO  [org.neo4j]: --- STARTED diagnostics for KernelDiagnostics:StoreFiles START ---
+2014-12-17 18:05:14.648+0000 INFO  [org.neo4j]: Disk space on partition (Total / Free / Free %): 999324516352 / 333195911168 / 33
+Storage files: (filename : modification date - size)
+      active_tx_log: 2014-12-17T19:05:14+0100 - 11,00 B
+      index:
+        lucene-store.db: 2014-12-17T19:05:14+0100 - 40,00 B
+        lucene.log.1: 2014-12-17T19:05:14+0100 - 16,00 B
+        lucene.log.active: 2014-12-17T19:05:14+0100 - 4,00 B
+      - Total: 2014-12-17T19:05:14+0100 - 60,00 B
+      lock: 2014-12-17T19:05:14+0100 - 0,00 B
+      messages.log: 2014-12-17T19:05:14+0100 - 21,30 kB
+      neostore: 2014-12-17T19:05:14+0100 - 81,00 B
+      neostore.id: 2014-12-17T19:05:14+0100 - 9,00 B
+      neostore.labeltokenstore.db: 2014-12-17T19:05:14+0100 - 0,00 B
+      neostore.labeltokenstore.db.id: 2014-12-17T19:05:14+0100 - 9,00 B
+      neostore.labeltokenstore.db.names: 2014-12-17T19:05:14+0100 - 38,00 B
+      neostore.labeltokenstore.db.names.id: 2014-12-17T19:05:14+0100 - 9,00 B
+      neostore.nodestore.db: 2014-12-17T19:05:14+0100 - 0,00 B
+      neostore.nodestore.db.id: 2014-12-17T19:05:14+0100 - 9,00 B
+      neostore.nodestore.db.labels: 2014-12-17T19:05:14+0100 - 68,00 B
+      neostore.nodestore.db.labels.id: 2014-12-17T19:05:14+0100 - 9,00 B
+      neostore.propertystore.db: 2014-12-17T19:05:14+0100 - 0,00 B
+      neostore.propertystore.db.arrays: 2014-12-17T19:05:14+0100 - 128,00 B
+      neostore.propertystore.db.arrays.id: 2014-12-17T19:05:14+0100 - 9,00 B
+      neostore.propertystore.db.id: 2014-12-17T19:05:14+0100 - 9,00 B
+      neostore.propertystore.db.index: 2014-12-17T19:05:14+0100 - 0,00 B
+      neostore.propertystore.db.index.id: 2014-12-17T19:05:14+0100 - 9,00 B
+      neostore.propertystore.db.index.keys: 2014-12-17T19:05:14+0100 - 38,00 B
+      neostore.propertystore.db.index.keys.id: 2014-12-17T19:05:14+0100 - 9,00 B
+      neostore.propertystore.db.strings: 2014-12-17T19:05:14+0100 - 128,00 B
+      neostore.propertystore.db.strings.id: 2014-12-17T19:05:14+0100 - 9,00 B
+      neostore.relationshipgroupstore.db: 2014-12-17T19:05:14+0100 - 25,00 B
+      neostore.relationshipgroupstore.db.id: 2014-12-17T19:05:14+0100 - 9,00 B
+      neostore.relationshipstore.db: 2014-12-17T19:05:14+0100 - 0,00 B
+      neostore.relationshipstore.db.id: 2014-12-17T19:05:14+0100 - 9,00 B
+      neostore.relationshiptypestore.db: 2014-12-17T19:05:14+0100 - 0,00 B
+      neostore.relationshiptypestore.db.id: 2014-12-17T19:05:14+0100 - 9,00 B
+      neostore.relationshiptypestore.db.names: 2014-12-17T19:05:14+0100 - 38,00 B
+      neostore.relationshiptypestore.db.names.id: 2014-12-17T19:05:14+0100 - 9,00 B
+      neostore.schemastore.db: 2014-12-17T19:05:14+0100 - 64,00 B
+      neostore.schemastore.db.id: 2014-12-17T19:05:14+0100 - 9,00 B
+      nioneo_logical.log.1: 2014-12-17T19:05:14+0100 - 16,00 B
+      nioneo_logical.log.active: 2014-12-17T19:05:14+0100 - 4,00 B
+      schema:
+        label:
+          lucene:
+            write.lock: 2014-12-17T19:05:14+0100 - 0,00 B
+          - Total: 2014-12-17T19:05:14+0100 - 0,00 B
+        - Total: 2014-12-17T19:05:14+0100 - 0,00 B
+      - Total: 2014-12-17T19:05:14+0100 - 0,00 B
+      store_lock: 2014-12-17T19:05:14+0100 - 0,00 B
+      tm_tx_log.1: 2014-12-17T19:05:14+0100 - 0,00 B
+2014-12-17 18:05:14.661+0000 INFO  [org.neo4j]: --- STARTED diagnostics for KernelDiagnostics:StoreFiles END ---
+2014-12-17 18:05:14.713+0000 INFO  [org.neo4j]: Database is now ready
+2014-12-17 18:05:16.677+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 210ms.
+2014-12-17 18:05:16.944+0000 INFO  [org.neo4j]: Index population started: [:Product(productID) [provider: {key=lucene, version=1.0}]]
+2014-12-17 18:05:16.953+0000 INFO  [org.neo4j]: Index population started: [:Product(productName) [provider: {key=lucene, version=1.0}]]
+2014-12-17 18:05:16.965+0000 INFO  [org.neo4j]: Index population completed. Index is now online: [:Product(productID) [provider: {key=lucene, version=1.0}]]
+2014-12-17 18:05:16.965+0000 INFO  [org.neo4j]: Index population completed. Index is now online: [:Product(productName) [provider: {key=lucene, version=1.0}]]
+2014-12-17 18:05:17.064+0000 INFO  [org.neo4j]: Index population started: [:Category(categoryID) [provider: {key=lucene, version=1.0}]]
+2014-12-17 18:05:17.074+0000 INFO  [org.neo4j]: Index population completed. Index is now online: [:Category(categoryID) [provider: {key=lucene, version=1.0}]]
+2014-12-17 18:05:17.100+0000 INFO  [org.neo4j]: Index population started: [:Employee(employeeID) [provider: {key=lucene, version=1.0}]]
+2014-12-17 18:05:17.105+0000 INFO  [org.neo4j]: Index population completed. Index is now online: [:Employee(employeeID) [provider: {key=lucene, version=1.0}]]
+2014-12-17 18:05:17.166+0000 INFO  [org.neo4j]: Index population started: [:Supplier(supplierID) [provider: {key=lucene, version=1.0}]]
+2014-12-17 18:05:17.175+0000 INFO  [org.neo4j]: Index population completed. Index is now online: [:Supplier(supplierID) [provider: {key=lucene, version=1.0}]]
+2014-12-17 18:05:17.185+0000 INFO  [org.neo4j]: Index population started: [:Customer(customerID) [provider: {key=lucene, version=1.0}]]
+2014-12-17 18:05:17.190+0000 INFO  [org.neo4j]: Index population completed. Index is now online: [:Customer(customerID) [provider: {key=lucene, version=1.0}]]
+2014-12-17 18:05:17.197+0000 INFO  [org.neo4j]: Index population started: [:Customer(customerName) [provider: {key=lucene, version=1.0}]]
+2014-12-17 18:05:17.205+0000 INFO  [org.neo4j]: Index population completed. Index is now online: [:Customer(customerName) [provider: {key=lucene, version=1.0}]]
+2014-12-17 18:05:25.614+0000 INFO  [org.neo4j]: Index population started: [:Order(orderID) [provider: {key=lucene, version=1.0}]]
+2014-12-17 18:05:25.723+0000 INFO  [org.neo4j]: Index population completed. Index is now online: [:Order(orderID) [provider: {key=lucene, version=1.0}]]
+2014-12-17 18:05:29.188+0000 INFO  [org.neo4j]: Shutdown started
+2014-12-17 18:05:29.188+0000 INFO  [org.neo4j]: Database is now unavailable
+2014-12-17 18:05:29.197+0000 INFO  [org.neo4j]: Closed log northwind.db/index/lucene.log
+2014-12-17 18:05:29.199+0000 INFO  [org.neo4j]: TM shutting down
+2014-12-17 18:05:29.224+0000 INFO  [org.neo4j]: Closed log northwind.db/nioneo_logical.log
+2014-12-17 18:05:29.243+0000 INFO  [org.neo4j]: northwind.db/neostore.relationshiptypestore.db.names hit=0 miss=6 switches=0 ooe=0
+2014-12-17 18:05:29.244+0000 INFO  [org.neo4j]: northwind.db/neostore.relationshiptypestore.db hit=0 miss=6 switches=0 ooe=0
+2014-12-17 18:05:29.245+0000 INFO  [org.neo4j]: northwind.db/neostore.labeltokenstore.db.names hit=0 miss=6 switches=0 ooe=0
+2014-12-17 18:05:29.245+0000 INFO  [org.neo4j]: northwind.db/neostore.labeltokenstore.db hit=0 miss=6 switches=0 ooe=0
+2014-12-17 18:05:29.246+0000 INFO  [org.neo4j]: northwind.db/neostore.propertystore.db.strings hit=4 miss=0 switches=0 ooe=0
+2014-12-17 18:05:29.247+0000 INFO  [org.neo4j]: northwind.db/neostore.propertystore.db.index.keys hit=0 miss=19 switches=0 ooe=0
+2014-12-17 18:05:29.247+0000 INFO  [org.neo4j]: northwind.db/neostore.propertystore.db.index hit=0 miss=19 switches=0 ooe=0
+2014-12-17 18:05:29.248+0000 INFO  [org.neo4j]: northwind.db/neostore.propertystore.db.arrays hit=0 miss=0 switches=0 ooe=0
+2014-12-17 18:05:29.249+0000 INFO  [org.neo4j]: northwind.db/neostore.propertystore.db hit=8441 miss=0 switches=0 ooe=0
+2014-12-17 18:05:29.250+0000 INFO  [org.neo4j]: northwind.db/neostore.relationshipstore.db hit=10113 miss=0 switches=0 ooe=0
+2014-12-17 18:05:29.250+0000 INFO  [org.neo4j]: northwind.db/neostore.nodestore.db.labels hit=0 miss=0 switches=0 ooe=0
+2014-12-17 18:05:29.251+0000 INFO  [org.neo4j]: northwind.db/neostore.nodestore.db hit=8133 miss=0 switches=0 ooe=0
+2014-12-17 18:05:29.252+0000 INFO  [org.neo4j]: northwind.db/neostore.schemastore.db hit=0 miss=38 switches=0 ooe=0
+2014-12-17 18:05:29.252+0000 INFO  [org.neo4j]: northwind.db/neostore.relationshipgroupstore.db hit=0 miss=96 switches=0 ooe=0
+2014-12-17 18:05:29.253+0000 INFO  [org.neo4j]: northwind.db/neostore hit=0 miss=80 switches=0 ooe=0
+2014-12-17 18:05:29.254+0000 INFO  [org.neo4j]: NeoStore closed
+2014-12-17 18:05:29.255+0000 INFO  [org.neo4j]: --- STOPPING diagnostics START ---
+2014-12-17 18:05:29.255+0000 INFO  [org.neo4j]: --- STOPPING diagnostics END ---
+2014-12-17 18:05:33.064+0000 INFO  [org.neo4j]: You are using an unsupported version of the Java runtime. Please use Oracle(R) Java(TM) Runtime Environment 7 or OpenJDK(TM) 7.
+2014-12-17 18:05:33.115+0000 INFO  [org.neo4j]: No locking implementation specified, defaulting to 'community'
+2014-12-17 18:05:33.216+0000 INFO  [org.neo4j]: --- INITIALIZED diagnostics START ---
+2014-12-17 18:05:33.218+0000 INFO  [org.neo4j]: Neo4j Kernel properties:
+    neostore.propertystore.db.strings.mapped_memory=1098M
+    ephemeral=false
+    neostore.nodestore.db.mapped_memory=358M
+    store_dir=northwind.db
+    read_only=false
+    neostore.propertystore.db.arrays.mapped_memory=1244M
+    neostore.propertystore.db.mapped_memory=1291M
+    neostore.relationshipstore.db.mapped_memory=1583M
+2014-12-17 18:05:33.219+0000 INFO  [org.neo4j]: Diagnostics providers:
+    org.neo4j.kernel.configuration.Config
+    org.neo4j.kernel.info.DiagnosticsManager
+    SYSTEM_MEMORY
+    JAVA_MEMORY
+    OPERATING_SYSTEM
+    JAVA_VIRTUAL_MACHINE
+    CLASSPATH
+    LIBRARY_PATH
+    SYSTEM_PROPERTIES
+    NETWORK
+2014-12-17 18:05:33.220+0000 INFO  [org.neo4j]: System memory information:
+    Total Physical memory: 16,00 GB
+    Free Physical memory: 948,95 MB
+    Committed virtual memory: 7,82 GB
+    Total swap space: 6,00 GB
+    Free swap space: 1,20 GB
+2014-12-17 18:05:33.224+0000 INFO  [org.neo4j]: JVM memory information:
+    Free  memory: 3,81 GB
+    Total memory: 3,88 GB
+    Max   memory: 3,88 GB
+    Garbage Collector: PS Scavenge: [PS Eden Space, PS Survivor Space]
+    Garbage Collector: PS MarkSweep: [PS Eden Space, PS Survivor Space, PS Old Gen]
+    Memory Pool: Code Cache (Non-heap memory): committed=2,44 MB, used=2,22 MB, max=240,00 MB, threshold=0,00 B
+    Memory Pool: Metaspace (Non-heap memory): committed=6,63 MB, used=6,30 MB, max=-1,00 B, threshold=0,00 B
+    Memory Pool: Compressed Class Space (Non-heap memory): committed=896,00 kB, used=836,07 kB, max=1,00 GB, threshold=0,00 B
+    Memory Pool: PS Eden Space (Heap memory): committed=768,00 MB, used=61,44 MB, max=768,00 MB, threshold=?
+    Memory Pool: PS Survivor Space (Heap memory): committed=128,00 MB, used=0,00 B, max=128,00 MB, threshold=?
+    Memory Pool: PS Old Gen (Heap memory): committed=3,00 GB, used=0,00 B, max=3,00 GB, threshold=0,00 B
+2014-12-17 18:05:33.231+0000 INFO  [org.neo4j]: Operating system information:
+    Operating System: Mac OS X; version: 10.10.1; arch: x86_64; cpus: 4
+    Max number of file descriptors: 10240
+    Number of open file descriptors: 32
+    Process id: 65739@wuqour.local
+    Byte order: LITTLE_ENDIAN
+    Local timezone: Europe/Berlin
+2014-12-17 18:05:33.239+0000 INFO  [org.neo4j]: JVM information:
+    VM Name: Java HotSpot(TM) 64-Bit Server VM
+    VM Vendor: Oracle Corporation
+    VM Version: 25.0-b70
+    JIT compiler: HotSpot 64-Bit Tiered Compilers
+    VM Arguments: [-Xmx4G, -Xms4G, -Xmn1G, -Dapp.name=neo4j-shell, -Dapp.pid=65739, -Dapp.repo=/Users/mh/Downloads/neo4j-community-2.1.5/lib, -Dbasedir=/Users/mh/Downloads/neo4j-community-2.1.5, -Dfile.encoding=UTF-8]
+2014-12-17 18:05:33.240+0000 INFO  [org.neo4j]: Java classpath:
+     [classpath + loader.0] file:/Users/mh/Downloads/neo4j-community-2.1.5/lib/neo4j-cypher-commons-2.1.5.jar
+     [classpath + loader.0] file:/Users/mh/Downloads/neo4j-community-2.1.5/lib/neo4j-lucene-index-2.1.5.jar
+     [bootstrap] /Library/Java/JavaVirtualMachines/jdk1.8.0.jdk/Contents/Home/jre/classes
+     [classpath + loader.0] file:/Users/mh/Downloads/neo4j-community-2.1.5/lib/neo4j-graph-matching-2.1.5.jar
+     [bootstrap] /Library/Java/JavaVirtualMachines/jdk1.8.0.jdk/Contents/Home/jre/lib/charsets.jar
+     [classpath + loader.0] file:/Users/mh/Downloads/neo4j-community-2.1.5/lib/neo4j-shell-2.1.5.jar
+     [classpath + loader.0] file:/Users/mh/Downloads/neo4j-community-2.1.5/lib/parboiled-core-1.1.6.jar
+     [classpath + loader.0] file:/Users/mh/Downloads/neo4j-community-2.1.5/lib/opencsv-2.0.jar
+     [bootstrap] /Library/Java/JavaVirtualMachines/jdk1.8.0.jdk/Contents/Home/jre/lib/rt.jar
+     [bootstrap] /Library/Java/JavaVirtualMachines/jdk1.8.0.jdk/Contents/Home/jre/lib/jsse.jar
+     [loader.1] file:/Library/Java/JavaVirtualMachines/jdk1.8.0.jdk/Contents/Home/jre/lib/ext/sunec.jar
+     [bootstrap] /Library/Java/JavaVirtualMachines/jdk1.8.0.jdk/Contents/Home/jre/lib/jce.jar
+     [loader.1] file:/Library/Java/JavaVirtualMachines/jdk1.8.0.jdk/Contents/Home/jre/lib/ext/localedata.jar
+     [loader.1] file:/Library/Java/JavaVirtualMachines/jdk1.8.0.jdk/Contents/Home/jre/lib/ext/zipfs.jar
+     [bootstrap] /Library/Java/JavaVirtualMachines/jdk1.8.0.jdk/Contents/Home/jre/lib/resources.jar
+     [classpath + loader.0] file:/Users/mh/Downloads/neo4j-community-2.1.5/lib/neo4j-primitive-collections-2.1.5.jar
+     [classpath + loader.0] file:/Users/mh/Downloads/neo4j-community-2.1.5/lib/geronimo-jta_1.1_spec-1.1.1.jar
+     [classpath + loader.0] file:/Users/mh/Downloads/neo4j-community-2.1.5/lib/neo4j-cypher-compiler-1.9-2.0.3.jar
+     [bootstrap] /Library/Java/JavaVirtualMachines/jdk1.8.0.jdk/Contents/Home/jre/lib/jfr.jar
+     [classpath + loader.0] file:/Users/mh/Downloads/neo4j-community-2.1.5/lib/neo4j-cypher-2.1.5.jar
+     [loader.1] file:/Library/Java/JavaVirtualMachines/jdk1.8.0.jdk/Contents/Home/jre/lib/ext/cldrdata.jar
+     [loader.1] file:/Library/Java/JavaVirtualMachines/jdk1.8.0.jdk/Contents/Home/jre/lib/ext/sunpkcs11.jar
+     [classpath + loader.0] file:/Users/mh/Downloads/neo4j-community-2.1.5/lib/server-api-2.1.5.jar
+     [loader.1] file:/Library/Java/JavaVirtualMachines/jdk1.8.0.jdk/Contents/Home/jre/lib/ext/sunjce_provider.jar
+     [classpath + loader.0] file:/Users/mh/Downloads/neo4j-community-2.1.5/lib/neo4j-udc-2.1.5.jar
+     [classpath + loader.0] file:/Users/mh/Downloads/neo4j-community-2.1.5/lib/neo4j-jmx-2.1.5.jar
+     [classpath + loader.0] file:/Users/mh/Downloads/neo4j-community-2.1.5/lib/neo4j-cypher-compiler-2.0-2.0.3.jar
+     [bootstrap] /Library/Java/JavaVirtualMachines/jdk1.8.0.jdk/Contents/Home/jre/lib/sunrsasign.jar
+     [classpath + loader.0] file:/Users/mh/Downloads/neo4j-community-2.1.5/lib/neo4j-cypher-compiler-2.1-2.1.5.jar
+     [classpath + loader.0] file:/Users/mh/Downloads/neo4j-community-2.1.5/lib/concurrentlinkedhashmap-lru-1.3.1.jar
+     [classpath + loader.0] file:/Users/mh/Downloads/neo4j-community-2.1.5/lib/org.apache.servicemix.bundles.jline-0.9.94_1.jar
+     [classpath + loader.0] file:/Users/mh/Downloads/neo4j-community-2.1.5/lib/parboiled-scala_2.10-1.1.6.jar
+     [loader.1] file:/Library/Java/JavaVirtualMachines/jdk1.8.0.jdk/Contents/Home/jre/lib/ext/dnsns.jar
+     [classpath + loader.0] file:/Users/mh/Downloads/neo4j-community-2.1.5/lib/scala-library-2.10.4.jar
+     [classpath + loader.0] file:/Users/mh/Downloads/neo4j-community-2.1.5/lib/lucene-core-3.6.2.jar
+     [loader.1] file:/Library/Java/JavaVirtualMachines/jdk1.8.0.jdk/Contents/Home/jre/lib/ext/jfxrt.jar
+     [classpath + loader.0] file:/Users/mh/Downloads/neo4j-community-2.1.5/lib/neo4j-graph-algo-2.1.5.jar
+     [classpath + loader.0] file:/Users/mh/Downloads/neo4j-community-2.1.5/lib/neo4j-kernel-2.1.5.jar
+     [classpath + loader.0] file:/Users/mh/Downloads/neo4j-community-2.1.5/lib/groovy-all-2.3.7.jar
+     [classpath + loader.0] file:/Users/mh/java/neo/developer-resources/working-with-data/guide-importing-data-and-etl/northwind/
+     [loader.1] file:/Library/Java/JavaVirtualMachines/jdk1.8.0.jdk/Contents/Home/jre/lib/ext/nashorn.jar
+     [loader.1] file:/System/Library/Java/Extensions/MRJToolkit.jar
+2014-12-17 18:05:33.243+0000 INFO  [org.neo4j]: Library path:
+    /Users/mh/Library/Java/Extensions
+    /Library/Java/Extensions
+    /Network/Library/Java/Extensions
+    /System/Library/Java/Extensions
+    /usr/lib/java
+    /Users/mh/java/neo/developer-resources/working-with-data/guide-importing-data-and-etl/northwind
+2014-12-17 18:05:33.244+0000 INFO  [org.neo4j]: System.properties:
+    sun.boot.library.path = /Library/Java/JavaVirtualMachines/jdk1.8.0.jdk/Contents/Home/jre/lib
+    gopherProxySet = false
+    path.separator = :
+    file.encoding.pkg = sun.io
+    user.country = DE
+    sun.java.launcher = SUN_STANDARD
+    sun.os.patch.level = unknown
+    user.dir = /Users/mh/java/neo/developer-resources/working-with-data/guide-importing-data-and-etl/northwind
+    basedir = /Users/mh/Downloads/neo4j-community-2.1.5
+    app.name = neo4j-shell
+    sun.jnu.encoding = UTF-8
+    app.repo = /Users/mh/Downloads/neo4j-community-2.1.5/lib
+    sun.management.compiler = HotSpot 64-Bit Tiered Compilers
+    user.home = /Users/mh
+    user.timezone = Europe/Berlin
+    file.encoding = UTF-8
+    user.name = mh
+    sun.java.command = org.neo4j.shell.StartClient -path northwind.db
+    sun.arch.data.model = 64
+    user.language = de
+    awt.toolkit = sun.lwawt.macosx.LWCToolkit
+    file.separator = /
+    sun.io.unicode.encoding = UnicodeBig
+    sun.cpu.endian = little
+    app.pid = 65739
+    sun.cpu.isalist = 
+2014-12-17 18:05:33.245+0000 INFO  [org.neo4j]: Network information:
+    Interface utun0:
+        address: fd6c:1d93:fc9:9f19:4c53:117e:a902:8325
+        address: fe80:0:0:0:4c53:117e:a902:8325%utun0
+    Interface lo0:
+        address: fe80:0:0:0:0:0:0:1%lo0
+        address: 0:0:0:0:0:0:0:1
+        address: 127.0.0.1
+2014-12-17 18:05:33.249+0000 INFO  [org.neo4j]: --- INITIALIZED diagnostics END ---
+2014-12-17 18:05:33.751+0000 INFO  [org.neo4j]: [northwind.db/neostore.relationshiptypestore.db.names] brickCount=0 brickSize=0b mappedMem=0b (storeSize=266b)
+2014-12-17 18:05:33.752+0000 INFO  [org.neo4j]: [northwind.db/neostore.relationshiptypestore.db] brickCount=0 brickSize=0b mappedMem=0b (storeSize=30b)
+2014-12-17 18:05:33.752+0000 INFO  [org.neo4j]: [northwind.db/neostore.labeltokenstore.db.names] brickCount=0 brickSize=0b mappedMem=0b (storeSize=266b)
+2014-12-17 18:05:33.752+0000 INFO  [org.neo4j]: [northwind.db/neostore.labeltokenstore.db] brickCount=0 brickSize=0b mappedMem=0b (storeSize=30b)
+2014-12-17 18:05:33.753+0000 INFO  [org.neo4j]: [northwind.db/neostore.propertystore.db.strings] brickCount=0 brickSize=1151232b mappedMem=1151336448b (storeSize=640b)
+2014-12-17 18:05:33.753+0000 INFO  [org.neo4j]: [northwind.db/neostore.propertystore.db.index.keys] brickCount=0 brickSize=0b mappedMem=0b (storeSize=760b)
+2014-12-17 18:05:33.754+0000 INFO  [org.neo4j]: [northwind.db/neostore.propertystore.db.index] brickCount=0 brickSize=0b mappedMem=0b (storeSize=171b)
+2014-12-17 18:05:33.755+0000 INFO  [org.neo4j]: [northwind.db/neostore.propertystore.db.arrays] brickCount=0 brickSize=1304320b mappedMem=1304428544b (storeSize=128b)
+2014-12-17 18:05:33.762+0000 INFO  [org.neo4j]: [northwind.db/neostore.propertystore.db] brickCount=0 brickSize=1353697b mappedMem=1353711616b (storeSize=145263b)
+2014-12-17 18:05:33.766+0000 INFO  [org.neo4j]: [northwind.db/neostore.relationshipstore.db] brickCount=0 brickSize=1659880b mappedMem=1659895808b (storeSize=135218b)
+2014-12-17 18:05:33.766+0000 INFO  [org.neo4j]: [northwind.db/neostore.nodestore.db.labels] brickCount=0 brickSize=0b mappedMem=0b (storeSize=68b)
+2014-12-17 18:05:33.769+0000 INFO  [org.neo4j]: [northwind.db/neostore.nodestore.db] brickCount=0 brickSize=375390b mappedMem=375390208b (storeSize=15660b)
+2014-12-17 18:05:33.771+0000 INFO  [org.neo4j]: [northwind.db/neostore.schemastore.db] brickCount=0 brickSize=0b mappedMem=0b (storeSize=640b)
+2014-12-17 18:05:33.772+0000 INFO  [org.neo4j]: [northwind.db/neostore.relationshipgroupstore.db] brickCount=0 brickSize=0b mappedMem=0b (storeSize=750b)
+2014-12-17 18:05:33.773+0000 INFO  [org.neo4j]: [northwind.db/neostore] brickCount=0 brickSize=0b mappedMem=0b (storeSize=81b)
+2014-12-17 18:05:34.118+0000 INFO  [org.neo4j]: IndexingService.initIndexes: index on :label[0](property[0]) is ONLINE
+2014-12-17 18:05:34.131+0000 INFO  [org.neo4j]: IndexingService.initIndexes: index on :label[0](property[1]) is ONLINE
+2014-12-17 18:05:34.137+0000 INFO  [org.neo4j]: IndexingService.initIndexes: index on :label[1](property[2]) is ONLINE
+2014-12-17 18:05:34.141+0000 INFO  [org.neo4j]: IndexingService.initIndexes: index on :label[2](property[3]) is ONLINE
+2014-12-17 18:05:34.146+0000 INFO  [org.neo4j]: IndexingService.initIndexes: index on :label[3](property[4]) is ONLINE
+2014-12-17 18:05:34.153+0000 INFO  [org.neo4j]: IndexingService.initIndexes: index on :label[4](property[5]) is ONLINE
+2014-12-17 18:05:34.157+0000 INFO  [org.neo4j]: IndexingService.initIndexes: index on :label[4](property[6]) is ONLINE
+2014-12-17 18:05:34.163+0000 INFO  [org.neo4j]: IndexingService.initIndexes: index on :label[5](property[16]) is ONLINE
+2014-12-17 18:05:34.174+0000 INFO  [org.neo4j]: Opened logical log [northwind.db/nioneo_logical.log.1] version=1, lastTxId=59 (clean)
+2014-12-17 18:05:34.187+0000 INFO  [org.neo4j]: TM opening log: northwind.db/tm_tx_log.1
+2014-12-17 18:05:34.202+0000 INFO  [org.neo4j]: IndexingService.start: index on :label[0](property[0]) is ONLINE
+2014-12-17 18:05:34.202+0000 INFO  [org.neo4j]: IndexingService.start: index on :label[0](property[1]) is ONLINE
+2014-12-17 18:05:34.203+0000 INFO  [org.neo4j]: IndexingService.start: index on :label[1](property[2]) is ONLINE
+2014-12-17 18:05:34.203+0000 INFO  [org.neo4j]: IndexingService.start: index on :label[2](property[3]) is ONLINE
+2014-12-17 18:05:34.204+0000 INFO  [org.neo4j]: IndexingService.start: index on :label[3](property[4]) is ONLINE
+2014-12-17 18:05:34.205+0000 INFO  [org.neo4j]: IndexingService.start: index on :label[4](property[5]) is ONLINE
+2014-12-17 18:05:34.205+0000 INFO  [org.neo4j]: IndexingService.start: index on :label[4](property[6]) is ONLINE
+2014-12-17 18:05:34.207+0000 INFO  [org.neo4j]: IndexingService.start: index on :label[5](property[16]) is ONLINE
+2014-12-17 18:05:34.208+0000 INFO  [org.neo4j]: Kernel health set to OK
+2014-12-17 18:05:34.239+0000 INFO  [org.neo4j]: Opened logical log [northwind.db/index/lucene.log.1] version=1, lastTxId=1 (clean)
+2014-12-17 18:05:34.253+0000 INFO  [org.neo4j]: --- STARTED diagnostics for KernelDiagnostics:Versions START ---
+2014-12-17 18:05:34.254+0000 INFO  [org.neo4j]: Graph Database: org.neo4j.kernel.EmbeddedGraphDatabase StoreId{creationTime=1418839514037, randomId=-272873202702287831, storeVersion=14406081294923270, upgradeTime=1418839514037, upgradeId=-272873202702287831}
+2014-12-17 18:05:34.254+0000 INFO  [org.neo4j]: Kernel version: Neo4j - Graph Database Kernel (neo4j-kernel), version: 2.1.5
+2014-12-17 18:05:34.254+0000 INFO  [org.neo4j]: Neo4j component versions:
+2014-12-17 18:05:34.258+0000 INFO  [org.neo4j]:   Neo4j - Cypher Compiler 1.9 (neo4j-cypher-compiler-1.9), version: 2.0.3; revision: 2.0.3:2.0-maint:72/307c563c11b75fdc71cfa6df05daf9b08d6c37dc
+2014-12-17 18:05:34.258+0000 INFO  [org.neo4j]:   Neo4j - Cypher Commons (neo4j-cypher-commons), version: 2.1.5; revision: 2.1.5:2.1-maint:529/45c3cc04946c2b0e243e48c8252e40cb85931744
+2014-12-17 18:05:34.258+0000 INFO  [org.neo4j]:   neo4j-udc, version: 2.1.5; revision: 2.1.5:2.1-maint:529/45c3cc04946c2b0e243e48c8252e40cb85931744
+2014-12-17 18:05:34.258+0000 INFO  [org.neo4j]:   Neo4j Server API (server-api), version: 2.1.5; revision: 2.1.5:2.1-maint:529/45c3cc04946c2b0e243e48c8252e40cb85931744
+2014-12-17 18:05:34.258+0000 INFO  [org.neo4j]:   Neo4j - Lucene Index (neo4j-lucene-index), version: 2.1.5; revision: 2.1.5:2.1-maint:529/45c3cc04946c2b0e243e48c8252e40cb85931744
+2014-12-17 18:05:34.258+0000 INFO  [org.neo4j]:   Neo4j - Cypher Compiler 2.0 (neo4j-cypher-compiler-2.0), version: 2.0.3; revision: 2.0.3:2.0-maint:72/307c563c11b75fdc71cfa6df05daf9b08d6c37dc
+2014-12-17 18:05:34.258+0000 INFO  [org.neo4j]:   Neo4j - Graph Matching (neo4j-graph-matching), version: 2.1.5; revision: 2.1.5:2.1-maint:529/45c3cc04946c2b0e243e48c8252e40cb85931744
+2014-12-17 18:05:34.258+0000 INFO  [org.neo4j]:   Neo4j - Graph Database Kernel (neo4j-kernel), version: 2.1.5; revision: 2.1.5:2.1-maint:529/45c3cc04946c2b0e243e48c8252e40cb85931744
+2014-12-17 18:05:34.258+0000 INFO  [org.neo4j]:   Neo4j - JMX support (neo4j-jmx), version: 2.1.5; revision: 2.1.5:2.1-maint:529/45c3cc04946c2b0e243e48c8252e40cb85931744
+2014-12-17 18:05:34.259+0000 INFO  [org.neo4j]:   Neo4j - Cypher (neo4j-cypher), version: 2.1.5; revision: 2.1.5:2.1-maint:529/45c3cc04946c2b0e243e48c8252e40cb85931744
+2014-12-17 18:05:34.259+0000 INFO  [org.neo4j]:   Neo4j - Generic shell (neo4j-shell), version: 2.1.5; revision: 2.1.5:2.1-maint:529/45c3cc04946c2b0e243e48c8252e40cb85931744
+2014-12-17 18:05:34.259+0000 INFO  [org.neo4j]:   Neo4j - Graph Algorithms (neo4j-graph-algo), version: 2.1.5; revision: 2.1.5:2.1-maint:529/45c3cc04946c2b0e243e48c8252e40cb85931744
+2014-12-17 18:05:34.259+0000 INFO  [org.neo4j]: --- STARTED diagnostics for KernelDiagnostics:Versions END ---
+2014-12-17 18:05:34.262+0000 INFO  [org.neo4j]: --- STARTED diagnostics for NEO_STORE_VERSIONS START ---
+2014-12-17 18:05:34.263+0000 INFO  [org.neo4j]: Store versions:
+    Store versions:
+      NeoStore v0.A.3
+      SchemaStore v0.A.3
+      NodeStore v0.A.3
+      RelationshipStore v0.A.3
+      RelationshipTypeStore v0.A.3
+      LabelTokenStore v0.A.3
+      PropertyStore v0.A.3
+      PropertyIndexStore v0.A.3
+      StringPropertyStore v0.A.3
+      ArrayPropertyStore v0.A.3
+      RelationshipGroupStore v0.A.3
+2014-12-17 18:05:34.263+0000 INFO  [org.neo4j]: --- STARTED diagnostics for NEO_STORE_VERSIONS END ---
+2014-12-17 18:05:34.263+0000 INFO  [org.neo4j]: --- STARTED diagnostics for NEO_STORE_ID_USAGE START ---
+2014-12-17 18:05:34.263+0000 INFO  [org.neo4j]: Id usage:
+    Id usage:
+      SchemaStore: used=10 high=9
+      NodeStore: used=1044 high=1043
+      RelationshipStore: used=3977 high=3976
+      RelationshipTypeStore: used=6 high=5
+      LabelTokenStore: used=6 high=5
+      PropertyStore: used=3543 high=3542
+      PropertyIndexStore: used=19 high=18
+      StringPropertyStore: used=5 high=4
+      ArrayPropertyStore: used=1 high=0
+      RelationshipGroupStore: used=30 high=29
+2014-12-17 18:05:34.264+0000 INFO  [org.neo4j]: --- STARTED diagnostics for NEO_STORE_ID_USAGE END ---
+2014-12-17 18:05:34.264+0000 INFO  [org.neo4j]: --- STARTED diagnostics for PERSISTENCE_WINDOW_POOL_STATS START ---
+2014-12-17 18:05:34.264+0000 INFO  [org.neo4j]: --- STARTED diagnostics for PERSISTENCE_WINDOW_POOL_STATS END ---
+2014-12-17 18:05:34.265+0000 INFO  [org.neo4j]: --- STARTED diagnostics for KernelDiagnostics:StoreFiles START ---
+2014-12-17 18:05:34.265+0000 INFO  [org.neo4j]: Disk space on partition (Total / Free / Free %): 999324516352 / 333190844416 / 33
+Storage files: (filename : modification date - size)
+      active_tx_log: 2014-12-17T19:05:14+0100 - 11,00 B
+      index:
+        lucene-store.db: 2014-12-17T19:05:29+0100 - 40,00 B
+        lucene.log.1: 2014-12-17T19:05:34+0100 - 16,00 B
+        lucene.log.active: 2014-12-17T19:05:34+0100 - 4,00 B
+        lucene.log.v0: 2014-12-17T19:05:14+0100 - 16,00 B
+      - Total: 2014-12-17T19:05:34+0100 - 76,00 B
+      lock: 2014-12-17T19:05:33+0100 - 0,00 B
+      messages.log: 2014-12-17T19:05:34+0100 - 47,39 kB
+      neostore: 2014-12-17T19:05:33+0100 - 81,00 B
+      neostore.id: 2014-12-17T19:05:33+0100 - 9,00 B
+      neostore.labeltokenstore.db: 2014-12-17T19:05:33+0100 - 30,00 B
+      neostore.labeltokenstore.db.id: 2014-12-17T19:05:33+0100 - 9,00 B
+      neostore.labeltokenstore.db.names: 2014-12-17T19:05:33+0100 - 266,00 B
+      neostore.labeltokenstore.db.names.id: 2014-12-17T19:05:33+0100 - 9,00 B
+      neostore.nodestore.db: 2014-12-17T19:05:33+0100 - 15,29 kB
+      neostore.nodestore.db.id: 2014-12-17T19:05:33+0100 - 9,00 B
+      neostore.nodestore.db.labels: 2014-12-17T19:05:33+0100 - 68,00 B
+      neostore.nodestore.db.labels.id: 2014-12-17T19:05:33+0100 - 9,00 B
+      neostore.propertystore.db: 2014-12-17T19:05:33+0100 - 141,86 kB
+      neostore.propertystore.db.arrays: 2014-12-17T19:05:33+0100 - 128,00 B
+      neostore.propertystore.db.arrays.id: 2014-12-17T19:05:33+0100 - 9,00 B
+      neostore.propertystore.db.id: 2014-12-17T19:05:33+0100 - 9,00 B
+      neostore.propertystore.db.index: 2014-12-17T19:05:33+0100 - 171,00 B
+      neostore.propertystore.db.index.id: 2014-12-17T19:05:33+0100 - 9,00 B
+      neostore.propertystore.db.index.keys: 2014-12-17T19:05:33+0100 - 760,00 B
+      neostore.propertystore.db.index.keys.id: 2014-12-17T19:05:33+0100 - 9,00 B
+      neostore.propertystore.db.strings: 2014-12-17T19:05:33+0100 - 640,00 B
+      neostore.propertystore.db.strings.id: 2014-12-17T19:05:33+0100 - 9,00 B
+      neostore.relationshipgroupstore.db: 2014-12-17T19:05:33+0100 - 750,00 B
+      neostore.relationshipgroupstore.db.id: 2014-12-17T19:05:33+0100 - 9,00 B
+      neostore.relationshipstore.db: 2014-12-17T19:05:33+0100 - 132,05 kB
+      neostore.relationshipstore.db.id: 2014-12-17T19:05:33+0100 - 9,00 B
+      neostore.relationshiptypestore.db: 2014-12-17T19:05:33+0100 - 30,00 B
+      neostore.relationshiptypestore.db.id: 2014-12-17T19:05:33+0100 - 9,00 B
+      neostore.relationshiptypestore.db.names: 2014-12-17T19:05:33+0100 - 266,00 B
+      neostore.relationshiptypestore.db.names.id: 2014-12-17T19:05:33+0100 - 9,00 B
+      neostore.schemastore.db: 2014-12-17T19:05:33+0100 - 640,00 B
+      neostore.schemastore.db.id: 2014-12-17T19:05:33+0100 - 9,00 B
+      nioneo_logical.log.1: 2014-12-17T19:05:34+0100 - 16,00 B
+      nioneo_logical.log.active: 2014-12-17T19:05:34+0100 - 4,00 B
+      nioneo_logical.log.v0: 2014-12-17T19:05:29+0100 - 1,10 MB
+      schema:
+        index:
+          lucene:
+            1:
+              _0.fdt: 2014-12-17T19:05:19+0100 - 534,00 B
+              _0.fdx: 2014-12-17T19:05:19+0100 - 620,00 B
+              _0.fnm: 2014-12-17T19:05:19+0100 - 18,00 B
+              _0.frq: 2014-12-17T19:05:19+0100 - 154,00 B
+              _0.nrm: 2014-12-17T19:05:19+0100 - 4,00 B
+              _0.tii: 2014-12-17T19:05:19+0100 - 126,00 B
+              _0.tis: 2014-12-17T19:05:19+0100 - 1,08 kB
+              failure-message: 2014-12-17T19:05:16+0100 - 16,00 kB
+              segments.gen: 2014-12-17T19:05:29+0100 - 20,00 B
+              segments_2: 2014-12-17T19:05:29+0100 - 255,00 B
+              write.lock: 2014-12-17T19:05:34+0100 - 0,00 B
+            - Total: 2014-12-17T19:05:34+0100 - 18,78 kB
+            2:
+              _0.fdt: 2014-12-17T19:05:19+0100 - 534,00 B
+              _0.fdx: 2014-12-17T19:05:19+0100 - 620,00 B
+              _0.fnm: 2014-12-17T19:05:19+0100 - 18,00 B
+              _0.frq: 2014-12-17T19:05:19+0100 - 154,00 B
+              _0.nrm: 2014-12-17T19:05:19+0100 - 4,00 B
+              _0.tii: 2014-12-17T19:05:19+0100 - 201,00 B
+              _0.tis: 2014-12-17T19:05:19+0100 - 2,15 kB
+              failure-message: 2014-12-17T19:05:16+0100 - 16,00 kB
+              segments.gen: 2014-12-17T19:05:29+0100 - 20,00 B
+              segments_2: 2014-12-17T19:05:29+0100 - 255,00 B
+              write.lock: 2014-12-17T19:05:34+0100 - 0,00 B
+            - Total: 2014-12-17T19:05:34+0100 - 19,91 kB
+            3:
+              _0.fdt: 2014-12-17T19:05:19+0100 - 60,00 B
+              _0.fdx: 2014-12-17T19:05:19+0100 - 68,00 B
+              _0.fnm: 2014-12-17T19:05:19+0100 - 18,00 B
+              _0.frq: 2014-12-17T19:05:19+0100 - 16,00 B
+              _0.nrm: 2014-12-17T19:05:19+0100 - 4,00 B
+              _0.tii: 2014-12-17T19:05:19+0100 - 43,00 B
+              _0.tis: 2014-12-17T19:05:19+0100 - 139,00 B
+              failure-message: 2014-12-17T19:05:17+0100 - 16,00 kB
+              segments.gen: 2014-12-17T19:05:29+0100 - 20,00 B
+              segments_2: 2014-12-17T19:05:29+0100 - 255,00 B
+              write.lock: 2014-12-17T19:05:34+0100 - 0,00 B
+            - Total: 2014-12-17T19:05:34+0100 - 16,61 kB
+            4:
+              _0.fdt: 2014-12-17T19:05:19+0100 - 67,00 B
+              _0.fdx: 2014-12-17T19:05:19+0100 - 76,00 B
+              _0.fnm: 2014-12-17T19:05:19+0100 - 18,00 B
+              _0.frq: 2014-12-17T19:05:19+0100 - 18,00 B
+              _0.nrm: 2014-12-17T19:05:19+0100 - 4,00 B
+              _0.tii: 2014-12-17T19:05:19+0100 - 43,00 B
+              _0.tis: 2014-12-17T19:05:19+0100 - 154,00 B
+              failure-message: 2014-12-17T19:05:17+0100 - 16,00 kB
+              segments.gen: 2014-12-17T19:05:29+0100 - 20,00 B
+              segments_2: 2014-12-17T19:05:29+0100 - 255,00 B
+              write.lock: 2014-12-17T19:05:34+0100 - 0,00 B
+            - Total: 2014-12-17T19:05:34+0100 - 16,64 kB
+            5:
+              _0.fdt: 2014-12-17T19:05:19+0100 - 207,00 B
+              _0.fdx: 2014-12-17T19:05:19+0100 - 236,00 B
+              _0.fnm: 2014-12-17T19:05:19+0100 - 18,00 B
+              _0.frq: 2014-12-17T19:05:19+0100 - 58,00 B
+              _0.nrm: 2014-12-17T19:05:19+0100 - 4,00 B
+              _0.tii: 2014-12-17T19:05:19+0100 - 71,00 B
+              _0.tis: 2014-12-17T19:05:19+0100 - 434,00 B
+              failure-message: 2014-12-17T19:05:17+0100 - 16,00 kB
+              segments.gen: 2014-12-17T19:05:29+0100 - 20,00 B
+              segments_2: 2014-12-17T19:05:29+0100 - 255,00 B
+              write.lock: 2014-12-17T19:05:34+0100 - 0,00 B
+            - Total: 2014-12-17T19:05:34+0100 - 17,27 kB
+            6:
+              _0.fdt: 2014-12-17T19:05:18+0100 - 540,00 B
+              _0.fdx: 2014-12-17T19:05:18+0100 - 732,00 B
+              _0.fnm: 2014-12-17T19:05:18+0100 - 18,00 B
+              _0.frq: 2014-12-17T19:05:18+0100 - 182,00 B
+              _0.nrm: 2014-12-17T19:05:18+0100 - 4,00 B
+              _0.tii: 2014-12-17T19:05:18+0100 - 166,00 B
+              _0.tis: 2014-12-17T19:05:18+0100 - 1,52 kB
+              failure-message: 2014-12-17T19:05:17+0100 - 16,00 kB
+              segments.gen: 2014-12-17T19:05:29+0100 - 20,00 B
+              segments_2: 2014-12-17T19:05:29+0100 - 255,00 B
+              write.lock: 2014-12-17T19:05:34+0100 - 0,00 B
+            - Total: 2014-12-17T19:05:34+0100 - 19,39 kB
+            7:
+              failure-message: 2014-12-17T19:05:17+0100 - 16,00 kB
+              segments.gen: 2014-12-17T19:05:17+0100 - 20,00 B
+              segments_1: 2014-12-17T19:05:17+0100 - 46,00 B
+              write.lock: 2014-12-17T19:05:34+0100 - 0,00 B
+            - Total: 2014-12-17T19:05:34+0100 - 16,06 kB
+            8:
+              _0.fdt: 2014-12-17T19:05:25+0100 - 5,72 kB
+              _0.fdx: 2014-12-17T19:05:25+0100 - 6,49 kB
+              _0.fnm: 2014-12-17T19:05:25+0100 - 18,00 B
+              _0.frq: 2014-12-17T19:05:25+0100 - 2,99 kB
+              _0.nrm: 2014-12-17T19:05:25+0100 - 4,00 B
+              _0.tii: 2014-12-17T19:05:25+0100 - 1,09 kB
+              _0.tis: 2014-12-17T19:05:25+0100 - 11,56 kB
+              failure-message: 2014-12-17T19:05:25+0100 - 16,00 kB
+              segments.gen: 2014-12-17T19:05:25+0100 - 20,00 B
+              segments_1: 2014-12-17T19:05:25+0100 - 255,00 B
+              write.lock: 2014-12-17T19:05:34+0100 - 0,00 B
+            - Total: 2014-12-17T19:05:34+0100 - 44,14 kB
+          - Total: 2014-12-17T19:05:25+0100 - 168,80 kB
+        - Total: 2014-12-17T19:05:16+0100 - 168,80 kB
+        label:
+          lucene:
+            _0.fdt: 2014-12-17T19:05:18+0100 - 37,00 B
+            _0.fdx: 2014-12-17T19:05:18+0100 - 28,00 B
+            _0.fnm: 2014-12-17T19:05:18+0100 - 23,00 B
+            _0.frq: 2014-12-17T19:05:18+0100 - 6,00 B
+            _0.nrm: 2014-12-17T19:05:18+0100 - 4,00 B
+            _0.tii: 2014-12-17T19:05:18+0100 - 35,00 B
+            _0.tis: 2014-12-17T19:05:18+0100 - 52,00 B
+            _0_1.del: 2014-12-17T19:05:29+0100 - 31,00 B
+            _1.fdt: 2014-12-17T19:05:19+0100 - 54,00 B
+            _1.fdx: 2014-12-17T19:05:19+0100 - 36,00 B
+            _1.fnm: 2014-12-17T19:05:19+0100 - 26,00 B
+            _1.frq: 2014-12-17T19:05:19+0100 - 9,00 B
+            _1.nrm: 2014-12-17T19:05:19+0100 - 4,00 B
+            _1.tii: 2014-12-17T19:05:19+0100 - 35,00 B
+            _1.tis: 2014-12-17T19:05:19+0100 - 66,00 B
+            _1_1.del: 2014-12-17T19:05:29+0100 - 31,00 B
+            _2.fdt: 2014-12-17T19:05:19+0100 - 32,00 B
+            _2.fdx: 2014-12-17T19:05:19+0100 - 20,00 B
+            _2.fnm: 2014-12-17T19:05:19+0100 - 29,00 B
+            _2.frq: 2014-12-17T19:05:19+0100 - 5,00 B
+            _2.nrm: 2014-12-17T19:05:19+0100 - 4,00 B
+            _2.tii: 2014-12-17T19:05:19+0100 - 35,00 B
+            _2.tis: 2014-12-17T19:05:19+0100 - 52,00 B
+            _2_1.del: 2014-12-17T19:05:29+0100 - 31,00 B
+            _5.fdt: 2014-12-17T19:05:21+0100 - 174,00 B
+            _5.fdx: 2014-12-17T19:05:21+0100 - 108,00 B
+            _5.fnm: 2014-12-17T19:05:21+0100 - 38,00 B
+            _5.frq: 2014-12-17T19:05:21+0100 - 29,00 B
+            _5.nrm: 2014-12-17T19:05:21+0100 - 4,00 B
+            _5.tii: 2014-12-17T19:05:21+0100 - 43,00 B
+            _5.tis: 2014-12-17T19:05:21+0100 - 144,00 B
+            _5_1.del: 2014-12-17T19:05:29+0100 - 32,00 B
+            _6.fdt: 2014-12-17T19:05:25+0100 - 160,00 B
+            _6.fdx: 2014-12-17T19:05:25+0100 - 108,00 B
+            _6.fnm: 2014-12-17T19:05:25+0100 - 38,00 B
+            _6.frq: 2014-12-17T19:05:25+0100 - 26,00 B
+            _6.nrm: 2014-12-17T19:05:25+0100 - 4,00 B
+            _6.tii: 2014-12-17T19:05:25+0100 - 35,00 B
+            _6.tis: 2014-12-17T19:05:25+0100 - 125,00 B
+            _6_1.del: 2014-12-17T19:05:29+0100 - 32,00 B
+            _7.fdt: 2014-12-17T19:05:25+0100 - 40,00 B
+            _7.fdx: 2014-12-17T19:05:25+0100 - 28,00 B
+            _7.fnm: 2014-12-17T19:05:25+0100 - 38,00 B
+            _7.frq: 2014-12-17T19:05:25+0100 - 6,00 B
+            _7.nrm: 2014-12-17T19:05:25+0100 - 4,00 B
+            _7.tii: 2014-12-17T19:05:25+0100 - 35,00 B
+            _7.tis: 2014-12-17T19:05:25+0100 - 53,00 B
+            segments.gen: 2014-12-17T19:05:29+0100 - 20,00 B
+            segments_1: 2014-12-17T19:05:29+0100 - 1,26 kB
+            write.lock: 2014-12-17T19:05:34+0100 - 0,00 B
+          - Total: 2014-12-17T19:05:34+0100 - 3,22 kB
+        - Total: 2014-12-17T19:05:14+0100 - 3,22 kB
+      - Total: 2014-12-17T19:05:16+0100 - 172,02 kB
+      store_lock: 2014-12-17T19:05:14+0100 - 0,00 B
+      tm_tx_log.1: 2014-12-17T19:05:34+0100 - 0,00 B
+2014-12-17 18:05:34.325+0000 INFO  [org.neo4j]: --- STARTED diagnostics for KernelDiagnostics:StoreFiles END ---
+2014-12-17 18:05:34.381+0000 INFO  [org.neo4j]: Database is now ready
+2014-12-17 21:06:12.066+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 10800734ms.
+2014-12-18 03:26:52.906+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 22835268ms.
+2014-12-18 03:27:15.004+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 918ms.
+2014-12-18 03:29:47.080+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 378ms.
+2014-12-18 03:43:15.221+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 209ms.
+2014-12-18 03:44:45.237+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 225ms.
+2014-12-18 04:25:54.329+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 222ms.
+2014-12-18 08:28:38.024+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 10798909ms.
+2014-12-19 00:26:54.366+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 57492788ms.
+2014-12-19 00:27:15.107+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 804ms.
+2014-12-19 00:29:24.554+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 268ms.
+2014-12-19 01:28:41.113+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 328ms.
+2014-12-19 03:01:31.835+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 606ms.
+2014-12-19 07:08:07.171+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 10799343ms.
+2014-12-19 08:07:48.327+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 3546132ms.
+2014-12-19 08:08:14.949+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 852ms.
+2014-12-19 08:09:35.623+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 341ms.
+2014-12-19 08:12:03.477+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 202ms.
+2014-12-19 08:15:33.503+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 229ms.
+2014-12-19 11:58:08.074+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 10799785ms.
+2014-12-19 21:30:15.605+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 34316491ms.
+2014-12-19 21:30:46.293+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 1111ms.
+2014-12-19 21:32:02.506+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 319ms.
+2014-12-19 21:32:38.646+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 209ms.
+2014-12-19 22:10:32.968+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 252ms.
+2014-12-19 22:44:41.244+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 224ms.
+2014-12-19 23:17:18.716+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 222ms.
+2014-12-20 02:21:41.023+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 1139427ms.
+2014-12-20 06:08:00.087+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 10800192ms.
+2014-12-20 15:58:08.462+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 35369271ms.
+2014-12-20 15:58:39.946+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 894ms.
+2014-12-20 19:43:30.039+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 10799893ms.
+2014-12-20 20:24:53.657+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 2472636ms.
+2014-12-20 20:25:15.868+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 752ms.
+2014-12-21 00:09:34.760+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 10800089ms.
+2014-12-21 01:33:47.446+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 5011032ms.
+2014-12-21 01:33:50.050+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 255ms.
+2014-12-21 01:34:26.263+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 5846ms.
+2014-12-21 01:38:49.142+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 427ms.
+2014-12-21 01:39:07.281+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 915ms.
+2014-12-21 01:39:07.733+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 351ms.
+2014-12-21 01:39:51.119+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 414ms.
+2014-12-21 02:10:14.794+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 888ms.
+2014-12-21 02:35:53.444+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 291ms.
+2014-12-21 04:10:05.054+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 28422ms.
+2014-12-21 04:18:58.027+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 189038ms.
+2014-12-21 04:29:07.636+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 777ms.
+2014-12-21 07:29:46.082+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 10800498ms.
+2014-12-22 08:29:25.846+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 89975001ms.
+2014-12-22 08:29:44.197+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 598ms.
+2014-12-22 08:30:50.902+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 222ms.
+2014-12-22 08:32:13.555+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 381ms.
+2014-12-22 10:01:11.712+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 3109759ms.
+2014-12-22 10:39:04.684+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 280ms.
+2014-12-22 10:44:09.434+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 334ms.
+2014-12-22 11:45:52.027+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 1247592ms.
+2014-12-22 11:55:40.089+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 34708ms.
+2014-12-22 12:09:48.013+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 799381ms.
+2014-12-22 12:18:48.279+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 291ms.
+2014-12-22 12:25:10.276+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 210ms.
+2014-12-22 15:38:42.687+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 11609389ms.
+2014-12-22 16:09:08.012+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 1799222ms.
+2014-12-22 18:20:46.795+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 5885350ms.
+2014-12-22 18:21:12.744+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 230ms.
+2014-12-22 18:43:46.014+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 244ms.
+2014-12-22 18:55:03.918+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 213ms.
+2014-12-22 21:38:31.070+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 247ms.
+2014-12-22 21:47:46.121+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 228ms.
+2014-12-22 21:55:03.738+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 216ms.
+2014-12-22 22:47:07.385+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 269ms.
+2014-12-23 01:28:12.833+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 250ms.
+2014-12-23 01:50:10.965+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 219ms.
+2014-12-23 04:07:46.870+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 272ms.
+2014-12-23 05:52:35.113+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 294ms.
+2014-12-23 14:26:39.907+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 406ms.
+2014-12-23 15:07:45.947+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 212ms.
+2014-12-23 19:18:21.202+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 217ms.
+2014-12-24 00:22:32.056+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 491ms.
+2014-12-24 00:22:38.925+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 232ms.
+2014-12-24 00:24:13.833+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 216ms.
+2014-12-24 00:24:15.185+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 236ms.
+2014-12-24 00:24:19.764+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 204ms.
+2014-12-24 00:24:25.803+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 235ms.
+2014-12-24 00:31:22.090+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 221ms.
+2014-12-24 07:50:31.814+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 10800824ms.
+2014-12-24 10:03:24.542+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 7937359ms.
+2014-12-24 10:03:46.770+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 427ms.
+2014-12-24 11:08:21.683+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 3617336ms.
+2014-12-24 11:08:24.586+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 859ms.
+2014-12-24 11:10:34.083+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 201ms.
+2014-12-24 14:11:07.094+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 10797703ms.
+2014-12-25 08:30:19.461+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 65947131ms.
+2014-12-25 08:30:40.994+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 441ms.
+2014-12-25 11:32:59.025+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 10799534ms.
+2014-12-25 17:22:56.379+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 20969626ms.
+2014-12-25 17:23:14.313+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 328ms.
+2014-12-25 20:28:19.003+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 10799998ms.
+2014-12-26 09:23:37.663+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 46487900ms.
+2014-12-26 09:24:04.099+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 407ms.
+2014-12-26 13:16:06.059+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 10799769ms.
+2014-12-26 17:26:06.472+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 14997052ms.
+2014-12-26 17:26:27.123+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 560ms.
+2014-12-26 20:15:11.009+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 8626210ms.
+2014-12-26 21:57:55.102+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 843ms.
+2014-12-26 22:53:52.028+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 3305241ms.
+2014-12-27 01:06:55.692+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 7978225ms.
+2014-12-27 02:56:02.031+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 6474056ms.
+2014-12-27 03:56:47.654+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 3594441ms.
+2014-12-27 05:45:31.031+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 6473664ms.
+2014-12-27 07:34:16.062+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 6475118ms.
+2014-12-27 08:35:00.081+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 3593709ms.
+2014-12-27 09:35:45.028+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 3594010ms.
+2014-12-27 09:53:59.069+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 1042969ms.
+2014-12-27 09:54:00.469+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 447ms.
+2014-12-27 10:11:12.090+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 577749ms.
+2014-12-27 10:11:16.687+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 345ms.
+2014-12-27 17:40:43.822+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 10800979ms.
+2014-12-28 09:32:34.812+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 57104381ms.
+2014-12-28 09:32:47.382+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 306ms.
+2014-12-28 13:26:15.024+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 7384ms.
+2014-12-28 14:17:15.655+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 3016658ms.
+2014-12-28 17:29:28.040+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 10797867ms.
+2014-12-29 11:06:45.689+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 63431845ms.
+2014-12-29 11:07:03.697+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 400ms.
+2014-12-29 11:26:37.013+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 132093ms.
+2014-12-29 11:48:47.042+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 1304576ms.
+2014-12-29 14:53:39.038+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 10798406ms.
+2014-12-29 14:53:42.080+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 1287ms.
+2014-12-30 09:10:08.672+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 65783797ms.
+2014-12-30 09:10:38.012+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 693ms.
+2014-12-30 12:20:12.678+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 10800067ms.
+2014-12-30 17:27:59.264+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 18434670ms.
+2014-12-30 17:28:17.752+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 365ms.
+2014-12-30 19:34:36.570+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 3115106ms.
+2014-12-30 19:35:03.007+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 501ms.
+2014-12-30 21:16:17.682+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 4672010ms.
+2014-12-31 00:02:27.907+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 251ms.
+2014-12-31 02:18:00.024+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 105940ms.
+2014-12-31 02:18:03.532+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 531ms.
+2014-12-31 04:01:14.072+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 6080172ms.
+2014-12-31 05:02:19.044+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 3593934ms.
+2014-12-31 06:51:19.671+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 6474155ms.
+2014-12-31 08:07:19.004+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 4493909ms.
+2014-12-31 09:09:19.039+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 3594012ms.
+2014-12-31 10:55:19.023+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 6294180ms.
+2014-12-31 10:55:21.161+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 202ms.
+2014-12-31 12:44:19.091+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 6474509ms.
+2014-12-31 14:00:18.060+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 4495143ms.
+2014-12-31 15:49:18.082+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 6474969ms.
+2014-12-31 17:05:18.052+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 4493864ms.
+2014-12-31 18:21:18.030+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 4494696ms.
+2014-12-31 19:22:18.007+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 3594507ms.
+2014-12-31 20:53:18.077+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 5394351ms.
+2014-12-31 22:42:18.685+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 6474172ms.
+2014-12-31 22:42:20.445+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 487ms.
+2015-01-01 00:31:19.067+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 6474601ms.
+2015-01-01 02:02:20.027+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 5394115ms.
+2015-01-01 03:51:20.032+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 6474903ms.
+2015-01-01 05:40:20.011+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 6474488ms.
+2015-01-01 07:29:20.048+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 6475012ms.
+2015-01-01 08:30:19.011+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 3594745ms.
+2015-01-01 10:19:19.101+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 6473939ms.
+2015-01-01 11:20:19.019+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 3594373ms.
+2015-01-01 13:06:19.040+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 6294356ms.
+2015-01-01 14:07:19.005+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 3593734ms.
+2015-01-01 15:56:18.078+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 6474319ms.
+2015-01-01 16:57:18.100+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 3593930ms.
+2015-01-01 18:46:18.055+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 6474763ms.
+2015-01-01 19:47:18.017+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 3594934ms.
+2015-01-01 20:48:18.003+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 3594351ms.
+2015-01-01 22:37:18.009+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 6473774ms.
+2015-01-02 00:26:18.055+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 6473964ms.
+2015-01-02 01:57:18.665+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 5394203ms.
+2015-01-02 03:46:18.046+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 6473836ms.
+2015-01-02 05:35:18.009+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 6474194ms.
+2015-01-02 07:24:17.065+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 6473760ms.
+2015-01-02 08:40:17.039+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 4494614ms.
+2015-01-02 10:29:17.008+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 6475328ms.
+2015-01-02 11:30:17.012+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 3594523ms.
+2015-01-02 13:01:17.655+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 5394129ms.
+2015-01-02 14:02:17.030+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 3595581ms.
+2015-01-02 15:51:17.003+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 6473628ms.
+2015-01-02 17:07:17.003+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 4495179ms.
+2015-01-02 17:07:18.582+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 498ms.
+2015-01-02 18:23:18.102+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 4494455ms.
+2015-01-02 19:24:18.088+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 3593788ms.
+2015-01-02 20:55:18.030+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 5393814ms.
+2015-01-02 22:44:18.104+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 6474403ms.
+2015-01-03 00:33:18.038+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 6474919ms.
+2015-01-03 02:04:19.047+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 5395508ms.
+2015-01-03 03:53:19.667+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 6474482ms.
+2015-01-03 05:42:19.672+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 6473908ms.
+2015-01-03 07:31:19.063+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 6474569ms.
+2015-01-03 08:47:19.086+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 4493795ms.
+2015-01-03 10:36:19.012+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 6474102ms.
+2015-01-03 10:47:00.087+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 575777ms.
+2015-01-03 10:47:02.503+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 1032ms.
+2015-01-03 11:28:51.622+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 232ms.
+2015-01-03 11:31:29.584+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 203ms.
+2015-01-03 14:18:20.752+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 5237904ms.
+2015-01-03 14:18:23.560+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 395ms.
+2015-01-03 14:36:34.051+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 217ms.
+2015-01-03 18:07:24.079+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 10800373ms.
+2015-01-03 20:06:06.752+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 7119601ms.
+2015-01-03 20:06:35.107+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 414ms.
+2015-01-03 20:54:16.437+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 249ms.
+2015-01-03 21:15:54.665+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 245ms.
+2015-01-03 22:32:20.884+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 317ms.
+2015-01-03 22:49:35.527+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 205ms.
+2015-01-03 23:40:24.564+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 205ms.
+2015-01-04 00:02:30.627+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 223ms.
+2015-01-04 00:06:29.716+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 263ms.
+2015-01-04 01:36:20.839+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 3592703ms.
+2015-01-04 03:16:57.005+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 5973836ms.
+2015-01-04 05:06:02.044+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 6475186ms.
+2015-01-04 06:55:02.026+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 6474651ms.
+2015-01-04 08:41:02.006+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 6294657ms.
+2015-01-04 10:14:05.029+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 5517023ms.
+2015-01-04 11:50:15.724+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 1642212ms.
+2015-01-04 11:50:18.644+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 1060ms.
+2015-01-04 14:25:38.528+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 215ms.
+2015-01-04 14:38:33.437+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 256ms.
+2015-01-04 15:28:16.532+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 269ms.
+2015-01-04 15:39:52.510+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 254ms.
+2015-01-04 15:49:48.723+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 206ms.
+2015-01-04 16:04:07.491+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 217ms.
+2015-01-04 16:20:03.592+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 254ms.
+2015-01-04 16:23:33.530+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 219ms.
+2015-01-04 16:55:24.587+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 202ms.
+2015-01-04 17:03:26.726+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 379ms.
+2015-01-04 19:56:17.863+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 278ms.
+2015-01-04 23:26:37.122+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 229ms.
+2015-01-04 23:39:50.093+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 204ms.
+2015-01-04 23:52:47.121+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 217ms.
+2015-01-05 00:12:01.094+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 331ms.
+2015-01-05 00:15:58.165+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 284ms.
+2015-01-05 01:10:46.208+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 203ms.
+2015-01-05 01:19:55.177+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 212ms.
+2015-01-05 03:17:16.954+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 5394899ms.
+2015-01-05 05:06:19.017+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 6473595ms.
+2015-01-05 05:20:37.104+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 791840ms.
+2015-01-05 06:22:34.012+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 3594456ms.
+2015-01-05 07:17:51.013+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 3245438ms.
+2015-01-05 07:33:41.160+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 316ms.
+2015-01-05 07:37:14.101+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 298ms.
+2015-01-05 07:41:35.080+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 233ms.
+2015-01-05 07:53:00.095+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 224ms.
+2015-01-05 07:57:30.205+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 224ms.
+2015-01-05 08:02:03.054+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 210ms.
+2015-01-05 08:02:11.200+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 343ms.
+2015-01-05 08:07:26.178+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 322ms.
+2015-01-05 09:06:39.225+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 245ms.
+2015-01-05 09:55:36.241+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 221ms.
+2015-01-05 10:05:20.432+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 393ms.
+2015-01-05 10:05:21.265+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 211ms.
+2015-01-05 10:20:02.336+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 250ms.
+2015-01-05 10:21:27.310+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 202ms.
+2015-01-05 10:53:48.345+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 290ms.
+2015-01-05 10:57:54.293+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 217ms.
+2015-01-05 11:04:29.371+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 303ms.
+2015-01-05 11:07:26.428+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 256ms.
+2015-01-05 11:16:18.346+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 214ms.
+2015-01-05 11:16:35.361+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 306ms.
+2015-01-05 11:31:57.447+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 291ms.
+2015-01-05 11:37:21.376+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 257ms.
+2015-01-05 11:37:24.301+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 202ms.
+2015-01-05 11:58:42.444+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 332ms.
+2015-01-05 12:21:48.462+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 238ms.
+2015-01-05 12:59:08.450+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 274ms.
+2015-01-05 13:21:31.546+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 247ms.
+2015-01-05 13:21:36.566+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 260ms.
+2015-01-05 13:24:36.562+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 277ms.
+2015-01-05 13:30:55.529+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 217ms.
+2015-01-05 13:33:10.578+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 294ms.
+2015-01-05 14:05:19.536+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 245ms.
+2015-01-05 14:05:22.633+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 283ms.
+2015-01-05 14:36:58.787+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 288ms.
+2015-01-05 14:37:54.779+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 475ms.
+2015-01-05 14:44:40.573+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 236ms.
+2015-01-05 15:24:30.612+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 243ms.
+2015-01-05 15:31:16.678+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 206ms.
+2015-01-05 15:48:31.899+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 325ms.
+2015-01-05 15:48:32.763+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 322ms.
+2015-01-05 16:47:11.776+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 214ms.
+2015-01-05 17:24:13.751+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 235ms.
+2015-01-05 17:31:56.792+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 203ms.
+2015-01-05 18:11:56.017+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 2364077ms.
+2015-01-05 18:12:02.860+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 263ms.
+2015-01-05 18:36:16.296+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 233ms.
+2015-01-05 19:28:13.442+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 252ms.
+2015-01-05 19:29:39.406+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 290ms.
+2015-01-05 20:28:15.616+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 398ms.
+2015-01-05 20:28:16.489+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 206ms.
+2015-01-05 20:28:18.562+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 363ms.
+2015-01-05 21:23:51.663+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 398ms.
+2015-01-05 21:23:58.581+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 242ms.
+2015-01-05 21:24:00.569+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 210ms.
+2015-01-05 21:59:49.584+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 229ms.
+2015-01-05 22:42:58.051+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 297ms.
+2015-01-05 22:56:02.725+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 241ms.
+2015-01-05 22:56:03.669+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 268ms.
+2015-01-05 23:00:07.651+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 257ms.
+2015-01-05 23:16:30.713+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 217ms.
+2015-01-05 23:16:31.650+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 208ms.
+2015-01-05 23:16:33.664+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 222ms.
+2015-01-06 00:01:22.707+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 229ms.
+2015-01-06 00:06:52.957+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 323ms.
+2015-01-06 00:16:06.863+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 362ms.
+2015-01-06 00:23:41.852+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 206ms.
+2015-01-06 00:29:06.830+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 306ms.
+2015-01-06 00:29:07.755+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 270ms.
+2015-01-06 00:30:50.041+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 391ms.
+2015-01-06 00:30:50.730+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 521ms.
+2015-01-06 00:30:51.582+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 728ms.
+2015-01-06 00:30:52.009+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 213ms.
+2015-01-06 00:30:52.824+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 427ms.
+2015-01-06 00:34:49.431+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 239ms.
+2015-01-06 00:35:34.720+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 201ms.
+2015-01-06 01:02:14.906+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 230ms.
+2015-01-06 01:02:34.754+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 216ms.
+2015-01-06 01:09:37.815+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 208ms.
+2015-01-06 01:28:28.936+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 330ms.
+2015-01-06 01:30:53.879+0000 INFO  [org.neo4j]: GC Monitor: Application threads blocked for 207ms.
+2015-01-06 01:30:55.868+0000 INFO  [org.neo4j]: GC Mo
