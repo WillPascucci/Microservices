@@ -10,41 +10,52 @@ var snsPublish = require('aws-sns-publish');
 var etag = require('etag');
 
 console.log("IN START");
-var idempDict = {};
 
 exports.handler = (event, context, callback) => {
-  console.log("IDEMP Dict is:");
-  console.log(idempDict);
-  console.log("after idemp log");
-  if (event.httpMethod!='GET' && event.headers['idem-key'] in idempDict) {
-        console.log("DOES it get here??");
-        callback(null, {
-          statusCode: 200,
-          body: JSON.stringify(idempDict[event.headers['idem-key']]),
-          headers: {
-            'Content-Type': 'application/json',
-          }
-        });
 
-  } else {
-
-  console.log(idempDict);
 
   var connection = mysql.createConnection({
-  host     : "assignmentpart2db.cyi40ipdvtjm.us-east-1.rds.amazonaws.com",
-  user     : "microservices",
-  password : "microservices",
-  port     : 3306,
-  database : "microservices"
-});
+    host     : "assignmentpart2db.cyi40ipdvtjm.us-east-1.rds.amazonaws.com",
+    user     : "microservices",
+    password : "microservices",
+    port     : 3306,
+    database : "microservices"
+  });
 
-    connection.connect(function(errorfirst) {
-      if (errorfirst) {
-        console.error('Database connection failed: ' + errorfirst.stack);
-        connection.end();
-        return;
-      }
-    console.log('You are connected');
+  connection.connect(function(errorfirst) {
+    if (errorfirst) {
+      console.error('Database connection failed: ' + errorfirst.stack);
+      connection.end();
+      return;
+    }
+  console.log('You are connected');
+
+  // var idem_rows;
+
+  console.log(event.headers['idem-key'])
+  connection.query("SELECT resp from idem where `key`=?", event.headers['idem-key'], function (error, rows) {
+    console.log("in here...qwerty")
+    console.log(error)
+    console.log(rows)
+    // idem_rows = rows;
+    // if (!error) {
+    //     connection.end();
+    //     resolve(1);
+    // }
+    if (rows && rows != "null" && rows != "" && rows.length != 0) {
+      console.log("in here...qwerty2")
+      connection.end();
+      callback(null, {
+        statusCode: 200,
+        body: JSON.stringify(rows),
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
+    } else {
+      console.log("in else")
+    // return;
+
 
     snsPublish('In employeeFunc...', {arn: 'arn:aws:sns:us-east-1:099711494433:LambdaTest'});
 
@@ -191,16 +202,28 @@ exports.handler = (event, context, callback) => {
                 console.log(error);
                 console.log(rows);
                 my_rows = rows;
-                idempDict[event.headers['idem-key']] = JSON.stringify(my_rows);
-                if (!error) {
-                    connection.end();
-                    resolve(1);
-                }
+                console.log(event.headers['idem-key'])
+                console.log(JSON.stringify(my_rows))
+                connection.query("INSERT INTO idem (`key`, resp) VALUES (?, ?)", [event.headers['idem-key'], JSON.stringify(my_rows)], function (error2, rows2) {
+                  if (!error2) {
+                      console.log("in error block")
+                      console.log(error2)
+                      console.log(rows2)
+                      connection.end();
+                      resolve(1);
+                  }
+                  console.log("outside of error block")
+                  console.log(error2)
+                  console.log(rows2)
+                });
+                // if (!error) {
+                //     connection.end();
+                //     resolve(1);
+                // }
               });
             });
             postEmployeePromise.then(function() {
               console.log(my_rows);
-              console.log(idempDict);
               callback(null, {
                   statusCode: '200',
                   // body: err ? err.message : JSON.stringify(res),
@@ -224,17 +247,21 @@ exports.handler = (event, context, callback) => {
                     console.log(error);
                     console.log(rows);
                     my_rows = rows;
-                    idempDict[event.headers['idem-key']] = JSON.stringify(my_rows);
-                    if (!error) {
-                        connection.end();
-                        resolve(1);
-                    }
+                    connection.query("INSERT INTO idem (key, resp) VALUES (?, ?)", event.headers['idem-key'], JSON.stringify(my_rows), function (error, rows) {
+                      if (!error) {
+                          connection.end();
+                          resolve(1);
+                      }
+                    });
+                    // if (!error) {
+                    //     connection.end();
+                    //     resolve(1);
+                    // }
 
                 });
             });
             firstpormmm2.then(function() {
                 console.log(my_rows);
-                console.log(idempDict);
                 callback(null, {
                     statusCode: '200',
                     // body: err ? err.message : JSON.stringify(res),
@@ -256,16 +283,20 @@ exports.handler = (event, context, callback) => {
                   console.log(error);
                   console.log(rows);
                   my_rows = rows;
-                  idempDict[event.headers['idem-key']] = JSON.stringify(my_rows);
-                  if (!error) {
-                      connection.end();
-                      resolve(1);
+                  connection.query("INSERT INTO idem (key, resp) VALUES (?, ?)", event.headers['idem-key'], JSON.stringify(my_rows), function (error, rows) {
+                    if (!error) {
+                        connection.end();
+                        resolve(1);
                     }
+                  });
+                  // if (!error) {
+                  //     connection.end();
+                  //     resolve(1);
+                  //   }
                 });
             });
             putEmployeePromise.then(function() {
               console.log(my_rows);
-              console.log(idempDict);
               callback(null, {
                 statusCode: event.headers == null ? '200' : event.headers.etag == null  ? '200' : etag(JSON.stringify(my_rows)) == JSON.stringify(event.headers.etag) ? '304' : '200',
                   // body: err ? err.message : JSON.stringify(res),
@@ -281,6 +312,7 @@ exports.handler = (event, context, callback) => {
             console.log("IN DEFAULT");
             done(new Error(`Unsupported method "${event.httpMethod}"`));
     }
-});
-}
+  }
+  });
+  });
 };
