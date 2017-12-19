@@ -247,12 +247,18 @@ exports.handler = (event, context, callback) => {
                     console.log(error);
                     console.log(rows);
                     my_rows = rows;
-                    connection.query("INSERT INTO idem (key, resp) VALUES (?, ?)", event.headers['idem-key'], JSON.stringify(my_rows), function (error, rows) {
-                      if (!error) {
-                          connection.end();
-                          resolve(1);
-                      }
-                    });
+                    connection.query("INSERT INTO idem (`key`, resp) VALUES (?, ?)", [event.headers['idem-key'], JSON.stringify(my_rows)], function (error2, rows2) {
+                  if (!error2) {
+                      console.log("in error block")
+                      console.log(error2)
+                      console.log(rows2)
+                      connection.end();
+                      resolve(1);
+                  }
+                  console.log("outside of error block")
+                  console.log(error2)
+                  console.log(rows2)
+                });
                     // if (!error) {
                     //     connection.end();
                     //     resolve(1);
@@ -283,12 +289,18 @@ exports.handler = (event, context, callback) => {
                   console.log(error);
                   console.log(rows);
                   my_rows = rows;
-                  connection.query("INSERT INTO idem (key, resp) VALUES (?, ?)", event.headers['idem-key'], JSON.stringify(my_rows), function (error, rows) {
-                    if (!error) {
-                        connection.end();
-                        resolve(1);
-                    }
-                  });
+                  connection.query("INSERT INTO idem (`key`, resp) VALUES (?, ?)", [event.headers['idem-key'], JSON.stringify(my_rows)], function (error2, rows2) {
+                  if (!error2) {
+                      console.log("in error block")
+                      console.log(error2)
+                      console.log(rows2)
+                      connection.end();
+                      resolve(1);
+                  }
+                  console.log("outside of error block")
+                  console.log(error2)
+                  console.log(rows2)
+                });
                   // if (!error) {
                   //     connection.end();
                   //     resolve(1);
