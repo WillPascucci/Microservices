@@ -27,15 +27,28 @@ exports.handler = (event, context, callback) => {
     console.log('You are connected');
 
 
-    console.log("HI1");
-    console.log(event);
-    console.log("HI2");
-    console.log(context);
-    console.log("HI3");
-    console.log(event.httpMethod);
-    console.log("HI4");
-    console.log(context.httpMethod);
-    console.log("HI5");
+  console.log(event.headers['idem-key'])
+  connection.query("SELECT resp from idem where `key`=?", event.headers['idem-key'], function (error, rows) {
+    console.log("in here...qwerty")
+    console.log(error)
+    console.log(rows)
+    // idem_rows = rows;
+    // if (!error) {
+    //     connection.end();
+    //     resolve(1);
+    // }
+    if (rows && rows != "null" && rows != "" && rows.length != 0) {
+      console.log("in here...qwerty2")
+      connection.end();
+      callback(null, {
+        statusCode: 200,
+        body: JSON.stringify(rows),
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
+    } else {
+      console.log("in else")
 
 
     snsPublish('In companyFunc...', {arn: 'arn:aws:sns:us-east-1:099711494433:LambdaTest'});
@@ -201,10 +214,22 @@ exports.handler = (event, context, callback) => {
                   console.log(error);
                   console.log(rows);
                   my_rows = rows;
-                  if (!error) {
-                      connection.end();
-                      resolve(1);
+                  connection.query("INSERT INTO idem (`key`, resp) VALUES (?, ?)", [event.headers['idem-key'], JSON.stringify(my_rows)], function (error2, rows2) {
+                    if (!error2) {
+                        console.log("in error block")
+                        console.log(error2)
+                        console.log(rows2)
+                        connection.end();
+                        resolve(1);
                     }
+                    console.log("outside of error block")
+                    console.log(error2)
+                    console.log(rows2)
+                  });
+                  // if (!error) {
+                  //     connection.end();
+                  //     resolve(1);
+                  //   }
                 });
             });
             postCompanyPromise.then(function() {
@@ -234,10 +259,22 @@ exports.handler = (event, context, callback) => {
                 console.log(error);
                 console.log(rows);
                 my_rows = rows;
-                if (!error) {
-                    connection.end();
-                    resolve(1);
+                    connection.query("INSERT INTO idem (`key`, resp) VALUES (?, ?)", [event.headers['idem-key'], JSON.stringify(my_rows)], function (error2, rows2) {
+                  if (!error2) {
+                      console.log("in error block")
+                      console.log(error2)
+                      console.log(rows2)
+                      connection.end();
+                      resolve(1);
                   }
+                  console.log("outside of error block")
+                  console.log(error2)
+                  console.log(rows2)
+                });
+                // if (!error) {
+                //     connection.end();
+                //     resolve(1);
+                //   }
               });
           });
           delelteCompanyPromise.then(function() {
@@ -265,10 +302,22 @@ exports.handler = (event, context, callback) => {
                   console.log(error);
                   console.log(rows);
                   my_rows = rows;
-                  if (!error) {
+                  connection.query("INSERT INTO idem (`key`, resp) VALUES (?, ?)", [event.headers['idem-key'], JSON.stringify(my_rows)], function (error2, rows2) {
+                  if (!error2) {
+                      console.log("in error block")
+                      console.log(error2)
+                      console.log(rows2)
                       connection.end();
                       resolve(1);
-                    }
+                  }
+                  console.log("outside of error block")
+                  console.log(error2)
+                  console.log(rows2)
+                });
+                  // if (!error) {
+                  //     connection.end();
+                  //     resolve(1);
+                  //   }
                 });
             });
             putCompanyPromise.then(function() {
@@ -288,5 +337,7 @@ exports.handler = (event, context, callback) => {
             console.log("HTTP Method-"+event.httpMethod);
             done(new Error(`Unsupported method "${event.httpMethod}"`));
     }
-});
+  }
+  });
+  });
 };
