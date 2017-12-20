@@ -30,18 +30,12 @@ exports.handler = (event, context, callback) => {
     }
   console.log('You are connected');
 
-  // var idem_rows;
-
   console.log(event.headers['idem-key'])
   connection.query("SELECT resp from idem where `key`=?", event.headers['idem-key'], function (error, rows) {
     console.log("in here...qwerty")
     console.log(error)
     console.log(rows)
-    // idem_rows = rows;
-    // if (!error) {
-    //     connection.end();
-    //     resolve(1);
-    // }
+
     if (rows && rows != "null" && rows != "" && rows.length != 0) {
       console.log("in here...qwerty2")
       connection.end();
@@ -54,8 +48,6 @@ exports.handler = (event, context, callback) => {
       });
     } else {
       console.log("in else")
-    // return;
-
 
     snsPublish('In employeeFunc...', {arn: 'arn:aws:sns:us-east-1:099711494433:LambdaTest'});
 
@@ -216,10 +208,6 @@ exports.handler = (event, context, callback) => {
                   console.log(error2)
                   console.log(rows2)
                 });
-                // if (!error) {
-                //     connection.end();
-                //     resolve(1);
-                // }
               });
             });
             postEmployeePromise.then(function() {
@@ -259,11 +247,6 @@ exports.handler = (event, context, callback) => {
                   console.log(error2)
                   console.log(rows2)
                 });
-                    // if (!error) {
-                    //     connection.end();
-                    //     resolve(1);
-                    // }
-
                 });
             });
             firstpormmm2.then(function() {
@@ -301,10 +284,6 @@ exports.handler = (event, context, callback) => {
                   console.log(error2)
                   console.log(rows2)
                 });
-                  // if (!error) {
-                  //     connection.end();
-                  //     resolve(1);
-                  //   }
                 });
             });
             putEmployeePromise.then(function() {
