@@ -131,6 +131,12 @@ exports.handler = (event, context, callback) => {
             let firstpormmmPage = new Promise(function(resolve, reject) {
                 connection.query("SELECT FLOOR(a.totalPages/5) as totalPages, company.* from (select count(*) as totalPages from company) as a, company LIMIT "+(event.path.substr(event.path.lastIndexOf("/") + 1)*5)+", 5",  function (error, rows) {
                   console.log(error);
+                    var r;
+                    for (r in rows) {
+                      rows[r]["selfPage"] = "https://0j1j9o13l2.execute-api.us-east-1.amazonaws.com/prod/companyFunc/page/" + event.path.substr(event.path.lastIndexOf("/")+1);
+                      rows[r]["prevPage"] = "https://0j1j9o13l2.execute-api.us-east-1.amazonaws.com/prod/companyFunc/page/" + (event.path.substr(event.path.lastIndexOf("/")+1)-1<=0 ? 0 : event.path.substr(event.path.lastIndexOf("/")+1)-1);
+                      rows[r]["nextPage"] = "https://0j1j9o13l2.execute-api.us-east-1.amazonaws.com/prod/companyFunc/page/" + (Number(event.path.substr(event.path.lastIndexOf("/")+1))+1>=0+Number(rows[r].totalPages) ? rows[r].totalPages : event.path.substr(event.path.lastIndexOf("/")+1)-0+1);
+                    }
                     console.log(rows);
                     my_rows = rows;
                     if (!error) {
