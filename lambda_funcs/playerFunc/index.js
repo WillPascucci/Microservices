@@ -39,14 +39,13 @@ exports.handler = (event, context, callback) => {
                     if (!result) {
                         console.log('No user found.');
                     } else {
-                        console.log(result)
+                        console.log(results)
                         console.log("BETWEEN")
-                        console.log(result['n'])
                         // var user = result['u'];
-                        console.log(JSON.stringify(result));
+                        console.log(JSON.stringify(results));
                         callback(null, {
                             statusCode: '200',
-                            body: JSON.stringify(result),
+                            body: JSON.stringify(results),
                             headers: {
                                 'Content-Type': 'application/json',
                             }
@@ -125,47 +124,27 @@ exports.handler = (event, context, callback) => {
             break;
         case 'DELETE':
             console.log("IN DELETE");
-            console.log("getting key from header:");
-            console.log(event.headers['idem-key']);
-            console.log()
-            snsPublish('In employeeFunc.: DELETE', {arn: 'arn:aws:sns:us-east-1:099711494433:LambdaTest'});
-            var my_rows;
-            let firstpormmm2 = new Promise(function(resolve, reject) {
-                connection.query("DELETE from employee where employeeId="+String(event.path.substr(event.path.lastIndexOf("/") + 1)), function (error, rows) {
-                    console.log(error);
-                    console.log(rows);
-                    my_rows = rows;
-                    connection.query("INSERT INTO idem (`key`, resp) VALUES (?, ?)", [event.headers['idem-key'], JSON.stringify(my_rows)], function (error2, rows2) {
-                  if (!error2) {
-                      console.log("in error block")
-                      console.log(error2)
-                      console.log(rows2)
-                      connection.end();
-                      resolve(1);
-                  }
-                  console.log("outside of error block")
-                  console.log(error2)
-                  console.log(rows2)
-                });
-                    // if (!error) {
-                    //     connection.end();
-                    //     resolve(1);
-                    // }
-
-                });
-            });
-            firstpormmm2.then(function() {
-                console.log(my_rows);
-                callback(null, {
-                    statusCode: '200',
-                    // body: err ? err.message : JSON.stringify(res),
-                    body: JSON.stringify(my_rows),
-                    headers: {
-                        'Content-Type': 'application/json',
-                      //  'etag': etag(JSON.stringify(my_rows))
-                    }
-                })
-            });
+            console.log(event.path.substr(event.path.lastIndexOf("/") + 1))
+            var id = event.path.substr(event.path.lastIndexOf("/") + 1)
+            console.log(id)
+              db.cypher({
+                  query: 'match (n:Player {player_id: ' + "'" + id + "'" + '}) delete n',
+                  // query: 'match (n:Player {player_id: $id }) return n',
+              }, function (err, results) {
+                  if (err) throw err;
+                  // var result = results[0];
+                  console.log(results)
+                  console.log("BETWEEN")
+                  // var user = result['u'];
+                  console.log(JSON.stringify(results));
+                  callback(null, {
+                      statusCode: '200',
+                      body: JSON.stringify(results),
+                      headers: {
+                          'Content-Type': 'application/json',
+                      }
+                  })
+              });
             break;
         case 'PUT': // this is for PUT on companyFunc/:id
          console.log("IN PUT");
