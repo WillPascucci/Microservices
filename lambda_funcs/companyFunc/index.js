@@ -32,11 +32,6 @@ exports.handler = (event, context, callback) => {
     console.log("in here...qwerty")
     console.log(error)
     console.log(rows)
-    // idem_rows = rows;
-    // if (!error) {
-    //     connection.end();
-    //     resolve(1);
-    // }
     if (rows && rows != "null" && rows != "" && rows.length != 0) {
       console.log("in here...qwerty2")
       connection.end();
@@ -226,11 +221,7 @@ exports.handler = (event, context, callback) => {
                     console.log(error2)
                     console.log(rows2)
                   });
-                  // if (!error) {
-                  //     connection.end();
-                  //     resolve(1);
-                  //   }
-                });
+                  });
             });
             postCompanyPromise.then(function() {
               console.log(my_rows);
@@ -271,10 +262,7 @@ exports.handler = (event, context, callback) => {
                   console.log(error2)
                   console.log(rows2)
                 });
-                // if (!error) {
-                //     connection.end();
-                //     resolve(1);
-                //   }
+
               });
           });
           delelteCompanyPromise.then(function() {
@@ -314,10 +302,7 @@ exports.handler = (event, context, callback) => {
                   console.log(error2)
                   console.log(rows2)
                 });
-                  // if (!error) {
-                  //     connection.end();
-                  //     resolve(1);
-                  //   }
+                
                 });
             });
             putCompanyPromise.then(function() {
