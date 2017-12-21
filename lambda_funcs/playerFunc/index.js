@@ -85,7 +85,8 @@ exports.handler = (event, context, callback) => {
                 var id = event.path.split('/')[2]
                 console.log(id)
                   db.cypher({
-                      query: 'match (n:Player { player_id: ' + "'" + id + "'" + '})-[r:APPEARANCE]->(t:Team) match (x:Player)-[y:APPEARANCE]->(z:Team) where z.team_id=t.team_id return x',
+                      // query: 'match (n:Player { player_id: ' + "'" + id + "'" + '})-[r:APPEARANCE]->(t:Team) match (x:Player)-[y:APPEARANCE]->(z:Team) where z.team_id=t.team_id return distinct x',
+                      query: 'match (napoli:Player {player_id:"' + id + '"})-[a1:APPEARANCE]->(t:Team)<-[a2:APPEARANCE]-(teammate:Player) where a1.year = a2.year and teammate.player_id <>"' + id + '" return teammate.player_id as PlayerID, t.team_id as TeamID, a1.year as Year',
                       // query: 'match (n:Player {player_id: $id }) return n',
                   }, function (err, results) {
                       if (err) throw err;
