@@ -58,11 +58,7 @@ exports.handler = (event, context, callback) => {
             } else if(event.path.includes('/playerFunc/')){ // this is for /companyFunc/:id
 
               if (event.path.includes('/teams')){
-              console.log(event.path.split('/'))
-              console.log((event.path.split('/'))[0])
-              console.log((event.path.split('/'))[1])
               console.log((event.path.split('/'))[2])
-              console.log((event.path.split('/'))[3])
 
               var id = event.path.split('/')[2]
               console.log(id)
@@ -83,7 +79,29 @@ exports.handler = (event, context, callback) => {
                         })
                 });
 
-               } else {
+               } else if (event.path.includes('/teammates')){
+                console.log((event.path.split('/'))[2])
+
+                var id = event.path.split('/')[2]
+                console.log(id)
+                  db.cypher({
+                      query: 'match (n:Player { player_id: ' + "'" + id + "'" + '})-[r:APPEARANCE]->(t:Team) match (x:Player)-[y:APPEARANCE]->(z:Team) where z.team_id=t.team_id return x',
+                      // query: 'match (n:Player {player_id: $id }) return n',
+                  }, function (err, results) {
+                      if (err) throw err;
+                          console.log(results)
+                          console.log("BETWEEN")
+                          console.log(JSON.stringify(results));
+                          callback(null, {
+                              statusCode: '200',
+                              body: JSON.stringify(results),
+                              headers: {
+                                  'Content-Type': 'application/json',
+                              }
+                          })
+                  });
+               }
+               else {
               console.log(event.path.substr(event.path.lastIndexOf("/") + 1))
               var id = event.path.substr(event.path.lastIndexOf("/") + 1)
               console.log(id)
